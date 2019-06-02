@@ -35,30 +35,29 @@ class Form2 extends Component {
                             <h3> &nbsp; Nuevo Paciente </h3>
                         </div>
                         <CardContent>
-                            <Grid container alignItems="stretch" spacing="16" sm="12">
-                                <Grid item sm="4">
+                            <Grid container alignContent="space-between" spacing={16}>
+                                <Grid item sm={4}>
                                     <Paper>
-                                        <Input placeholder=" Tipo de caso" fullWidth defaultValue={vals.TipoCaso} onChange={(e)=>handleChange(e,'TipoCaso')}/>
+                                        <Input disableUnderline={true} placeholder=" Tipo de caso" fullWidth defaultValue={vals.TipoCaso} onChange={(e)=>handleChange(e,'TipoCaso')}/>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="4">
+                                <Grid item sm={4}>
                                     <Paper>
-                                        <Input placeholder=" Tratamiento que recibe" fullWidth defaultValue={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')} />
+                                        <Input disableUnderline={true} placeholder=" Tratamiento que recibe" fullWidth defaultValue={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')} />
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="4">
+                                <Grid item sm={4}>
                                     <Paper>
-                                        <Input placeholder=" No. Expediente" fullWidth defaultValue={vals.NumeroEx} onChange={(e)=>handleChange(e,'NumeroEx')}/>
+                                        <Input disableUnderline={true} placeholder=" No. Expediente" fullWidth defaultValue={vals.NumeroEx} onChange={(e)=>handleChange(e,'NumeroEx')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignItems="stretch" spacing="24" sm="12">
-                                
-                                <Grid item sm="6">
+                            <Grid container alignContent="space-between" spacing={16}>
+                                <Grid item sm={4}>
                                     <Paper>
-                                        <NativeSelect id="estado-atencion" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
+                                        <NativeSelect disableUnderline={true} id="estado-atencion" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
                                             <option value=""> Estado de Atencion </option>
                                             <option value="activo"> Activo </option>
                                             <option value="abandono"> Abandono </option>
@@ -66,19 +65,24 @@ class Form2 extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="6">
+                                <Grid item sm={4}>
                                     <Paper>
-                                        <NativeSelect id="terapeuta" fullWidth value={vals.Terapeuta} onChange={(e)=>handleChange(e,'Terapeuta')}>
+                                        <NativeSelect disableUnderline={true} id="terapeuta" fullWidth value={vals.Terapeuta} onChange={(e)=>handleChange(e,'Terapeuta')}>
                                             <option value=""> Terapeuta </option>
                                             <option value="ninguno"> Ninguno </option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
+                                <Grid item sm={4}>
+                                    <Paper>
+                                        <Input disableUnderline={true} placeholder=" Remision" fullWidth defaultValue={vals.Remision} onChange={(e)=>handleChange(e,'Remision')} />
+                                    </Paper>
+                                </Grid>
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignItems="stretch" spacing="8" sm="12">
-                                <Grid alignContent="center" item sm="4">
+                            <Grid container alignContent="stretch" spacing={8}>
+                                <Grid item sm={6}>
                                     <InputLabel htmlFor="tipo-violencia"> &nbsp; Tipo de violencia</InputLabel>
                                     <List id="tipo-violencia">
                                         <ListItem key="psicologica">
@@ -99,7 +103,7 @@ class Form2 extends Component {
                                         </ListItem>
                                     </List>
                                 </Grid>
-                                <Grid alignContent="center" item sm="4">
+                                <Grid item sm={6}>
                                     <InputLabel htmlFor="tipo-condicion"> &nbsp; Tipo de condicion</InputLabel>
                                     <List id="tipo-condicion">
                                         <ListItem key="victima">
@@ -116,42 +120,18 @@ class Form2 extends Component {
                                         </ListItem>
                                     </List>
                                 </Grid>
-                                <Grid alignContent="center" item sm="4">
-                                    <InputLabel htmlFor="tipo-condicion"> &nbsp; Beneficiados</InputLabel>
-                                    <List id="beneficiados">
-                                        <ListItem key="ninos">
-                                            <ListItemText primary="Niños" />
-                                            <Paper>
-                                                <Input placeholder=" Cant. niños" fullWidth defaultValue={vals.Ninos} onChange={(e)=>handleChange(e,'Ninos')}/>
-                                            </Paper>
-                                        </ListItem>
-                                        <ListItem key="ninas">
-                                            <ListItemText primary="Ninas" />
-                                            <Paper>
-                                                <Input placeholder=" Cant. niñas" fullWidth defaultValue={vals.Ninas} onChange={(e)=>handleChange(e,'Ninas')}/>
-                                            </Paper>
-                                        </ListItem>
-                                        <ListItem key="otros">
-                                            <ListItemText primary="Otros" />
-                                            <Paper>
-                                                <Input placeholder=" Cant. otros" fullWidth defaultValue={vals.Otros} onChange={(e)=>handleChange(e,'Otros')}/>
-                                            </Paper>
-                                        </ListItem>
-                                    </List>
-                                </Grid>
                             </Grid>
                         </CardContent>
-                        <CardContent>
-                      
-                        <Grid container alignItems="space-between" spacing="16" sm="12">
-                                <Grid item sm="6" alignContent="space-around">
+                        <CardContent> 
+                        <Grid container alignContent="space-between" spacing={16}>
+                                <Grid item sm={6} >
                                     <Paper>
-                                    <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Back</Button>
+                                    <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="6" alignContent="space-around">
+                                <Grid item sm={6} >
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>
