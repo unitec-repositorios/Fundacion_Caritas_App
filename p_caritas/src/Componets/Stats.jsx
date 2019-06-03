@@ -57,11 +57,34 @@ class Stats extends Component {
         'Violencia no especificada'
       ],
       datasets: [
-        {
-          data: [5, 3, 12, 1],
-          backgroundColor: ['red', 'green', 'blue', 'orange'],
-          borderColor: ['red', 'green', 'blue', 'orange']
-        }
+          {
+            label: 'Psicologica',
+            data: [5, 0, 0, 0],
+            backgroundColor: 'red',
+            borderColor: 'red',
+            borderWidth: 0
+          },
+          {
+            label: 'Sexual',
+            data: [0, 3, 0, 0],
+            backgroundColor: 'green',
+            borderColor: 'green',
+            borderWidth: 0
+          },
+          {
+            label: 'Fisica',
+            data: [0, 0, 12, 0],
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            borderWidth: 0
+          },
+          {
+            label: 'No especificada',
+            data: [0, 0, 0, 1],
+            backgroundColor: 'orange',
+            borderColor: 'orange',
+            borderWidth: 0
+          }
       ]
     }
 
@@ -94,8 +117,8 @@ class Stats extends Component {
               <Pie
                 data = {data_gender}
                 options={{ maintainAspectRatio: false }}
-                width={'100%'}
-                height={'400%'}
+                width={100}
+                height={400}
               />
             </article>
             </Grid>
@@ -108,8 +131,8 @@ class Stats extends Component {
               <BarChart
                 data = {data_types}
                 options={{ maintainAspectRatio: false }}
-                width={'50%'}
-                height={'400%'}
+                width={50}
+                height={400}
               />
             </article>
             </Grid>

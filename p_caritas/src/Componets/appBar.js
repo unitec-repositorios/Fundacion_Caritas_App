@@ -34,9 +34,9 @@ function DenseAppBar(props) {
         <Toolbar variant="dense">
         <img src={logo} width="10%" alt='logo'/>
           <Tabs value={value} onChange={handleChange}>
-          <Tab label='Formulario' value='0' component={Link} to="./Formulario"/>
-          <Tab label='Estadisticas' value='1' component={Link} to="./Estadisticas"/>
-          <Tab label='Pacientes' value='2' component={Link} to="./Pacientes"/>
+          <Tab label='Formulario' value={0} component={Link} to="./Formulario"/>
+          <Tab label='Estadisticas' value={1} component={Link} to="./Estadisticas"/>
+          <Tab label='Pacientes' value={2} component={Link} to="./Pacientes"/>
         </Tabs>
         </Toolbar>
       </AppBar>
