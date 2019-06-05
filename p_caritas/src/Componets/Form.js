@@ -34,7 +34,7 @@ class Form extends Component {
                                     </Paper>
                                 </Grid>
                                 <Grid item sm="3" alignContent="space-around">
-                                    <Paper>
+                                    <Paper> 
                                         <Input placeholder=" Primer apellido" fullWidth defaultValue={vals.PrimerA} onChange={(e)=>handleChange(e,'PrimerA')}/>
                                     </Paper>
                                 </Grid>
