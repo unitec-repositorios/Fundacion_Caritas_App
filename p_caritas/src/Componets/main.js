@@ -55,7 +55,7 @@ export class main extends Component {
                 <div style={{justifyContent: 'space-around', overflow: 'hidden'}}>
       <GridList style={{ flexWrap: 'nowrap',
               // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-              transform: 'translateZ(0)'}} cols={4}>
+              transform: 'translateZ(0)'}} cols={5}>
         {this.state.tileData.map(tile => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
