@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Bar from './appBar';
 import Pacient from './PacientList';
+import Dialogs from './dialog';
 import Main from './main';
 import Form2 from './Form2';
 import Form from './Form';
@@ -55,6 +56,7 @@ class Stepper extends Component {
                     <Bar/>
                     <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
                     <Pacient/> 
+                    <Dialogs/>
                </div>
             );
         case 2:
