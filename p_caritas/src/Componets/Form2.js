@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Bar from './appBar';
 import Card  from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -28,7 +27,6 @@ class Form2 extends Component {
         const {vals,handleChange,handleCheckBox}=this.props;
         return (
             <div>
-                   <Bar />
                  <div style={{ width: '60%', position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import Bar from './appBar';
+import Pacient from './PacientList';
+import Main from './main';
 import Form2 from './Form2';
 import Form from './Form';
 import Form3 from './Form3';
@@ -49,18 +52,22 @@ class Stepper extends Component {
         case 1:
             return (
                 <div>
-                    <Form newStep={this.newStep} handleChange={this.handleChange} vals={vals}/> 
+                    <Bar/>
+                    <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
+                    <Pacient/> 
                </div>
             );
         case 2:
             return (
                 <div>
+                    <Bar/>
                      <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals}/>  
                </div>
             );
         case 3:
             return (
                 <div>
+                    <Bar/>
                      <Form3  prevStep={this.prevStep} handleChange={this.handleChange}/>  
                </div>
             );  

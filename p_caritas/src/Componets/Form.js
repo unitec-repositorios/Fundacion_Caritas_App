@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import Card  from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -20,7 +19,6 @@ class Form extends Component {
     const card_background = grey[200];
     return (
       <div >
-        <Bar/>
         <div style={{ width: '60%', position: 'absolute', left: '50%', top: '55%', transform: 'translate(-50%, -50%)'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
