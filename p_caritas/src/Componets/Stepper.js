@@ -61,7 +61,7 @@ class Stepper extends Component {
         case 3:
             return (
                 <div>
-                     <Form3  prevStep={this.prevStep} handleChange={this.handleChange}/>  
+                     <Form3  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
                </div>
             );  
         default:
