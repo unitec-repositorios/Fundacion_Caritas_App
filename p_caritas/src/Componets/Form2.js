@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Bar from './appBar';
 import Card  from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +28,8 @@ class Form2 extends Component {
         const {vals,handleChange,handleCheckBox}=this.props;
         return (
             <div>
-                 <div style={{ width: '60%', position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}>
+                <Bar />
+                <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
                             <h3> &nbsp; Nuevo Paciente </h3>
@@ -135,8 +137,7 @@ class Form2 extends Component {
                             </Grid>
                         </CardContent>
                     </Card>
-                </div>
-               
+                </Grid>
             </div>
         )
     }
