@@ -28,8 +28,8 @@ class Form2 extends Component {
         const {vals,handleChange,handleCheckBox}=this.props;
         return (
             <div>
-                   <Bar />
-                 <div style={{ width: '60%', position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}>
+                <Bar />
+                <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
                             <h3> &nbsp; Nuevo Paciente </h3>
@@ -137,8 +137,7 @@ class Form2 extends Component {
                             </Grid>
                         </CardContent>
                     </Card>
-                </div>
-               
+                </Grid>
             </div>
         )
     }
