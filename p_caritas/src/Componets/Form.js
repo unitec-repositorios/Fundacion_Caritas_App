@@ -25,11 +25,9 @@ class Form extends Component {
     const card_background = grey[200];
     return (
       <div >
-        <Bar/>
         <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
             <Card style={{backgroundColor: card_background}}>
-                <div style={{ textAlign: 'center' }}>
-                    <h3> &nbsp; Nuevo Paciente </h3>
+
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
                             <h3> &nbsp; Nuevo Paciente </h3>
@@ -209,9 +207,7 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                     </Card>
->>>>>>> origin/featureM
-                </div>
-                <CardContent>
+                {/* <CardContent>
                     <Grid container alignContent="space-around" spacing={16} >
                         <Grid item sm={3} >
                             <Paper>
@@ -374,10 +370,10 @@ class Form extends Component {
                     <Button fullWidth color="primary" variant="outlined" onClick={this.continue}>
                     Continuar
                     </Button>
-                </CardContent>
+                </CardContent> */}
             </Card>
         </Grid>
-      </div>
+    </div>
     );
   }
 }

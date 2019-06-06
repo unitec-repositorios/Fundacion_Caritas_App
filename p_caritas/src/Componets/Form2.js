@@ -28,7 +28,6 @@ class Form2 extends Component {
         const {vals,handleChange,handleCheckBox}=this.props;
         return (
             <div>
-                <Bar />
                 <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
