@@ -67,11 +67,11 @@ export class main extends Component {
         return (
             <div>
               <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
-                <h1><strong>Citas para hoy!</strong></h1>
+                <h1><strong>Pacientes Recientes</strong></h1>
                 <div style={{justifyContent: 'space-around', overflow: 'hidden'}}>
              <GridList style={{ flexWrap: 'nowrap',
               // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-              transform: 'translateZ(0)'}} cols={5}  onClick={this.handleClickOpen}>
+              transform: 'translateZ(0)'}} cols={4.01}  onClick={this.handleClickOpen}>
               {this.state.tileData.map(tile => (
                 <GridListTile key={tile.img}>
                   <img src={tile.img} alt={tile.title} />
