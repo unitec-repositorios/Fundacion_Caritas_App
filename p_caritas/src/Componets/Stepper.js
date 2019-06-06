@@ -69,7 +69,7 @@ class Stepper extends Component {
                 return (
                     <div>
                         <Bar/>
-                        <Form newStep={this.newStep} vals={vals} prevStep={this.prevStep} /> 
+                        <Form newStep={this.newStep}handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} /> 
                    </div>
                 );  
             

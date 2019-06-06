@@ -14,6 +14,10 @@ class Form extends Component {
     e.preventDefault();
     this.props.newStep();
   };
+  back=e=>{
+    e.preventDefault();
+    this.props.prevStep();
+}
   render() {
     const {vals,handleChange}=this.props;
     const card_background = grey[200];
@@ -170,9 +174,19 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Button fullWidth color="primary" variant="outlined" onClick={this.continue}>
-                            Continue
-                            </Button>
+                      
+                        <Grid container alignItems="space-between" spacing="16" sm="12">
+                                <Grid item sm="6" alignContent="space-around">
+                                    <Paper>
+                                    <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Back</Button>
+                                    </Paper>
+                                </Grid>
+                                <Grid item sm="6" alignContent="space-around">
+                                    <Paper>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
                         </CardContent>
                     </Card>
                 </div>
