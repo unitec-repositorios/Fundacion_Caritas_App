@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import Card  from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -16,12 +15,15 @@ class Form extends Component {
     e.preventDefault();
     this.props.newStep();
   };
+  back=e=>{
+    e.preventDefault();
+    this.props.prevStep();
+}
   render() {
     const {vals,handleChange}=this.props;
     const card_background = grey[200];
     return (
       <div >
-        <Bar/>
         <div style={{ width: '60%', position: 'absolute', left: '50%', top: '55%', transform: 'translate(-50%, -50%)'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
@@ -187,9 +189,19 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Button fullWidth color="primary" variant="outlined" onClick={this.continue}>
-                            Continuar
-                            </Button>
+                      
+                        <Grid container alignItems="space-between" spacing="16" sm="12">
+                                <Grid item sm="6" alignContent="space-around">
+                                    <Paper>
+                                    <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Back</Button>
+                                    </Paper>
+                                </Grid>
+                                <Grid item sm="6" alignContent="space-around">
+                                    <Paper>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
                         </CardContent>
                     </Card>
                 </div>
