@@ -31,7 +31,7 @@ render(){
   return (
     <div>
     
-      <Dialog fullScreen open={vals} onClose={this.CloseDialog} TransitionComponent={Transition}>
+      <Dialog fullScreen open={vals.open} onClose={this.CloseDialog} TransitionComponent={Transition}>
         <AppBar style={{position: 'relative',}}color="secondary">
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={this.CloseDialog} aria-label="Close">
@@ -43,11 +43,11 @@ render(){
           </Toolbar>
         </AppBar>
         <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
+          <ListItem >
+            <ListItemText primary={vals.Nombre} secondary="Titania" />
           </ListItem>
           <Divider />
-          <ListItem button>
+          <ListItem >
             <ListItemText primary="Default notification ringtone" secondary="Tethys" />
           </ListItem>
         </List>

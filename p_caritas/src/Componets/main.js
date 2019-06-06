@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-
+import Dialog from './dialog';
 export class main extends Component {
     constructor(props) {
         super(props)
@@ -42,35 +40,48 @@ export class main extends Component {
                    title:"Paciente 3",
                   author:"Jose Luis"
                }
-             ]
+             ],
+             open:false,
+             Nombre:"Jose"
         }
     }
+
+  
+  
+    handelonClick=(input,value)=>{
+    this.setState({[input]:[value]});
+    console.log(value);
+    }
+    handleClickOpen = () => {
+        this.setState({ open: true });
+        console.log(this.state.open);
+    };
+    handleClose = () => {
+        this.setState({ open: false });
+      };
     
     render() {
-
-          
+      const {open,Nombre}=this.state;
+      const vals={open,Nombre};
+      
         return (
             <div>
+              <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
                 <h1><strong>Citas para hoy!</strong></h1>
                 <div style={{justifyContent: 'space-around', overflow: 'hidden'}}>
-      <GridList style={{ flexWrap: 'nowrap',
+             <GridList style={{ flexWrap: 'nowrap',
               // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-              transform: 'translateZ(0)'}} cols={5}>
-        {this.state.tileData.map(tile => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              
-              actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
-                  <StarBorderIcon  />
-                </IconButton>
-              }
-            />
-          </GridListTile>
+              transform: 'translateZ(0)'}} cols={5}  onClick={this.handleClickOpen}>
+              {this.state.tileData.map(tile => (
+                <GridListTile key={tile.img}>
+                  <img src={tile.img} alt={tile.title} />
+                <GridListTileBar
+                    title={tile.title}
+                   
+                />
+                </GridListTile>
         ))}
-      </GridList>
+        </GridList>
     </div>
             </div>
         )

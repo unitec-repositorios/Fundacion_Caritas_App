@@ -5,6 +5,9 @@ import Main from './main';
 import Form2 from './Form2';
 import Form from './Form';
 import Form3 from './Form3';
+import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 class Stepper extends Component {
 
     constructor(props){
@@ -50,34 +53,50 @@ class Stepper extends Component {
     
         switch(this.state.steps){
         case 1:
-            return (
+        return (
                 <div>
                     <Bar/>
                     <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
                     <Pacient/> 
-                    
+                    <Fab color="primary" aria-label="Add" style={{margin:'1em'}}>
+                        <Button onClick={this.newStep}>
+                        <AddIcon />
+                        </Button>
+                    </Fab>       
                </div>
             );
         case 2:
-            return (
-                <div>
-                    <Bar/>
-                     <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals}/>  
-               </div>
-            );
+                return (
+                    <div>
+                        <Bar/>
+                        <Form newStep={this.newStep} vals={vals} prevStep={this.prevStep} /> 
+                   </div>
+                );  
+            
         case 3:
-            return (
-                <div>
-                    <Bar/>
-                     <Form3  prevStep={this.prevStep} handleChange={this.handleChange}/>  
-               </div>
-            );  
+                return (
+                    <div>
+                        <Bar/>
+                         <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals}/>  
+                   </div>
+                );
+              
+        case 4:
+                return (
+                    <div>
+                        <Bar/>
+                         <Form3  prevStep={this.prevStep} handleChange={this.handleChange}/>  
+                   </div>
+                );
         default:
-        return (
-            <div>
-                <Form newStep={this.newStep}/> 
-           </div>
-        );     
+            return( <div>
+                <Bar/>
+                <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
+                <Pacient/> 
+                <Fab color="primary" aria-label="Add" style={{margin:'1em'}}>
+                    <AddIcon />
+                </Fab>       
+           </div>);  
         }
         
     }
