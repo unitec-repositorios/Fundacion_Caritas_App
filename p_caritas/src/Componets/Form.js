@@ -22,7 +22,7 @@ class Form extends Component {
     return (
       <div >
         <Bar/>
-        <div style={{ width: '60%', position: 'absolute', left: '50%', top: '55%', transform: 'translate(-50%, -50%)'}}>
+        <div style={{ width: '60%', position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
                             <h3> &nbsp; Nuevo Paciente </h3>
