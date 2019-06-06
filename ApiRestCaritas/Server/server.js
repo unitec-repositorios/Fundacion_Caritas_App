@@ -27,7 +27,7 @@ app.get('/',(req,res,next)=>{
 })
 
 app.get('/api/paciente',(req, res , next)=>{
-    var sql = 'select Identidad, Nombre_Paciente, Edad , Genero, Estado_Civil, Oficio from Paciente';
+    var sql = 'select identidad,nombre_paciente,apellido_paciente, edad , genero, estado_civil, oficio, estado_ocupacion  from PACIENTES';
     var params = [];
     db.all(sql,params,(err,rows)=>{
         if(err){
@@ -37,9 +37,22 @@ app.get('/api/paciente',(req, res , next)=>{
     });
 });
 app.get('/api/paciente/:id',(req,res,next)=>{
-    var sql = "select * from Paciente where Identidad = ?"
+    var sql = "select * from Pacientes where identidad = ?"
     var params = [req.params.id];
     db.get(sql,params,(err,row)=>{
+        if(err){
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json(row);
+    });
+});
+
+app.post('/api/paciente/:id/:nombre/:apellido/:edad/:genero/:estado/:oficio/:ocupacion/:edu/:edi/:tera',(req,res,next)=>{
+    var sql = "INSERT into PACIENTES VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+    var params = [req.params.id ,req.params.nombre , req.params.apellido,req.params.edad,req.params.genero,req.params.estado,req.params.oficio,req.params.ocupacion,req.params.edu,req.params.edi,req.params.tera];
+    console.log(params)
+    db.run(sql,params,(err,row)=>{
         if(err){
             res.status(400).json({"error": err.message});
             return;
