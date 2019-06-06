@@ -1,92 +1,60 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
 
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-function MaxWidthDialog() {
-  const [open, setOpen] = React.useState(false);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
-
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
-
-  function handleMaxWidthChange(event) {
-    setMaxWidth(event.target.value);
-  }
-
-  function handleFullWidthChange(event) {
-    setFullWidth(event.target.checked);
-  }
-
+class FullScreenDialog extends Component   {
+    openDialog = e => {
+        e.preventDefault();
+        this.props.handleClickOpen();
+      };  
+      CloseDialog = e => {
+        e.preventDefault();
+        console.log('close');
+        this.props.handleClose();
+      };  
+render(){
+    const {vals}=this.props;
   return (
-    <React.Fragment>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open max-width dialog
-      </Button>
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="max-width-dialog-title">
-        <DialogTitle id="max-width-dialog-title">Optional sizes</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You can set my maximum width and whether to adapt or not.
-          </DialogContentText>
-          <form style={ {display: 'flex',flexDirection: 'column',margin: 'auto',width: 'fit-content'}} noValidate>
-            <FormControl style={{ marginTop:"2em",minWidth: 120,}}>
-              <InputLabel htmlFor="max-width">maxWidth</InputLabel>
-              <Select
-                value={maxWidth}
-                onChange={handleMaxWidthChange}
-                inputProps={{
-                  name: 'max-width',
-                  id: 'max-width',
-                }}
-              >
-                <MenuItem value={false}>false</MenuItem>
-                <MenuItem value="xs">xs</MenuItem>
-                <MenuItem value="sm">sm</MenuItem>
-                <MenuItem value="md">md</MenuItem>
-                <MenuItem value="lg">lg</MenuItem>
-                <MenuItem value="xl">xl</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControlLabel
-              style={{ marginTop:"1em"}}
-              control={
-                <Switch checked={fullWidth} onChange={handleFullWidthChange} value="fullWidth" />
-              }
-              label="Full width"
-            />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
+    <div>
+    
+      <Dialog fullScreen open={vals} onClose={this.CloseDialog} TransitionComponent={Transition}>
+        <AppBar style={{position: 'relative',}}color="secondary">
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={this.CloseDialog} aria-label="Close">
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" style={{ marginLeft:"2em",flex: 1,}}color="inherit">
+              Informacion de Paciente 
+            </Typography>  
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItem button>
+            <ListItemText primary="Phone ringtone" secondary="Titania" />
+          </ListItem>
+          <Divider />
+          <ListItem button>
+            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+          </ListItem>
+        </List>
       </Dialog>
-    </React.Fragment>
+    </div>
   );
 }
+}
 
-export default MaxWidthDialog;
+export default FullScreenDialog;
