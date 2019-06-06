@@ -59,9 +59,9 @@ class Stepper extends Component {
                     <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
                     <Pacient/> 
                     <Fab color="primary" aria-label="Add" style={{margin:'1em'}}>
-                        <Button onClick={this.newStep}>
-                        <AddIcon />
-                        </Button>
+                        
+                        <AddIcon onClick={this.newStep}/>
+                        
                     </Fab>       
                </div>
             );
