@@ -6,7 +6,6 @@ import Form2 from './Form2';
 import Form from './Form';
 import Form3 from './Form3';
 import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 class Stepper extends Component {
 
@@ -85,7 +84,7 @@ class Stepper extends Component {
                 return (
                     <div>
                         <Bar/>
-                         <Form3  prevStep={this.prevStep} handleChange={this.handleChange}/>  
+                         <Form3  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
                    </div>
                 );
         default:
