@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "caritas-ui",
+    "caritas": "caritas-ui"
+  }
+}

@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react'
 import './ficha_usuarios.css';
+import Button from '@material-ui/core/Button';
 
 export class Form3 extends Component {
-    continue = e => {
-        e.preventDefault();
-        this.props.newStep();
-      };
-    back=e=>{
+ 
+   back=e=>{
         e.preventDefault();
         this.props.prevStep();
     }
     render() {
-        const vals=this.props.vals;
+        const {vals}=this.props;
         return (
             <div class="c47">
+                  <Button  color="secondary" variant="outlined" onClick={this.back}>Regresar</Button><Button  color="primary" variant="outlined" onClick={this.back}>Imprimir</Button>
+                  
                 <div>
                     <p class="c11"><span class="c43">CARITAS DE SAN PEDRO SULA</span></p>
                     <p class="c0 c3"><span class="c6 c33"></span></p>
@@ -35,7 +35,7 @@ export class Form3 extends Component {
                         <tr class="c8">
                             <td class="c12" colspan="1" rowspan="1">
                                 <p class="c0"><span class="c6 c1">NOMBRE</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Nombre} </span></p>
+                                <p class="c0"><span class="c6 c1">{vals.Nombre}</span></p>
                                 <p class="c0 c3"><span class="c6 c1"></span></p>
                             </td>
                             <td class="c36" colspan="3" rowspan="1">

@@ -81,7 +81,7 @@ class FormDialog extends React.Component {
               autoFocus
               margin="dense"
               id="name"
-              label="UserName or Email Address"
+              label="Usuario"
               name="email"
               onChange={this.handleChange}
               type="email"
@@ -92,7 +92,7 @@ class FormDialog extends React.Component {
               autoFocus
               margin="dense"
               id="pass"
-              label="Password"
+              label="Contraseña"
               name="pass"
               onChange={this.handleChange}
               type="Password"
