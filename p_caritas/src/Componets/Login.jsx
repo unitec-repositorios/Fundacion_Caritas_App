@@ -6,7 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import logo from './Recursos/caritas_logo.png';
 
 class FormDialog extends React.Component {
   constructor(props){
@@ -57,7 +58,7 @@ class FormDialog extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundColor:"#ff8a80"}}>
           {this.renderRedirect()}
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Login
@@ -66,11 +67,15 @@ class FormDialog extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          PaperProps={{
+            style: {backgroundColor: '#ff8a80', boxShadow: "none",
+            overflow: "hidden"}
+          }}
         >
           <DialogTitle id="form-dialog-title">Login </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              
+            <img src={logo} width="100%" alt="logo" />
             </DialogContentText>
             <TextField
               autoFocus

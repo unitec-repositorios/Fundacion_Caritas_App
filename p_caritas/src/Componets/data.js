@@ -1,37 +1,53 @@
 import React, { Component } from 'react';
 import Bar from './appBar';
-import DataTable from 'react-data-table-component';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Search from '@material-ui/icons/Search';
+import Clear from '@material-ui/icons/Clear';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import MaterialTable from 'material-table';
+
+const tableIcons = {
+  DetailPanel: ChevronRight,
+  Filter: FilterList,
+  FirstPage: FirstPage,
+  Clear: Clear,
+  LastPage: LastPage,
+  NextPage: ChevronRight,
+  PreviousPage: ChevronLeft,
+  Search: Search,
+  SortArrow: ArrowUpward,
+  ViewColumn: ViewColumn
+};
 
 const columns=[
   {
-    name: 'Identidad',
-    selector: 'Identidad',
-    sortable: true
+    title: 'Identidad',
+    field: 'Identidad'
   },
   {
-    name: 'Nombre',
-    selector: 'Nombre_Paciente',
-    sortable: true
+    title: 'Nombre',
+    field: 'Nombre_Paciente'
   },
   {
-    name: 'Edad',
-    selector: 'Edad',
-    sortable: true
+    title: 'Edad',
+    field: 'Edad',
   },
   {
-    name: 'Edad',
-    selector: 'Genero',
-    sortable: true
+    title: 'Genero',
+    field: 'Genero'
   },
   {
-    name: 'Edad',
-    selector: 'Estado_Civil',
-    sortable: true
+    title:'Estado Civil',
+    field: 'Estado_Civil'
   },
   {
-    name: 'Edad',
-    selector: 'Oficio',
-    sortable: true
+    title: 'Oficio',
+    field: 'Oficio'
   },
 ]
 
@@ -47,16 +63,37 @@ class data extends Component {
     }
     render(){
       return (
-        <div>
+        <div style={{maxWidth:'100%'}}>
           <Bar/>
-          <DataTable
+          <MaterialTable
+          icons={tableIcons}
           title = "Pacientes"
           columns = {columns}
           data={this.state.list}
-          pagination= {true}
-          paginationPerPage = {5}
-          responsive ={true}
-          highlightOnHover ={true}
+          isLoading = {this.state.list.length === 0}
+          localization = {{
+            pagination: {
+              labelDisplayedRows: "{from}-{to} de {count}",
+              labelRowsSelect: "filas",
+              labelRowsPerPage: "Filas por pagina:",
+              firstAriaLabel: "Primera pagina",
+              firstTooltip: "Primera pagina",
+              previousAriaLabel: "Pagina anterior",
+              previousTooltip: "Pagina anterior",
+              nextAriaLabel: "Pagina siguiente",
+              nextTooltip: "Pagina siguiente",
+              lastAriaLabel: "Ultima pagina",
+              lastTooltip: "Ultima pagina"
+            },
+            body: {
+              emptyDataSourceMessage: 'No se encontraron registros',
+              filterTooltip: 'Filtrar'
+            },
+            toolbar: {
+              searchTooltip: "Buscar",
+              searchPlaceholder: "Buscar"
+            }
+          }}
           />
         </div>
       );
