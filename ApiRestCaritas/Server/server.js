@@ -381,7 +381,7 @@ app.post('/api/tipoviolencia/:tipo',(req,res,next)=>{
 
 //Ingresar Usuarios
 app.post('/api/usuario/:usu/:con',(req,res,next)=>{
-    var sql = 'INSERT INTO USUARIOS values (null,?,?)';
+    var sql = 'INSERT INTO USUARIOS values (?,?)';
     var params = [req.params.usu, req.params.con];
     console.log(params)
     db.run(sql,params,(err,row)=>{
