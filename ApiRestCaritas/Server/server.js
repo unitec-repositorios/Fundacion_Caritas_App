@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var db = require('./database.js');
 const router = express.Router();
+var md5 = require('md5');
 
 
 //var PORT = 'https://apicaritas.herokuapp.com';
@@ -382,7 +383,7 @@ app.post('/api/tipoviolencia/:tipo',(req,res,next)=>{
 //Ingresar Usuarios
 app.post('/api/usuario/:usu/:con',(req,res,next)=>{
     var sql = 'INSERT INTO USUARIOS values (?,?)';
-    var params = [req.params.usu, req.params.con];
+    var params = [req.params.usu, md5(req.params.con)];
     console.log(params)
     db.run(sql,params,(err,row)=>{
         if(err){
