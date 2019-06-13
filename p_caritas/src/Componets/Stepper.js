@@ -89,6 +89,7 @@ class Stepper extends Component {
                 </div>
             );
         case 5:
+            
             return (
                 <div>
                     <Bar/>
