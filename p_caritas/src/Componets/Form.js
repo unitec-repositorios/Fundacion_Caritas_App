@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import Card  from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -91,7 +90,7 @@ class Form extends Component {
                         </CardContent>
                         <CardContent>
                             <Grid container alignContent="stretch" spacing={24} >
-                                <Grid item sm={3}>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivil')} value={vals.EstadoCivil}>
                                             <option value=""> Estado Civil </option>
@@ -101,7 +100,7 @@ class Form extends Component {
                                     </Paper>
                                 </Grid>
                            
-                                <Grid item sm={3}>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="genero" fullWidth onChange={(e)=>handleChange(e,'Genero')} value={vals.Genero}>
                                             <option value=""> Genero </option>
@@ -110,12 +109,8 @@ class Form extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm={3} >
-                                    <Paper>
-                                        <Input disableUnderline={true} placeholder=" Edad" fullWidth defaultValue={vals.Edad} onChange={(e)=>handleChange(e,'Edad')} />
-                                    </Paper>
-                                </Grid>
-                                <Grid item sm={3}>
+                             
+                                <Grid item sm={4}>
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.Oficio} onChange={(e)=>handleChange(e,'Oficio')} />
                                     </Paper>

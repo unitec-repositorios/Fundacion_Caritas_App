@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import Bar from './appBar';
 import Pacient from './PacientList';
 import Main from './main';
+import Form3 from './Form3';
 import Form2 from './Form2';
 import Form from './Form';
-import Form3 from './Form3';
+import Document from './document';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 class Stepper extends Component {
@@ -16,7 +17,7 @@ class Stepper extends Component {
             Localidad: '', Departamento:'', Telefono:'', Date:'', EstadoCivil:'', Genero:'', 
             Edad:'', Oficio:'', Educacion:'', EstadoOcupacion:'', Remision:'', Parroquia:'', 
             Colonia:'', TipoCaso:'',Tratamiento:'',NumeroEx:'',EstadoAtencion:'',Terapeuta:'',
-            VPsicologica:false,VFisica:'',VEconomica:'',VSexual:'',Victima:'',Agresor:'',RPT:'',
+            VPsicologica:'',VFisica:'',VEconomica:'',VSexual:'',Victima:'',Agresor:'',RPT:'',
             Ninos:'',Ninas:'',Otros:''
           };  
            
@@ -42,21 +43,23 @@ class Stepper extends Component {
         console.log(this.state.VPsicologica);
     }
     render() {
-        const {Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
-            Genero,Edad,Oficio,Educacion,EstadoOcupacion,Remision,Parroquia,Colonia,TipoCaso,Tratamiento,NumeroEx,
+        const {NombreD,PrimerAD ,SegundoAD ,NumeroIdentD ,DireccionD ,LocalidadD ,DepartamentoD,EstadoCivilD,OficioD,TelefonoD,DateD,
+            Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
+            Genero,Oficio,Educacion,EstadoOcupacion,Remision,Parroquia,Colonia,TipoCaso,Tratamiento,NumeroEx,
             EstadoAtencion,Terapeuta,VPsicologica,VFisica,VEconomica,VSexual,Victima,Agresor,RPT,Ninos,Ninas,Otros
         }=this.state;
-        const vals={ Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
-            Genero,Edad,Oficio,Educacion,EstadoOcupacion,Remision,Parroquia,Colonia,TipoCaso,Tratamiento,NumeroEx,
-            EstadoAtencion,Terapeuta,VPsicologica,VFisica,VEconomica,VSexual,Victima,Agresor,RPT,Ninos,Ninas,Otros};
+        const vals={NombreD,PrimerAD ,SegundoAD ,NumeroIdentD ,DireccionD ,LocalidadD ,DepartamentoD,EstadoCivilD,OficioD,TelefonoD,DateD,
+            Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
+            Genero,Oficio,Educacion,EstadoOcupacion,Remision,Parroquia,Colonia,TipoCaso,Tratamiento,NumeroEx,
+            EstadoAtencion,Terapeuta,VPsicologica,VFisica,VEconomica,VSexual,Victima,Agresor,RPT,Ninos,Ninas,Otros
+        };
     
         switch(this.state.steps){
         case 1:
         return (
                 <div>
                     <Bar/>
-                    <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>
-                    <Pacient/> 
+                   
                     <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
     bottom:0,
     left:"90%"}} onClick={this.newStep}>
@@ -84,9 +87,16 @@ class Stepper extends Component {
                 return (
                     <div>
                         <Bar/>
-                         <Form3  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
+                         <Form3  prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>  
                    </div>
                 );
+        case 5:
+                    return (
+                        <div>
+                            <Bar/>
+                             <Document  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
+                       </div>
+                    );
         default:
             return( <div>
                 <Bar/>
