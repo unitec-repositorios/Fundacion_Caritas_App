@@ -68,35 +68,33 @@ class Stepper extends Component {
                </div>
             );
         case 2:
-                return (
-                    <div>
-                        <Bar/>
-                        <Form newStep={this.newStep}handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} /> 
-                   </div>
-                );  
-            
+            return (
+                <div>
+                    <Bar/>
+                    <Form newStep={this.newStep}handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} /> 
+                </div>
+            );  
         case 3:
-                return (
-                    <div>
-                        <Bar/>
-                         <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals}/>  
-                   </div>
-                );
-              
+            return (
+                <div>
+                    <Bar/>
+                        <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals}/>  
+                </div>
+            );
         case 4:
-                return (
-                    <div>
-                        <Bar/>
-                         <Form3  prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>  
-                   </div>
-                );
+            return (
+                <div>
+                    <Bar/>
+                        <Form3  prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals}/>  
+                </div>
+            );
         case 5:
-                    return (
-                        <div>
-                            <Bar/>
-                             <Document  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
-                       </div>
-                    );
+            return (
+                <div>
+                    <Bar/>
+                        <Document  prevStep={this.prevStep} handleChange={this.handleChange} vals={vals}/>  
+                </div>
+            );
         default:
             return( <div>
                 <Bar/>
