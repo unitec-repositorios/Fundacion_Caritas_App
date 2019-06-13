@@ -119,7 +119,7 @@ class Form extends Component {
                                 </Grid>
                                 <Grid item sm="6" alignContent="space-around">
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>

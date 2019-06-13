@@ -27,11 +27,11 @@ const tableIcons = {
 const columns=[
   {
     title: 'Identidad',
-    field: 'Identidad'
+    field: 'Id'
   },
   {
     title: 'Nombre',
-    field: 'Nombre_Paciente'
+    field: 'Nombre'
   },
   {
     title: 'Edad',
@@ -43,13 +43,15 @@ const columns=[
   },
   {
     title:'Estado Civil',
-    field: 'Estado_Civil'
+    field: 'Estado'
   },
   {
     title: 'Oficio',
     field: 'Oficio'
-  },
+  }
 ]
+
+const port = 'http://localhost:8000';
 
 class data extends Component {
     constructor(props){
@@ -59,7 +61,7 @@ class data extends Component {
       }
     }
     componentDidMount(){
-      fetch('https://apicaritas.herokuapp.com/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+      fetch(port+'/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
     }
     render(){
       return (

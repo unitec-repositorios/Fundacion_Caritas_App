@@ -96,6 +96,7 @@ class Form extends Component {
                                             <option value=""> Estado Civil </option>
                                             <option value="soltero"> Soltero </option>
                                             <option value="casada"> Casado </option>
+                                            <option value="union_libre"> Union libre </option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
@@ -196,7 +197,7 @@ class Form extends Component {
                                 </Grid>
                                 <Grid item sm={6} alignContent="space-around">
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>
