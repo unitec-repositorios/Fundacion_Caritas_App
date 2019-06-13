@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react'
+import html2canvas from 'html2canvas';
 import './ficha_usuarios.css';
 import Button from '@material-ui/core/Button';
+import * as jsPDF from 'jspdf';
+import { number } from 'prop-types';
 
 export class Form3 extends Component {
  
@@ -9,241 +12,255 @@ export class Form3 extends Component {
         e.preventDefault();
         this.props.prevStep();
     }
+
+    generarPdf = () =>{
+        const input  = document.getElementById("imprimir");
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('img/png');
+            const pdf = new jsPDF('p', 'mm', 'legal');
+            pdf.addImage(imgData, 'PNG', 0, 0);
+            pdf.save('Ficha_Paciente.pdf'); 
+        });
+    }
+                      
     render() {
         const {vals}=this.props;
+
+        function getDate() {
+            const today = new Date(),
+            date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+            return date;
+        }
+        const fechaActual = getDate();
+
+        function cantBeneificiarios() {
+            var ninos = parseInt(vals.Ninos);
+            var ninas = parseInt(vals.Ninas);
+            var otros = parseInt(vals.Otros);
+            var cant = ninos + ninas;
+            
+            console.log("cantidad es: " + cant);
+            return cant;
+        }
+        const cantBenefi = cantBeneificiarios();
+
         return (
-            <div class="c47">
-                  <Button  color="secondary" variant="outlined" onClick={this.back}>Regresar</Button><Button  color="primary" variant="outlined" onClick={this.back}>Imprimir</Button>
-                  
-                <div>
-                    <p class="c11"><span class="c43">CARITAS DE SAN PEDRO SULA</span></p>
-                    <p class="c0 c3"><span class="c6 c33"></span></p>
+            <div>
+                <div class = "g34"> 
+                    <Button color="secondary" variant="outlined" onClick={this.back}>Regresar</Button><Button  color="primary" variant="outlined" onClick={this.generarPdf}>Imprimir</Button>
                 </div>
-                <p class="c11"><span class="c14">SOLICITUD DE ASISTENCIA PSICOLOGICA GRATUITA EN CASOS DE VIOLENCIA DOMESTICA </span></p>
-                <p class="c11 c3"><span class="c6 c1"></span></p>
-                <p class="c0"><span class="c6 c1">Con la finalidad de acreditar la concurrencia de los requisitos legales exigidos por Caritas de San Pedro Sula para el goce de apoyo psicol&oacute;gico gratuito, declaro que los datos que relaciono a continuaci&oacute;n son ciertos, completos y sin omisi&oacute;n alguna.</span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0"><span class="c14">1.- Datos personales &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de recepci&oacute;n: _______________________________</span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0" id="h.gjdgxs"><span class="c14">A) BENEFICIARIA (O) &nbsp;</span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <a id="t.42ce1ccee988b3c7d7220039a6232d7304771c4f"></a>
-                <a id="t.0"></a>
-                <table class="c23">
-                    <tbody>
-                        <tr class="c8">
-                            <td class="c12" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">NOMBRE</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Nombre}</span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c36" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">PRIMER APELLIDO</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.PrimerA} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c37" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">SEGUNDO APELLIDO</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.SegundoA} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c38" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">N&Uacute;MERO DE IDENTIDAD </span></p>
-                                <p class="c0"><span class="c6 c1">{vals.NumeroIdent} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c28" colspan="5" rowspan="1">
-                                <p class="c0"><span class="c6 c1">DIRECCI&Oacute;N</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Direccion} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c22" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">LOCALIDAD</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Localidad} </span></p> 
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c42" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">DEPARTAMENTO </span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Departamento} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c7" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">TEL&Eacute;FONO</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Telefono} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c26" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">FECHA DE NACIMIENTO</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Date} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c32" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">ESTADO CIVIL </span></p>
-                                <p class="c0"><span class="c6 c1">{vals.EstadoCivil} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c40" colspan="6" rowspan="1">
-                                <p class="c0"><span class="c6 c1">PROFESI&Oacute;N</span></p>
-                                <p class="c0"><span class="c6 c1">{vals.Oficio} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0"><span class="c14">B) DENUNCIADO </span></p>
-                <a id="t.fbd10b640194621b18a4328d169314d8e3af9f6c"></a>
-                <a id="t.1"></a>
-                <table class="c23">
-                    <tbody>
-                        <tr class="c8">
-                            <td class="c12" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">NOMBRE</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.NombreD}</span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c12" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">PRIMER APELLIDO</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.PrimerAD}</span></p>
-                            </td>
-                            <td class="c37" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">SEGUNDO APELLIDO</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.SegundoAD}</span></p>
-                            </td>
-                            <td class="c16" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">N&Uacute;MERO DE IDENTIDAD </span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.NumeroIdentD}</span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c46" colspan="4" rowspan="1">
-                                <p class="c0"><span class="c6 c1">DIRECCI&Oacute;N</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.DireccionD}</span></p>
-                            </td>
-                            <td class="c22" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">LOCALIDAD</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.LocalidadD}</span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c45" colspan="3" rowspan="1">
-                                <p class="c0"><span class="c6 c1">DEPARTAMENTO </span></p>
-                                <p class="c0 c3"><span class="c1 c6">{vals.DepartamentoD}</span></p>
-                            </td>
-                            <td class="c2" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">TEL&Eacute;FONO</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.TelefonoD}</span></p>
-                            </td>
-                            <td class="c22" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">FECHA DE NACIMIENTO</span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.DateD}</span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c15" colspan="2" rowspan="1">
-                                <p class="c0"><span class="c6 c1">ESTADO CIVIL </span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.EstadoCivilD}</span></p>
-                            </td>
-                            <td class="c39" colspan="4" rowspan="1">
-                                <p class="c0"><span class="c6 c1">PROFESI&Oacute;N </span></p>
-                                <p class="c0 c3"><span class="c6 c1">{vals.OficioD}</span></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0 c3"><span class="c6 c14"></span></p>
-                <p class="c0"><span class="c14">2.- Datos econ&oacute;micos</span></p>
-                <p class="c0"><span class="c14">A) INGRESOS MENSUALES POR UNIDAD FAMILIAR</span></p>
-                <a id="t.3e94ec758df7214fbd13b26ddc6e04f316937370"></a>
-                <a id="t.2"></a>
-                <table class="c21">
-                    <tbody>
-                        <tr class="c8">
-                            <td class="c4" colspan="1" rowspan="1">
-                                <p class="c11"><span class="c6 c1">Importe bruto</span></p>
-                            </td>
-                            <td class="c4" colspan="1" rowspan="1">
-                                <p class="c11"><span class="c1">Concepto </span><sup class="c1 c41"><a href="#ftnt1" id="ftnt_ref1">[1]</a></sup><span class="c6 c1">4)</span></p>
-                            </td>
-                        </tr>
-                        <tr class="c13">
-                            <td class="c4" colspan="1" rowspan="1">
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                            <td class="c4" colspan="1" rowspan="1">
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <a id="t.3b5c2538bcf182abdfeab0494286daae65dc0d1c"></a>
-                <a id="t.3"></a>
-                <table class="c21">
-                    <tbody>
-                        <tr class="c8">
-                            <td class="c31" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c14">&nbsp;Descripci&oacute;n de Atenci&oacute;n Psicol&oacute;gica:</span></p>
-                                <p class="c0"><span class="c6 c1">DESCRIPCI&Oacute;N DEL CASO: </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                                <p class="c0"><span class="c6 c1">Remitido de JEVD-EXP-VD XXXX</span></p>
-                                <p class="c0"><span class="c6 c1">TIPO DE VIOLENCIA:{vals.VFisica} {vals.VEconomica} {vals.VSexual} </span></p>
-                                <p class="c0"><span class="c6 c1">CONDICIÓN: {vals.Victima} {vals.Agresor}  </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                        <tr class="c8">
-                            <td class="c31" colspan="1" rowspan="1">
-                                <p class="c0"><span class="c6 c1">NOMBRE, APELLIDOS: {vals.Nombre} &nbsp; {vals.PrimerA} &nbsp; {vals.SegundoA} </span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                                <p class="c0 c3"><span class="c6 c1"></span></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0"><span class="c14">DECLARO SABER QUE:</span></p>
-                <ol class="c27 lst-kix_list_1-0 start" start="1">
-                    <li class="c0 c29"><span class="c6 c1">Mis datos de car&aacute;cter personal ser&aacute;n incluidos en un fichero manejado por la Instituci&oacute;n para efectos de registro e investigaci&oacute;n.</span></li>
-                    <li class="c0 c29"><span class="c6 c1">Que la instituci&oacute;n no es responsable de contactarme para el cumplimiento del proceso, esa responsabilidad recae en m&iacute;, para hacer las gestiones necesarias para iniciar dicho tr&aacute;mite.</span></li>
-                </ol>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c0 c3"><span class="c6 c1"></span></p>
-                <p class="c11 c3"><span class="c6 c20"></span></p>
-                <p class="c11 c3"><span class="c6 c20"></span></p>
-                <p class="c3 c11"><span class="c6 c20"></span></p>
-                <p class="c11 c3"><span class="c6 c20"></span></p>
-                <p class="c11"><span class="c6 c20">____________________________________________________</span></p>
-                <p class="c11"><span class="c6 c20">(Firma)</span></p>
+                <div id = "imprimir" class="c26">
+                    <p class="c10"><span class="c3">CARITAS DE SAN PEDRO SULA</span></p>
+                    <p class="c10 c19"><span class="c11"></span></p>
+                    <p class="c24"><span class="c14">SOLICITUD DE ASISTENCIA PSICOL&Oacute;GICA GRATUITA EN CASOS DE VIOLENCIA DOM&Eacute;STICA</span></p>
+                    <p class="c18"><span class="c14"></span></p>
+                    <p class="c24"><span class="c17">Con la finalidad de acreditar la concurrencia de los requisitos legales exigidos por Caritas de San Pedro Sula para el goce de apoyo psicol&oacute;gico gratuito, declaro que los datos que relaciono a continuaci&oacute;n son ciertos, completos y sin omisi&oacute;n alguna.</span></p>
+                    <p class="c5 c19"><span class="c17"></span></p>
+                    <p class="c5"><span class="c11">1. Datos Personales&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de recepci&oacute;n: {fechaActual}</span></p>
+                    <p class="c5"><span class="c11">A) Beneficiario (a)</span></p>
+                    <a id="t.d86e859a5c1d334867d8bfd47dd17184fce41e1a"></a>
+                    <a id="t.0"></a>
+                    <table class="c16">
+                        <tbody>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">NOMBRE</span></p>
+                                    <p class="c13"><span class="c7">{vals.Nombre}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">PRIMER APELLIDO</span></p>
+                                    <p class="c13"><span class="c7">{vals.PrimerA}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">SEGUNDO APELLIDO</span></p>
+                                    <p class="c13"><span class="c7">{vals.SegundoA}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">N&Uacute;MERO DE IDENTIDAD</span></p>
+                                    <p class="c13"><span class="c7">{vals.NumeroIdent}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">DIRECCI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.Direccion}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">LOCALIDAD</span></p>
+                                    <p class="c13"><span class="c7">{vals.Localidad}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">DEPARTAMENTO</span></p>
+                                    <p class="c13"><span class="c7">{vals.Departamento}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">TEL&Eacute;FONO</span></p>
+                                    <p class="c13"><span class="c7">{vals.Telefono}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">FECHA DE NACIMIENTO</span></p>
+                                    <p class="c13"><span class="c7">{vals.Date}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">ESTADO CIVIL</span></p>
+                                    <p class="c13"><span class="c7">{vals.EstadoCivil}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">PROFESI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.Oficio}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">TIPO DE EDUCACI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.Educacion}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">CANTIDAD BENEFICIARIOS</span></p>
+                                    <p class="c13"><span class="c7">{cantBenefi}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">CAUSA DE VIOLENCIA</span></p>
+                                    <p class="c0"><span class="c8"></span></p>
+                                    <p class="c0"><span class="c8"></span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c15">UBICACI&Oacute;N DE LA VIOLENCIA</span></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="c5 c19"><span class="c3"></span></p>
+                    <p class="c5"><span class="c11">B) Denunciado (a)</span></p>
+                    <a id="t.cd9ed001c7ab7e14bf6c30b597e61596ac2aae18"></a>
+                    <a id="t.1"></a>
+                    <table class="c16">
+                        <tbody>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">NOMBRE</span></p>
+                                    <p class="c13"><span class="c7">{vals.NombreD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">PRIMER APELLIDO</span></p>
+                                    <p class="c13"><span class="c7">{vals.PrimerAD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">SEGUNDO APELLIDO</span></p>
+                                    <p class="c13"><span class="c7">{vals.SegundoAD}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">N&Uacute;MERO DE IDENTIDAD</span></p>
+                                    <p class="c13"><span class="c7">{vals.NumeroIdentD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">DIRECCI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.DireccionD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">LOCALIDAD</span></p>
+                                    <p class="c13"><span class="c7">{vals.LocalidadD}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">DEPARTAMENTO</span></p>
+                                    <p class="c13"><span class="c7">{vals.DepartamentoD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">TEL&Eacute;FONO</span></p>
+                                    <p class="c13"><span class="c7">{vals.TelefonoD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">FECHA DE NACIMIENTO</span></p>
+                                    <p class="c13"><span class="c7">{vals.DateD}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c9">
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">ESTADO CIVIL</span></p>
+                                    <p class="c13"><span class="c7">{vals.EstadoCivilD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">PROFESI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.OficioD}</span></p>
+                                </td>
+                                <td class="c6" colspan="2" rowspan="1">
+                                    <p class="c2"><span class="c8">TIPO DE EDUCACI&Oacute;N</span></p>
+                                    <p class="c13"><span class="c7">{vals.EducacionD}</span></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="c5 c19"><span class="c3"></span></p>
+                    <p class="c5"><span class="c11">2. Datos Econ&oacute;micos </span></p>
+                    <p class="c5"><span class="c11">A) Ingresos Mensuales por unidad familiar</span></p>
+                    <p class="c5 c19"><span class="c3"></span></p>
+                    <a id="t.2223e35d945286bda65bdd5d75a79e80383a2cfa"></a>
+                    <a id="t.2"></a>
+                    <table class="c16">
+                        <tbody>
+                            <tr class="c22">
+                                <td class="c12" colspan="1" rowspan="1">
+                                    <p class="c2"><span class="c14">IMPORTE BRUTO</span></p>
+                                </td>
+                                <td class="c12" colspan="1" rowspan="1">
+                                    <p class="c2"><span class="c14">CONCEPTO</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c25">
+                                <td class="c12" colspan="1" rowspan="1">
+                                    <p class="c0"><span class="c7"></span></p>
+                                </td>
+                                <td class="c12" colspan="1" rowspan="1">
+                                    <p class="c0"><span class="c14"></span></p>
+                                    <p class="c0"><span class="c7"></span></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="c5 c19"><span class="c3"></span></p>
+                    <a id="t.5a944f3f52af2d3a3cc57f662423c0ea88feb0fb"></a>
+                    <a id="t.3"></a>
+                    <table class="c16">
+                        <tbody>
+                            <tr class="c22">
+                                <td class="c21" colspan="1" rowspan="1">
+                                    <p class="c2"><span class="c14">DESCRIPCI&Oacute;N DE ATENCI&Oacute;N PSICOL&Oacute;GICA</span></p>
+                                    <p class="c13"><span class="c7">Remitido de: {vals.Remision}</span></p>
+                                    <p class="c13"><span class="c7">Tipo de Violencia: {vals.VPsicologica}</span></p>
+                                    <p class="c13"><span class="c7">Condici&oacute;n de la persona: {vals.Victima}</span></p>
+                                </td>
+                            </tr>
+                            <tr class="c20">
+                                <td class="c21" colspan="1" rowspan="1">
+                                    <p class="c2"><span class="c14">NOMBRE, APELLIDOS</span></p>
+                                    <p class="c13"><span class="c7">{vals.Nombre}&nbsp;{vals.PrimerA}&nbsp;{vals.SegundoA}</span></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="c5 c19"><span class="c3"></span></p>
+                    <p class="c5"><span class="c11">DECLARO SABER QUE:</span></p>
+                    <ol class="c23 lst-kix_ukewq6o6x8b9-0 start" start="1">
+                        <li class="c5 c27"><span class="c17">Mis datos de car&aacute;cter personal ser&aacute;n incluidos en un fichero manejado por la Instituci&oacute;n para efectos de registro e investigaci&oacute;n.</span></li>
+                        <li class="c5 c27"><span class="c17">Que la instituci&oacute;n no es responsable de contactarme para el cumplimiento del proceso, esa responsabilidad recae en m&iacute;, para hacer las gestiones necesarias para iniciar dicho tr&aacute;mite.</span></li>
+                    </ol>
+                    <p class="c5 c19"><span class="c17"></span></p>
+                    <p class="c5 c19"><span class="c17"></span></p>
+                    <p class="c5 c19"><span class="c17"></span></p>
+                    <p class="c10"><span class="c17">____________________________________________________</span></p>
+                    <p class="c10"><span class="c17">(Firma)</span></p>
+                </div>
             </div>
-        )
+        
+        );
     }
 }
 

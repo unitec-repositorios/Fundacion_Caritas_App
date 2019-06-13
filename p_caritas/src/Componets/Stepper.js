@@ -42,6 +42,7 @@ class Stepper extends Component {
         this.setState({steps:this.state.steps - 1});
         console.log(this.state.VPsicologica);
     }
+
     render() {
         const {NombreD,PrimerAD ,SegundoAD ,NumeroIdentD ,DireccionD ,LocalidadD ,DepartamentoD,EstadoCivilD,OficioD,TelefonoD,DateD,
             Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
