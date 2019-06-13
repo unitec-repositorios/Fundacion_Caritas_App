@@ -12,6 +12,8 @@
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
     "chart.js": "^2.3",
+    "html2canvas": "^1.0.0-rc.3",
+    "jspdf": "^1.5.3",
     "material-table": "^1.39.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
@@ -20,7 +22,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "styled-components": "^4.2.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "vanillajs": "0.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
