@@ -13,10 +13,26 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
 
+const url = 'http://localhost:8000/api/paciente/';
 class Form2 extends Component {
+    
     continue = e => {
         e.preventDefault();
         this.props.newStep();
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            // body: JSON.stringify({
+            //     id: vals.numeroIdent,
+            //     nombre: vals.nombre, 
+            //     apellido: vals.primerA,
+            //     genero: vals.genero,
+            //     estado: vals.genero//req.params.oficio,req.params.ocupacion,req.params.edu,req.params.edi,req.params.tera];
+            // })
+        })
       };
     back=e=>{
         e.preventDefault();

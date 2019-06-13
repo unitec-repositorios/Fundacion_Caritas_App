@@ -188,13 +188,13 @@ class Form extends Component {
                         </CardContent>
                         <CardContent>
                       
-                        <Grid container alignItems="space-between" spacing="16" sm="12">
-                                <Grid item sm="6" alignContent="space-around">
+                        <Grid container alignItems="space-between" spacing={16}>
+                                <Grid item sm={6} alignContent="space-around">
                                     <Paper>
                                     <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="6" alignContent="space-around">
+                                <Grid item sm={6} alignContent="space-around">
                                     <Paper>
                                     <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
                                     </Paper>
