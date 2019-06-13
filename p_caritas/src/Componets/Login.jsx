@@ -55,10 +55,10 @@ class FormDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-
+  //"#ff8a80"
   render() {
     return (
-      <div style={{backgroundColor:"#ff8a80"}}>
+      <div >
           {this.renderRedirect()}
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Login
@@ -68,11 +68,11 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           PaperProps={{
-            style: {backgroundColor: '#ff8a80', boxShadow: "none",
+            style: {backgroundColor: '#e63946', boxShadow: "none",
             overflow: "hidden"}
           }}
         >
-          <DialogTitle id="form-dialog-title">Login </DialogTitle>
+          {/*<DialogTitle id="form-dialog-title" style={{ textAlign: 'center'}}>LOGIN</DialogTitle>*/}
           <DialogContent>
             <DialogContentText>
             <img src={logo} width="100%" alt="logo" />
