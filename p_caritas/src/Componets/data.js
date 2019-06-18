@@ -50,8 +50,12 @@ const columns=[
   {
     title: 'Oficio',
     field: 'Oficio'
-  },
+  }
 ]
+
+
+const port = 'http://localhost:8000';
+
 class data extends Component {
     constructor(props){
       super(props);
@@ -62,7 +66,7 @@ class data extends Component {
       }
     }
     componentDidMount(){
-      fetch('https://apicaritas.herokuapp.com/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+      fetch(port+'/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
     }
   handleClickOpen = () => {
       this.setState({ open: true });
