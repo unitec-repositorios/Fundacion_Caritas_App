@@ -44,7 +44,7 @@ render(){
         </AppBar>
         <List>
           <ListItem >
-            <ListItemText primary={vals.Nombre} secondary="Titania" />
+            <ListItemText primary={vals.row} secondary="Titania" />
           </ListItem>
           <Divider />
           <ListItem >

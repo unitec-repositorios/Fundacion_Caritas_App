@@ -15,6 +15,7 @@ const routing =(
                 <Route exact path='/Formulario' component={Stepper}/>
                 <Route path='/Estadisticas' component={stats}/>
                 <Route path='/Pacientes' component={data}/>
+                
         </div>
         
     </Router>
