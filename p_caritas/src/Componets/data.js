@@ -24,7 +24,8 @@ const tableIcons = {
   SortArrow: ArrowUpward,
   ViewColumn: ViewColumn
 };
-
+let pos=0;
+let Nombres='';
 const columns=[
   {
     title: 'Identidad',
@@ -51,17 +52,12 @@ const columns=[
     field: 'Oficio'
   },
 ]
-
 class data extends Component {
     constructor(props){
       super(props);
       this.state={
         list:[],
-        row:{ Nombre:'',
-        Edad:'',
-        Genero:'',
-        Estado:'',
-        Oficio:''},
+        Nombre:null,
         selectedRow:null,
         open:false
       }
@@ -77,21 +73,24 @@ class data extends Component {
       this.setState({ open: false });
     };
   
-   datas=(selectedRow)=>{
-     
+   datas=(selectedRow)=>{  
           this.setState({selectedRow:[selectedRow]});
+          this.settingInfo();
+   }
+   settingInfo=()=>{
+        Nombres=this.state.selectedRow[0].Nombre;
+
           this.handleClickOpen();
    }
-   
    info=()=>{
       console.log(this.state.selectedRow[0].tableData.id);
       let tam=this.state.selectedRow[0].tableData.id;
       console.log(this.state.list[tam].Nombre);
   }
     render() {
-      const {open,selectedRow}=this.state;
+      const {open,Nombre}=this.state;
       const vals={open};
-      const row={selectedRow};
+      
       return (
         <div style={{maxWidth:'100%'}}>
           <Bar/>
@@ -128,7 +127,9 @@ class data extends Component {
           }}
           />
         <Button onClick={this.info}>aqui</Button>
-        <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals} row={row}/>
+         <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals} Nombre={Nombres} />
+        
+        
         
         </div>
       );  

@@ -21,13 +21,16 @@ class FullScreenDialog extends Component   {
         e.preventDefault();
         this.props.handleClickOpen();
       };  
+      
       CloseDialog = e => {
         e.preventDefault();
         console.log('close');
         this.props.handleClose();
       };  
+
 render(){
-    const {vals}=this.props;
+    const {vals,Nombre}=this.props;
+   
   return (
     <div>
     
@@ -44,7 +47,7 @@ render(){
         </AppBar>
         <List>
           <ListItem >
-            <ListItemText primary={vals.row} secondary="Titania" />
+            <ListItemText primary={Nombre} secondary="Titania" />
           </ListItem>
           <Divider />
           <ListItem >
