@@ -10,13 +10,28 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Input from "@material-ui/core/Input";
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
+let Obj=null;
 class FullScreenDialog extends Component   {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       Nombre:'',
+       Edad:0,
+       Genero:'',
+       Estado:'',
+       Oficio:''
+    }
+  }
+  
+
     openDialog = e => {
         e.preventDefault();
         this.props.handleClickOpen();
@@ -27,10 +42,18 @@ class FullScreenDialog extends Component   {
         console.log('close');
         this.props.handleClose();
       };  
-
+componentDidMount=(e)=>{
+  console.log(this.props);
+  this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
+  this.setState({Edad:this.props.vals.selectedRow[0].Edad});
+  this.setState({Oficio:this.props.vals.selectedRow[0].Oficio});
+  this.setState({Genero:this.props.vals.selectedRow[0].Genero});
+  this.setState({Estado:this.props.vals.selectedRow[0].Estado});
+  console.log(this.state.Nombre);
+}
 render(){
-    const {vals,Nombre}=this.props;
-   
+    const {vals}=this.props;
+   console.log(this.state.Nombre);
   return (
     <div>
     
@@ -46,8 +69,11 @@ render(){
           </Toolbar>
         </AppBar>
         <List>
+        <ListItem >
+          <h2>Valor Antiguo</h2>  =  <h2>Nuevo Valor</h2>
+          </ListItem>
           <ListItem >
-            <ListItemText primary={Nombre} secondary="Titania" />
+          <Input disableUnderline disabled fullWidth defaultValue={this.state.Nombre} /> =<Input disableUnderline fullWidth defaultValue={this.state.Nombre} /> 
           </ListItem>
           <Divider />
           <ListItem >

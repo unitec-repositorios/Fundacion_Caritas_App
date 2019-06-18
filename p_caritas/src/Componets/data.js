@@ -57,7 +57,6 @@ class data extends Component {
       super(props);
       this.state={
         list:[],
-        Nombre:null,
         selectedRow:null,
         open:false
       }
@@ -68,6 +67,7 @@ class data extends Component {
   handleClickOpen = () => {
       this.setState({ open: true });
       console.log(this.state.open);
+      
   };
   handleClose = () => {
       this.setState({ open: false });
@@ -75,23 +75,19 @@ class data extends Component {
   
    datas=(selectedRow)=>{  
           this.setState({selectedRow:[selectedRow]});
-          this.settingInfo();
-   }
-   settingInfo=()=>{
-        Nombres=this.state.selectedRow[0].Nombre;
-
           this.handleClickOpen();
    }
+ 
    info=()=>{
       console.log(this.state.selectedRow[0].tableData.id);
-      let tam=this.state.selectedRow[0].tableData.id;
-      console.log(this.state.list[tam].Nombre);
+      pos=this.state.selectedRow[0].tableData.id;
+      console.log(this.state.list[pos].Nombre);
   }
     render() {
-      const {open,Nombre}=this.state;
-      const vals={open};
-      
-      return (
+      const {open,selectedRow}=this.state;
+      const vals={open,selectedRow};
+      if(!open){
+        return (
         <div style={{maxWidth:'100%'}}>
           <Bar/>
           <MaterialTable
@@ -126,13 +122,15 @@ class data extends Component {
             }
           }}
           />
-        <Button onClick={this.info}>aqui</Button>
-         <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals} Nombre={Nombres} />
-        
-        
-        
+        <Button onClick={this.info}>aqui</Button>        
         </div>
       );  
+      }else{
+        return (
+          <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
+        );  
+      }
+      
     }
 }
 
