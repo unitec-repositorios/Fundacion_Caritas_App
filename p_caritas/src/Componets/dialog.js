@@ -43,6 +43,7 @@ class FullScreenDialog extends Component   {
     this.setState(prevState=> ({Update:{...prevState.Update,Oficio:this.state.Oficio}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
+    
     this.CloseDialog();
   }
 
