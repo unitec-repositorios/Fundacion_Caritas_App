@@ -66,7 +66,7 @@ class data extends Component {
       }
     }
     componentDidMount(){
-      fetch(port+'/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+      fetch('https://apicaritas.herokuapp.com/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
     }
   handleClickOpen = () => {
       this.setState({ open: true });
