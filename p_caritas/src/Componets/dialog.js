@@ -18,11 +18,11 @@ import UpdateIcon from '@material-ui/icons/Update';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-let Obj=null;
 class FullScreenDialog extends Component   {
   constructor(props) {
     super(props)
     this.state = {
+      id:0,
       Update:{ Nombre:'',
       Edad:0,
       Genero:'',
@@ -63,6 +63,7 @@ class FullScreenDialog extends Component   {
 componentDidMount=(e)=>{
   console.log(this.props);
   this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
+  this.setState({id:this.props.vals.selectedRow[0].Id});
   this.setState({Edad:this.props.vals.selectedRow[0].Edad});
   this.setState({Oficio:this.props.vals.selectedRow[0].Oficio});
   this.setState({Genero:this.props.vals.selectedRow[0].Genero});
