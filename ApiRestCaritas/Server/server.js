@@ -452,6 +452,7 @@ app.put('/api/casos/:ide/:num/:id/:remi/:tvio/:cond/:causa/:ubi/:rmun/:estado/:c
             "Mensaje:": "Se Ingreso Exitosamente"
         });
     });
+    
 });
 //modficar pacientes
 app.put('/api/paciente/:id/:Nom/:Ed/:Gen/:Est/:Of/:Edu/:Mun/:Ter/:Eoc',(req,res,next)=>{
