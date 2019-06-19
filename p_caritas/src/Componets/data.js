@@ -126,7 +126,7 @@ class data extends Component {
             }
           }}
           />
-        <Button onClick={this.info}>aqui</Button>        
+            
         </div>
       );  
       }else{

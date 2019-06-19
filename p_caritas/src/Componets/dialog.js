@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -11,7 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Input from "@material-ui/core/Input";
-import InputLabel from '@material-ui/core/InputLabel';
+import Fab from '@material-ui/core/Fab';
+import UpdateIcon from '@material-ui/icons/Update';
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -21,24 +22,41 @@ let Obj=null;
 class FullScreenDialog extends Component   {
   constructor(props) {
     super(props)
-  
     this.state = {
-       Nombre:'',
-       Edad:0,
-       Genero:'',
-       Estado:'',
-       Oficio:''
+      Update:{ Nombre:'',
+      Edad:0,
+      Genero:'',
+      Estado:'',
+      Oficio:''},
+      Nombre:'',
+      Edad:0,
+      Genero:'',
+      Estado:'',
+      Oficio:''
+      
     }
   }
   
+  UpdateFunc=()=>{
+    this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Edad:this.state.Edad}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Oficio:this.state.Oficio}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
+    this.CloseDialog();
+  }
 
+  handleChange = (event,input) => {
+    this.setState({ [input]: event.target.value });
+    
+  };
     openDialog = e => {
-        e.preventDefault();
+        
         this.props.handleClickOpen();
       };  
       
       CloseDialog = e => {
-        e.preventDefault();
+        
         console.log('close');
         this.props.handleClose();
       };  
@@ -53,7 +71,7 @@ componentDidMount=(e)=>{
 }
 render(){
     const {vals}=this.props;
-   console.log(this.state.Nombre);
+
   return (
     <div>
     
@@ -68,18 +86,43 @@ render(){
             </Typography>  
           </Toolbar>
         </AppBar>
+        
         <List>
-        <ListItem >
-          <h2>Valor Antiguo</h2>  =  <h2>Nuevo Valor</h2>
-          </ListItem>
+        
           <ListItem >
-          <Input disableUnderline disabled fullWidth defaultValue={this.state.Nombre} /> =<Input disableUnderline fullWidth defaultValue={this.state.Nombre} /> 
+          <strong>Nombre:</strong>
+          <Input autoFocus style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Nombre} onChange={(e)=>this.handleChange(e,'Nombre')}/>
+          </ListItem>
+          
+          <Divider />
+          <ListItem>
+          <strong>Edad:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Edad} onChange={(e)=>this.handleChange(e,'Edad')} />
           </ListItem>
           <Divider />
           <ListItem >
-            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+          <strong>Oficio:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Oficio} onChange={(e)=>this.handleChange(e,'Oficio')} />
           </ListItem>
+          <Divider />
+          <ListItem >
+          <strong>Genero:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Genero} onChange={(e)=>this.handleChange(e,'Genero')} />
+          </ListItem>
+          <Divider />
+          <ListItem >
+          <strong>Estado:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Estado} onChange={(e)=>this.handleChange(e,'Estado')} />
+          </ListItem>
+          <Divider />
         </List>
+
+        <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
+    bottom:0,
+    left:"90%"}} onClick={this.UpdateFunc}>
+                        <UpdateIcon />
+                    </Fab>   
+
       </Dialog>
     </div>
   );
