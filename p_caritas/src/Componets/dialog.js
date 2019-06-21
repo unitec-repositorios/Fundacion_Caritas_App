@@ -14,7 +14,8 @@ import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
 
 
-
+const url = 'http://localhost:3000/api/paciente/';
+// const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -23,6 +24,7 @@ class FullScreenDialog extends Component   {
   constructor(props) {
     super(props)
     this.state = {
+      Id: 0,
       Update:{ Nombre:'',
       Edad:0,
       Genero:'',
@@ -32,18 +34,29 @@ class FullScreenDialog extends Component   {
       Edad:0,
       Genero:'',
       Estado:'',
-      Oficio:''
-      
+      Oficio:'',
+      extraData: []
     }
   }
   
   UpdateFunc=()=>{
+    console.log(this.props);
     this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Edad:this.state.Edad}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Oficio:this.state.Oficio}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
-    
+  
+    fetch(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
+              + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
+              + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
+              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{
+        method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+    }).then(res => console.log(res.data));
     this.CloseDialog();
   }
 
@@ -62,14 +75,24 @@ class FullScreenDialog extends Component   {
         this.props.handleClose();
       };  
 componentDidMount=(e)=>{
-  console.log(this.props);
+  // console.log( "Propiedades: " + this.props);
+  
+  this.setState({Id: this.props.vals.selectedRow[0].Id});
   this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
   this.setState({Edad:this.props.vals.selectedRow[0].Edad});
   this.setState({Oficio:this.props.vals.selectedRow[0].Oficio});
   this.setState({Genero:this.props.vals.selectedRow[0].Genero});
   this.setState({Estado:this.props.vals.selectedRow[0].Estado});
-  console.log(this.state.Nombre);
+  console.log("el id seleccionado es: "+this.props.vals.selectedRow[0].Id);
+
+  fetch('https://apicaritas.herokuapp.com/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
+    .then(res => res.json()).then(data =>
+       this.setState({extraData: data}))
+    .catch(function (error) {
+          console.log(error);
+    })
 }
+  
 render(){
     const {vals}=this.props;
 
