@@ -10,7 +10,8 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
-
+import Dialog from './dialog';
+import Button from '@material-ui/core/Button';
 const tableIcons = {
   DetailPanel: ChevronRight,
   Filter: FilterList,
@@ -23,7 +24,8 @@ const tableIcons = {
   SortArrow: ArrowUpward,
   ViewColumn: ViewColumn
 };
-
+let pos=0;
+let Nombres='';
 const columns=[
   {
     title: 'Identidad',
@@ -51,28 +53,59 @@ const columns=[
   }
 ]
 
+<<<<<<< HEAD
 const port = 'https://apicaritas.herokuapp.com';
+=======
+
+const port = 'http://localhost:8000';
+>>>>>>> b6170753a77fb5e94a6c59b772a37f6ad5226426
 
 class data extends Component {
     constructor(props){
       super(props);
       this.state={
-        list:[]
+        list:[],
+        selectedRow:null,
+        open:false
       }
     }
     componentDidMount(){
-      fetch(port+'/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+      fetch('https://apicaritas.herokuapp.com/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
     }
-    render(){
-      return (
+  handleClickOpen = () => {
+      this.setState({ open: true });
+      console.log(this.state.open);
+      
+  };
+  handleClose = () => {
+      this.setState({ open: false });
+    };
+  
+   datas=(selectedRow)=>{  
+          this.setState({selectedRow:[selectedRow]});
+          this.handleClickOpen();
+   }
+ 
+   info=()=>{
+      console.log(this.state.selectedRow[0].tableData.id);
+      pos=this.state.selectedRow[0].tableData.id;
+      console.log(this.state.list[pos].Nombre);
+  }
+    render() {
+      const {open,selectedRow}=this.state;
+      const vals={open,selectedRow};
+      if(!open){
+        return (
         <div style={{maxWidth:'100%'}}>
           <Bar/>
           <MaterialTable
           icons={tableIcons}
+         
           title = "Pacientes"
           columns = {columns}
           data={this.state.list}
           isLoading = {this.state.list.length === 0}
+          onRowClick={((evt, selectedRow) => this.datas(selectedRow))}
           localization = {{
             pagination: {
               labelDisplayedRows: "{from}-{to} de {count}",
@@ -97,8 +130,15 @@ class data extends Component {
             }
           }}
           />
+            
         </div>
-      );
+      );  
+      }else{
+        return (
+          <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
+        );  
+      }
+      
     }
 }
 

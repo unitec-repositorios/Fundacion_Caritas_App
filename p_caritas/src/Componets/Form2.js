@@ -92,9 +92,9 @@ class Form2 extends Component {
                                     <Paper>
                                         <NativeSelect disableUnderline={true} placeholder=" Remision" fullWidth defaultValue={vals.Remision} onChange={(e)=>handleChange(e,'Remision')}>
                                             <option value="">Remision</option>
-                                            <option value="1">JEVD</option>
-                                            <option value="2">JP</option>
-                                            <option value="3">JEVS</option>
+                                            <option value="JEVD">JEVD</option>
+                                            <option value="JP">JP</option>
+                                            <option value="JEVS">JEVS</option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>

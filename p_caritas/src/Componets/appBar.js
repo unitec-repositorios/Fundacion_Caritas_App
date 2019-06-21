@@ -8,7 +8,6 @@ import logo from './Recursos/Caritas.jpg';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-
 const styles = {
   root: {
     flexGrow: 1,
@@ -37,6 +36,7 @@ function DenseAppBar(props) {
           <Tab label='Formulario' value={0} component={Link} to="./Formulario"/>
           <Tab label='Estadisticas' value={1} component={Link} to="./Estadisticas"/>
           <Tab label='Pacientes' value={2} component={Link} to="./Pacientes"/>
+          <Tab label='Casos' value={3} component={Link} to="./Casos"/>
         </Tabs>
         </Toolbar>
       </AppBar>

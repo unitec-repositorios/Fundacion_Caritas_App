@@ -8,7 +8,6 @@ import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel'
 import grey from '@material-ui/core/colors/grey';
 
 class Form extends Component {
