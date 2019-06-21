@@ -75,7 +75,7 @@ app.get('/api/paciente/:id',(req,res,next)=>{
         res.json(row);
     });
 });
-
+//obtiene datos extras por un paciente
 app.get('/api/paciente/personal/:id',(req,res,next)=>{ 
     var sql = 'SELECT id_educacion as IdEdu , id_municipio as IdMun, id_terapeuta as IdTera, id_eocp as IdEO FROM PACIENTES where identidad = ?';
     var params = [req.params.id];
