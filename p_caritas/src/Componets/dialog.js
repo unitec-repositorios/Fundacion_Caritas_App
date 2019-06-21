@@ -16,7 +16,6 @@ import UpdateIcon from '@material-ui/icons/Update';
 
 // const url = 'http://localhost:3000/api/paciente/';
 const url = 'https://apicaritas.herokuapp.com/api/paciente/';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
