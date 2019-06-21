@@ -76,6 +76,18 @@ app.get('/api/paciente/:id',(req,res,next)=>{
     });
 });
 
+app.get('/api/paciente/personal/:id',(req,res,next)=>{ 
+    var sql = 'SELECT id_educacion as IdEdu , id_municipio as IdMun, id_terapeuta as IdTera, id_eocp as IdEO FROM PACIENTES where identidad = ?';
+    var params = [req.params.id];
+    db.get(sql,params,(err,row)=>{
+        if(err){
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json(row);
+    });
+});
+
 //obtener causa de violencia
 app.get('/api/cviolencia',(req, res , next)=>{
     var sql = 'SELECT id_causa as Id , causa as Causa FROM CVIOLENCIA';
@@ -455,7 +467,7 @@ app.put('/api/casos/:ide/:num/:id/:remi/:tvio/:cond/:causa/:ubi/:rmun/:estado/:c
 });
 
 //modficar pacientes
-app.post('/api/paciente/:id/:Nom/:Ed/:Gen/:Est/:Of/:Edu/:Mun/:Ter/:Eoc',(req,res,next)=>{
+app.put('/api/paciente/:id/:Nom/:Ed/:Gen/:Est/:Of/:Edu/:Mun/:Ter/:Eoc',(req,res,next)=>{
     var sql = "UPDATE PACIENTES set identidad = ?, nombreC = ?, edad = ?, genero = ?, estado_civil = ?, oficio = ?, id_educacion = ?, id_municipio = ?, id_terapeuta = ?, id_eocp = ? where identidad = ?";
     var params = [req.params.id ,req.params.Nom , 
         req.params.Ed,req.params.Gen,
