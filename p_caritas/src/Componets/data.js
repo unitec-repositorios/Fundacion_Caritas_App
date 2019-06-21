@@ -53,12 +53,7 @@ const columns=[
   }
 ]
 
-<<<<<<< HEAD
-const port = 'https://apicaritas.herokuapp.com';
-=======
-
-const port = 'http://localhost:8000';
->>>>>>> b6170753a77fb5e94a6c59b772a37f6ad5226426
+const port = 'https://apicaritas.herokuapp.com/';
 
 class data extends Component {
     constructor(props){
