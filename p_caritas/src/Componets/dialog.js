@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -10,24 +9,94 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Input from "@material-ui/core/Input";
+import Fab from '@material-ui/core/Fab';
+import UpdateIcon from '@material-ui/icons/Update';
 
+
+// const url = 'http://localhost:3000/api/paciente/';
+const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
+let Obj=null;
 class FullScreenDialog extends Component   {
+  constructor(props) {
+    super(props)
+    this.state = {
+      Id: 0,
+      Update:{ Nombre:'',
+      Edad:0,
+      Genero:'',
+      Estado:'',
+      Oficio:''},
+      Nombre:'',
+      Edad:0,
+      Genero:'',
+      Estado:'',
+      Oficio:'',
+      extraData: []
+    }
+  }
+  
+  UpdateFunc=()=>{
+    console.log(this.props);
+    this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Edad:this.state.Edad}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Oficio:this.state.Oficio}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
+    this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
+  
+    fetch(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
+              + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
+              + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
+              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{
+          method: 'PUT',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+      }).then(res => console.log(res.data));
+    this.CloseDialog();
+  }
+
+  handleChange = (event,input) => {
+    this.setState({ [input]: event.target.value });
+    
+  };
     openDialog = e => {
-        e.preventDefault();
+        
         this.props.handleClickOpen();
       };  
+      
       CloseDialog = e => {
-        e.preventDefault();
+        
         console.log('close');
         this.props.handleClose();
       };  
+componentDidMount=(e)=>{
+  // console.log( "Propiedades: " + this.props);
+  
+  this.setState({Id: this.props.vals.selectedRow[0].Id});
+  this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
+  this.setState({Edad:this.props.vals.selectedRow[0].Edad});
+  this.setState({Oficio:this.props.vals.selectedRow[0].Oficio});
+  this.setState({Genero:this.props.vals.selectedRow[0].Genero});
+  this.setState({Estado:this.props.vals.selectedRow[0].Estado});
+  console.log("el id seleccionado es: "+this.props.vals.selectedRow[0].Id);
+
+  fetch('https://apicaritas.herokuapp.com/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
+    .then(res => res.json()).then(data =>
+       this.setState({extraData: data}))
+    .catch(function (error) {
+          console.log(error);
+    })
+}
+  
 render(){
     const {vals}=this.props;
+
   return (
     <div>
     
@@ -42,15 +111,43 @@ render(){
             </Typography>  
           </Toolbar>
         </AppBar>
+        
         <List>
+        
           <ListItem >
-            <ListItemText primary={vals.Nombre} secondary="Titania" />
+          <strong>Nombre:</strong>
+          <Input autoFocus style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Nombre} onChange={(e)=>this.handleChange(e,'Nombre')}/>
+          </ListItem>
+          
+          <Divider />
+          <ListItem>
+          <strong>Edad:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Edad} onChange={(e)=>this.handleChange(e,'Edad')} />
           </ListItem>
           <Divider />
           <ListItem >
-            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+          <strong>Oficio:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Oficio} onChange={(e)=>this.handleChange(e,'Oficio')} />
           </ListItem>
+          <Divider />
+          <ListItem >
+          <strong>Genero:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Genero} onChange={(e)=>this.handleChange(e,'Genero')} />
+          </ListItem>
+          <Divider />
+          <ListItem >
+          <strong>Estado:</strong>
+          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Estado} onChange={(e)=>this.handleChange(e,'Estado')} />
+          </ListItem>
+          <Divider />
         </List>
+
+        <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
+    bottom:0,
+    left:"90%"}} onClick={this.UpdateFunc}>
+                        <UpdateIcon />
+                    </Fab>   
+
       </Dialog>
     </div>
   );

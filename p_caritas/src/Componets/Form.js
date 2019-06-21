@@ -7,7 +7,7 @@ import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel'
+import InputLabel from '@material-ui/core/InputLabel';
 import grey from '@material-ui/core/colors/grey';
 
 class Form extends Component {
@@ -29,7 +29,7 @@ class Form extends Component {
 
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
-                            <h3> &nbsp; Nuevo Paciente </h3>
+                            <h3 style={{ textAlign: 'center' }}> &nbsp; Paciente </h3>
                         </div>
                         <CardContent>
                             <Grid container alignContent="space-around" spacing={16} >
@@ -90,17 +90,18 @@ class Form extends Component {
                         </CardContent>
                         <CardContent>
                             <Grid container alignContent="stretch" spacing={24} >
-                                <Grid item sm={3}>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivil')} value={vals.EstadoCivil}>
                                             <option value=""> Estado Civil </option>
                                             <option value="soltero"> Soltero </option>
                                             <option value="casada"> Casado </option>
+                                            <option value="union_libre"> Union libre </option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
                            
-                                <Grid item sm={3}>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="genero" fullWidth onChange={(e)=>handleChange(e,'Genero')} value={vals.Genero}>
                                             <option value=""> Genero </option>
@@ -109,12 +110,8 @@ class Form extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm={3} >
-                                    <Paper>
-                                        <Input disableUnderline={true} placeholder=" Edad" fullWidth defaultValue={vals.Edad} onChange={(e)=>handleChange(e,'Edad')} />
-                                    </Paper>
-                                </Grid>
-                                <Grid item sm={3}>
+                             
+                                <Grid item sm={4}>
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.Oficio} onChange={(e)=>handleChange(e,'Oficio')} />
                                     </Paper>
@@ -192,15 +189,15 @@ class Form extends Component {
                         </CardContent>
                         <CardContent>
                       
-                        <Grid container alignItems="space-between" spacing="16" sm="12">
-                                <Grid item sm="6" alignContent="space-around">
+                        <Grid container alignItems="space-between" spacing={16}>
+                                <Grid item sm={6} alignContent="space-around">
                                     <Paper>
                                     <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="6" alignContent="space-around">
+                                <Grid item sm={6} alignContent="space-around">
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continue</Button>
+                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>
