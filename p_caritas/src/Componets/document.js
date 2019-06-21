@@ -216,11 +216,10 @@ export class Form3 extends Component {
                             </tr>
                             <tr class="c25">
                                 <td class="c12" colspan="1" rowspan="1">
-                                    <p class="c0"><span class="c7"></span></p>
+                                    <input class = "inputText" type="text" name="Importe" />
                                 </td>
                                 <td class="c12" colspan="1" rowspan="1">
-                                    <p class="c0"><span class="c14"></span></p>
-                                    <p class="c0"><span class="c7"></span></p>
+                                    <input class = "inputText" type="text" name="Importe" />
                                 </td>
                             </tr>
                         </tbody>

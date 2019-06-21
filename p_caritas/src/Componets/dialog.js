@@ -14,8 +14,8 @@ import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
 
 
-const url = 'http://localhost:3000/api/paciente/';
-// const url = 'https://apicaritas.herokuapp.com/api/paciente/';
+// const url = 'http://localhost:3000/api/paciente/';
+const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -51,12 +51,12 @@ class FullScreenDialog extends Component   {
               + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
               + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
               +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{
-        method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-    }).then(res => console.log(res.data));
+          method: 'PUT',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+      }).then(res => console.log(res.data));
     this.CloseDialog();
   }
 
