@@ -12,6 +12,7 @@ import Slide from '@material-ui/core/Slide';
 import Input from "@material-ui/core/Input";
 import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
+import Delete from '@material-ui/icons/Delete';
 
 
 // const url = 'http://localhost:3000/api/paciente/';
@@ -59,6 +60,21 @@ class FullScreenDialog extends Component   {
       }).then(res => console.log(res.data));
     this.CloseDialog();
   }
+
+  deleteFunc=()=>{
+    fetch(url + this.state.Id, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then(res => console.log(res.data));
+    if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){
+      this.CloseDialog();
+    }
+    
+  }
+
 
   handleChange = (event,input) => {
     this.setState({ [input]: event.target.value });
@@ -142,10 +158,15 @@ render(){
         </List>
 
         <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
-    bottom:0,
-    left:"90%"}} onClick={this.UpdateFunc}>
-                        <UpdateIcon />
-                    </Fab>   
+          bottom:0,
+          left:"90%"}} onClick={this.UpdateFunc}>
+          <UpdateIcon />
+        </Fab>  
+        <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
+          bottom:0,
+          left:"80%"}} onClick={this.deleteFunc}>
+          <Delete />
+        </Fab>  
 
       </Dialog>
     </div>
