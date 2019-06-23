@@ -46,7 +46,7 @@ class Form2 extends Component {
                 <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
-                            <h3> &nbsp; Nuevo Paciente </h3>
+                            <h3 style={{ textAlign: 'center' }}> &nbsp; Caso </h3>
                         </div>
                         <CardContent>
                             <Grid container alignContent="space-between" spacing={16}>

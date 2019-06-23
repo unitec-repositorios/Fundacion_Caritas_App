@@ -39,9 +39,45 @@ app.get('/api/paciente',(req, res , next)=>{
     });
 });
 
+//obtiene todos los casos 
+app.get('/api/casos',(req, res , next)=>{
+    var sql = 'select cas.id_caso as IDCaso,cas.identidad as ID, vio.tipo_violencia as Violencia ,rm.tipo_juez as Juez, cn.tipo_condicion as Condicion, cv.causa as Causa, uv.ubicacion as Ubicacion, rcm.tipo as Tipo, st.tipo_estado as Estado from CASOS cas INNER join tipo_violencia vio on cas.id_tipov = vio.id_violencia inner join REMISION rm on cas.id_remision = rm.id_juez inner join tipo_condicion cn on cas.id_cond = cn.id_condicion inner join CVIOLENCIA cv on cas.id_cvio = cv.id_causa inner join UVIOLENCIA uv on cas.id_uvio = uv.id_uvio inner join RMUNICIPALES rcm on cas.id_rmun = rcm.id_recursos INNER join ESTADO_ATENCION st on cas.id_eaten = st.id_estado';
+    var params = [];
+    db.all(sql,params,(err,rows)=>{
+        if(err){
+            res.status(400).json({"error": err.message})
+        }
+        res.json(rows);
+    });
+});
+
+//obtiene los casos por id de la persona
+app.get('/api/casos/:id',(req, res , next)=>{
+    var sql = 'select cas.id_caso as IDCaso,cas.identidad as ID, vio.tipo_violencia as Violencia ,rm.tipo_juez as Juez, cn.tipo_condicion as Condicion, cv.causa as Causa, uv.ubicacion as Ubicacion, rcm.tipo as Tipo, st.tipo_estado as Estado from CASOS cas INNER join tipo_violencia vio on cas.id_tipov = vio.id_violencia inner join REMISION rm on cas.id_remision = rm.id_juez inner join tipo_condicion cn on cas.id_cond = cn.id_condicion inner join CVIOLENCIA cv on cas.id_cvio = cv.id_causa inner join UVIOLENCIA uv on cas.id_uvio = uv.id_uvio inner join RMUNICIPALES rcm on cas.id_rmun = rcm.id_recursos INNER join ESTADO_ATENCION st on cas.id_eaten = st.id_estado where cas.identidad = ?';
+    var params = [req.params.id];
+    db.all(sql,params,(err,rows)=>{
+        if(err){
+            res.status(400).json({"error": err.message})
+        }
+        res.json(rows);
+    });
+});
+
 //obtinen pacientes por Id
 app.get('/api/paciente/:id',(req,res,next)=>{ 
     var sql = 'SELECT identidad as Id, nombreC as Nombre, edad as Edad ,genero as Genero, estado_civil as Estado, oficio as Oficio FROM PACIENTES where identidad = ?';
+    var params = [req.params.id];
+    db.get(sql,params,(err,row)=>{
+        if(err){
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json(row);
+    });
+});
+//obtiene datos extras por un paciente
+app.get('/api/paciente/personal/:id',(req,res,next)=>{ 
+    var sql = 'SELECT id_educacion as IdEdu , id_municipio as IdMun, id_terapeuta as IdTera, id_eocp as IdEO FROM PACIENTES where identidad = ?';
     var params = [req.params.id];
     db.get(sql,params,(err,row)=>{
         if(err){
@@ -418,6 +454,26 @@ app.put('/api/casos/:ide/:num/:id/:remi/:tvio/:cond/:causa/:ubi/:rmun/:estado/:c
     var params = [req.params.num,req.params.id,req.params.remi,
         req.params.tvio,req.params.cond,req.params.causa,
         req.params.ubi,req.params.rmun,req.params.estado,req.params.cb,req.params.ide];
+    console.log(params)
+    db.run(sql,params,(err,row)=>{
+        if(err){
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json({
+            "Mensaje:": "Se Ingreso Exitosamente"
+        });
+    });
+});
+
+//modficar pacientes
+app.put('/api/paciente/:id/:Nom/:Ed/:Gen/:Est/:Of/:Edu/:Mun/:Ter/:Eoc',(req,res,next)=>{
+    var sql = "UPDATE PACIENTES set identidad = ?, nombreC = ?, edad = ?, genero = ?, estado_civil = ?, oficio = ?, id_educacion = ?, id_municipio = ?, id_terapeuta = ?, id_eocp = ? where identidad = ?";
+    var params = [req.params.id ,req.params.Nom , 
+        req.params.Ed,req.params.Gen,
+        req.params.Est,req.params.Of,
+        req.params.Edu,req.params.Mun,req.params.Ter,
+        req.params.Eoc,req.params.id];
     console.log(params)
     db.run(sql,params,(err,row)=>{
         if(err){
