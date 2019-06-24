@@ -6,6 +6,12 @@ import Button from '@material-ui/core/Button';
 import * as jsPDF from 'jspdf';
 import { number } from 'prop-types';
 
+let cant=0;
+let vpsicologica='';
+let vfisica='';
+let veconomica='';
+let vsexual='';
+
 export class Form3 extends Component {
  
    back=e=>{
@@ -22,7 +28,37 @@ export class Form3 extends Component {
             pdf.save('Ficha_Paciente.pdf'); 
         });
     }
-                      
+    componentWillMount=()=>{
+if(this.props.vals.VPsicologica){
+    vpsicologica=" Psicologica ";
+}
+if(this.props.vals.VEconomica){
+    veconomica=" Economica ";
+}        
+if(this.props.vals.VFisica){
+    vfisica="Fisica";
+}
+if(this.props.vals.VSexual){
+    vsexual="Sexual";
+}
+if(this.props.vals.Ninos==='')
+    {var ninos = 0;}
+else    
+    {var ninos = parseInt(this.props.vals.Ninos);}
+if(this.props.vals.Ninas==='')
+   { var ninas =0;}
+else 
+    {var ninas = parseInt(this.props.vals.Ninas);}
+if(this.props.vals.Otros==='')
+    {var otros = 0;}    
+else
+    {var otros = parseInt(this.props.vals.Otros);}
+ 
+ cant = ninos + ninas + otros;
+
+console.log("cantidad es: " + cant + 'Ninos '+otros);
+}
+    
     render() {
         const {vals}=this.props;
 
@@ -32,17 +68,6 @@ export class Form3 extends Component {
             return date;
         }
         const fechaActual = getDate();
-
-        function cantBeneificiarios() {
-            var ninos = parseInt(vals.Ninos);
-            var ninas = parseInt(vals.Ninas);
-            var otros = parseInt(vals.Otros);
-            var cant = ninos + ninas + otros;
-            
-            console.log("cantidad es: " + cant);
-            return cant;
-        }
-        const cantBenefi = cantBeneificiarios();
 
         return (
             <div>
@@ -121,7 +146,7 @@ export class Form3 extends Component {
                             <tr class="c9">
                                 <td class="c6" colspan="2" rowspan="1">
                                     <p class="c2"><span class="c8">CANTIDAD BENEFICIARIOS</span></p>
-                                    <p class="c13"><span class="c7">{cantBenefi}</span></p>
+                                    <p class="c13"><span class="c7">{cant}</span></p>
                                 </td>
                                 <td class="c6" colspan="2" rowspan="1">
                                     <p class="c2"><span class="c8">CAUSA DE VIOLENCIA</span></p>
@@ -233,7 +258,7 @@ export class Form3 extends Component {
                                 <td class="c21" colspan="1" rowspan="1">
                                     <p class="c2"><span class="c14">DESCRIPCI&Oacute;N DE ATENCI&Oacute;N PSICOL&Oacute;GICA</span></p>
                                     <p class="c13"><span class="c7">Remitido de: {vals.Remision}</span></p>
-                                    <p class="c13"><span class="c7">Tipo de Violencia: {vals.VPsicologica} {vals.VFisica} {vals.VEconomica} {vals.VSexual} </span></p>
+                                    <p class="c13"><span class="c7">Tipo de Violencia: {vpsicologica} {vfisica} {veconomica} {vsexual} </span></p>
                                     <p class="c13"><span class="c7">Condici&oacute;n de la persona: {vals.Victima} {vals.Agresor} </span></p>
                                 </td>
                             </tr>

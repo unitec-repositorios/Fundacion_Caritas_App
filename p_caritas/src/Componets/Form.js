@@ -13,7 +13,7 @@ import grey from '@material-ui/core/colors/grey';
 class Form extends Component {
   continue = e => {
     e.preventDefault();
-    this.props.newStep();
+   this.props.newStep();
   };
   back=e=>{
     e.preventDefault();
