@@ -23,7 +23,7 @@ class Stepper extends Component {
             Edad:'', Oficio:'', Educacion:'', EstadoOcupacion:'', Remision:'', Parroquia:'', 
             Colonia:'', TipoCaso:'',Tratamiento:'',NumeroEx:'',EstadoAtencion:'',Terapeuta:'',
             VPsicologica:'',VFisica:'',VEconomica:'',VSexual:'',Victima:'',Agresor:'',RPT:'',
-            Ninos:'',Ninas:'',Otros:'',CEconomica: '', CInfidelidad: '', CAlcoholismo: '',
+            Ninos:0 ,Ninas:0 ,Otros:0 ,CEconomica: '', CInfidelidad: '', CAlcoholismo: '',
             VUrbana: '', VRural: ''
           };  
            
