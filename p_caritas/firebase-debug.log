@@ -1,9 +1,0 @@
-[debug] [2019-06-07T16:52:10.706Z] ----------------------------------------------------------------------
-[debug] [2019-06-07T16:52:10.709Z] Command:       /home/marioxe/.nvm/versions/node/v10.15.3/bin/node /home/marioxe/.nvm/versions/node/v10.15.3/bin/firebase login
-[debug] [2019-06-07T16:52:10.709Z] CLI Version:   6.11.0
-[debug] [2019-06-07T16:52:10.709Z] Platform:      linux
-[debug] [2019-06-07T16:52:10.710Z] Node Version:  v10.15.3
-[debug] [2019-06-07T16:52:10.710Z] Time:          Fri Jun 07 2019 10:52:10 GMT-0600 (Central Standard Time)
-[debug] [2019-06-07T16:52:10.710Z] ----------------------------------------------------------------------
-[debug] 
-[info] Already logged in as mariogflores16@gmail.com

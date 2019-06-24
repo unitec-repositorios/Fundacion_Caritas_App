@@ -37,7 +37,7 @@ export class Form3 extends Component {
             var ninos = parseInt(vals.Ninos);
             var ninas = parseInt(vals.Ninas);
             var otros = parseInt(vals.Otros);
-            var cant = ninos + ninas;
+            var cant = ninos + ninas + otros;
             
             console.log("cantidad es: " + cant);
             return cant;
@@ -216,11 +216,10 @@ export class Form3 extends Component {
                             </tr>
                             <tr class="c25">
                                 <td class="c12" colspan="1" rowspan="1">
-                                    <p class="c0"><span class="c7"></span></p>
+                                    <input class = "inputText" type="text" name="Importe" />
                                 </td>
                                 <td class="c12" colspan="1" rowspan="1">
-                                    <p class="c0"><span class="c14"></span></p>
-                                    <p class="c0"><span class="c7"></span></p>
+                                    <input class = "inputText" type="text" name="Importe" />
                                 </td>
                             </tr>
                         </tbody>
@@ -234,8 +233,8 @@ export class Form3 extends Component {
                                 <td class="c21" colspan="1" rowspan="1">
                                     <p class="c2"><span class="c14">DESCRIPCI&Oacute;N DE ATENCI&Oacute;N PSICOL&Oacute;GICA</span></p>
                                     <p class="c13"><span class="c7">Remitido de: {vals.Remision}</span></p>
-                                    <p class="c13"><span class="c7">Tipo de Violencia: {vals.VPsicologica}</span></p>
-                                    <p class="c13"><span class="c7">Condici&oacute;n de la persona: {vals.Victima}</span></p>
+                                    <p class="c13"><span class="c7">Tipo de Violencia: {vals.VPsicologica} {vals.VFisica} {vals.VEconomica} {vals.VSexual} </span></p>
+                                    <p class="c13"><span class="c7">Condici&oacute;n de la persona: {vals.Victima} {vals.Agresor} </span></p>
                                 </td>
                             </tr>
                             <tr class="c20">

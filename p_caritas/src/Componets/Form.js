@@ -29,7 +29,7 @@ class Form extends Component {
 
                     <Card style={{backgroundColor: card_background}}>
                         <div style={{ textAlign: 'center' }}>
-                            <h3> &nbsp; Nuevo Paciente </h3>
+                            <h3 style={{ textAlign: 'center' }}> &nbsp; Paciente </h3>
                         </div>
                         <CardContent>
                             <Grid container alignContent="space-around" spacing={16} >

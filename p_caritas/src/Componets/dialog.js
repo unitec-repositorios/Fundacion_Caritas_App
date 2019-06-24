@@ -12,9 +12,12 @@ import Slide from '@material-ui/core/Slide';
 import Input from "@material-ui/core/Input";
 import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
+import Delete from '@material-ui/icons/Delete';
+import axios from 'axios';
 
 
-
+// const url = 'http://localhost:3000/api/paciente/';
+const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -22,29 +25,42 @@ class FullScreenDialog extends Component   {
   constructor(props) {
     super(props)
     this.state = {
-      id:0,
+      Id: 0,
       Update:{ Nombre:'',
       Edad:0,
       Genero:'',
       Estado:'',
       Oficio:''},
-      Nombre:'',
-      Edad:0,
-      Genero:'',
-      Estado:'',
-      Oficio:''
-      
+      extraData: []
     }
   }
   
   UpdateFunc=()=>{
+    console.log(this.props);
     this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Edad:this.state.Edad}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Oficio:this.state.Oficio}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
+  
+    axios.put(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
+              + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
+              + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
+              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{}
+      ).then(res => console.log(res.data));
     this.CloseDialog();
   }
+
+  deleteFunc=()=>{
+    axios.delete(`https://apicaritas.herokuapp.com/api/paciente/${this.state.Id}`)
+    .then(res => console.log(res.data));
+
+    if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){
+      this.CloseDialog();
+    }
+    
+  }
+
 
   handleChange = (event,input) => {
     this.setState({ [input]: event.target.value });
@@ -61,15 +77,25 @@ class FullScreenDialog extends Component   {
         this.props.handleClose();
       };  
 componentDidMount=(e)=>{
-  console.log(this.props);
+  // console.log( "Propiedades: " + this.props);
+  
+  this.setState({Id: this.props.vals.selectedRow[0].Id});
   this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
   this.setState({id:this.props.vals.selectedRow[0].Id});
   this.setState({Edad:this.props.vals.selectedRow[0].Edad});
   this.setState({Oficio:this.props.vals.selectedRow[0].Oficio});
   this.setState({Genero:this.props.vals.selectedRow[0].Genero});
   this.setState({Estado:this.props.vals.selectedRow[0].Estado});
-  console.log(this.state.Nombre);
+  console.log("el id seleccionado es: "+this.props.vals.selectedRow[0].Id);
+
+  fetch('https://apicaritas.herokuapp.com/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
+    .then(res => res.json()).then(data =>
+       this.setState({extraData: data}))
+    .catch(function (error) {
+          console.log(error);
+    })
 }
+  
 render(){
     const {vals}=this.props;
 
@@ -119,10 +145,15 @@ render(){
         </List>
 
         <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
-    bottom:0,
-    left:"90%"}} onClick={this.UpdateFunc}>
-                        <UpdateIcon />
-                    </Fab>   
+          bottom:0,
+          left:"90%"}} onClick={this.UpdateFunc}>
+          <UpdateIcon />
+        </Fab>  
+        <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
+          bottom:0,
+          left:"80%"}} onClick={this.deleteFunc}>
+          <Delete />
+        </Fab>  
 
       </Dialog>
     </div>

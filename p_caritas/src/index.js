@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import stats from './Componets/Stats';
 import data from './Componets/data';
+import casos_views from './Componets/casos_view';
 import './index.css';
 import Stepper from './Componets/Stepper';
 import * as serviceWorker from './serviceWorker';
@@ -15,6 +16,7 @@ const routing =(
                 <Route exact path='/Formulario' component={Stepper}/>
                 <Route path='/Estadisticas' component={stats}/>
                 <Route path='/Pacientes' component={data}/>
+                <Route path='/Casos' component={casos_views}/>
                 
         </div>
         

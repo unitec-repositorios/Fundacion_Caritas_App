@@ -9,8 +9,9 @@ import Document from './document';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
+import logoi from './Recursos/caritasInicio.jpg';
 
-const port = 'http://localhost:8000';
+const port = 'https://apicaritas.herokuapp.com';
 
 class Stepper extends Component {
 
@@ -22,7 +23,7 @@ class Stepper extends Component {
             Edad:'', Oficio:'', Educacion:'', EstadoOcupacion:'', Remision:'', Parroquia:'', 
             Colonia:'', TipoCaso:'',Tratamiento:'',NumeroEx:'',EstadoAtencion:'',Terapeuta:'',
             VPsicologica:'',VFisica:'',VEconomica:'',VSexual:'',Victima:'',Agresor:'',RPT:'',
-            Ninos:'',Ninas:'',Otros:'',CEconomica: '', CInfidelidad: '', CAlcoholismo: '',
+            Ninos:0 ,Ninas:0 ,Otros:0 ,CEconomica: '', CInfidelidad: '', CAlcoholismo: '',
             VUrbana: '', VRural: ''
           };  
            
@@ -67,7 +68,12 @@ class Stepper extends Component {
         return (
                 <div>
                     <Bar/>
-                   
+                    
+                    <h2 style={{textAlign:'center'}}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
+                    <div style={{textAlign:'center'}}>
+                    <img src={logoi} width="30%" alt="logo inicio"/>
+                    </div>
+
                     <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
     bottom:0,
     left:"90%"}} onClick={this.newStep}>
