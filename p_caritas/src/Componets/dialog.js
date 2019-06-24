@@ -47,13 +47,13 @@ class FullScreenDialog extends Component   {
     axios.put(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
               + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
               + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
-              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO
+              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{}
       ).then(res => console.log(res.data));
     this.CloseDialog();
   }
 
   deleteFunc=()=>{
-    axios.delete(url + this.state.Id)
+    axios.delete(`https://apicaritas.herokuapp.com/api/paciente/${this.state.Id}`)
     .then(res => console.log(res.data));
 
     if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){
