@@ -13,6 +13,7 @@ import Input from "@material-ui/core/Input";
 import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
 import Delete from '@material-ui/icons/Delete';
+import axios from 'axios';
 
 
 // const url = 'http://localhost:3000/api/paciente/';
@@ -43,27 +44,17 @@ class FullScreenDialog extends Component   {
     this.setState(prevState=> ({Update:{...prevState.Update,Genero:this.state.Genero}}));
     this.setState(prevState=> ({Update:{...prevState.Update,Estado:this.state.Estado}}));
   
-    fetch(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
+    axios.put(url + this.state.Id + '/'+ this.state.Nombre + '/'+ this.state.Edad + '/'
               + this.state.Genero + '/'+ this.state.Estado + '/'+ this.state.Oficio
               + '/' + this.state.extraData.IdEdu + '/' + this.state.extraData.IdMun
-              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{
-          method: 'PUT',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-          },
-      }).then(res => console.log(res.data));
+              +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO
+      ).then(res => console.log(res.data));
     this.CloseDialog();
   }
 
   deleteFunc=()=>{
-    fetch(url + this.state.Id, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    }).then(res => console.log(res.data));
+    axios.delete(url + this.state.Id)
+    .then(res => console.log(res.data));
 
     if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){
       this.CloseDialog();
