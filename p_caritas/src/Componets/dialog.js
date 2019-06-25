@@ -34,9 +34,7 @@ class FullScreenDialog extends Component   {
       extraData: []
     }
   }
-  componentWillUnmount=()=>{
-    window.location.reload();
-  }
+  
   UpdateFunc=()=>{
     console.log(this.props);
     this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
