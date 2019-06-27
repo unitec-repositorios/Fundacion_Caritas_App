@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+import Form from './Form';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import Input from "@material-ui/core/Input";
 import Fab from '@material-ui/core/Fab';
 import UpdateIcon from '@material-ui/icons/Update';
 import Delete from '@material-ui/icons/Delete';
@@ -26,15 +23,15 @@ class FullScreenDialog extends Component   {
     super(props)
     this.state = {
       Id: 0,
-      Update:{ Nombre:'',
-      Edad:0,
-      Genero:'',
-      Estado:'',
-      Oficio:''},
+      Update:{Nombre: '', PrimerA: '', SegundoA: '', NumeroIdent: '', Direccion: '', 
+      Localidad: '', Departamento:'', Telefono:'', Date:'', EstadoCivil:'', Genero:'', 
+      Edad:0, Oficio:'', Educacion:'', EstadoOcupacion:'',Parroquia:'', 
+      Colonia:'',Ninos:'',Ninas:'' ,Otros:'' },
       extraData: []
     }
   }
   
+
     UpdateFunc=()=>{
     console.log(this.props);
     this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
@@ -98,6 +95,12 @@ componentDidMount=(e)=>{
   
 render(){
     const {vals}=this.props;
+    const {Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
+      Genero,Oficio,Educacion,EstadoOcupacion,Parroquia,Colonia,Ninos,Ninas,Otros
+  }=this.state;
+  const formval={Nombre,PrimerA ,SegundoA ,NumeroIdent ,Direccion ,Localidad ,Departamento,Telefono,Date,EstadoCivil,
+      Genero,Oficio,Educacion,EstadoOcupacion,Parroquia,Colonia,Ninos,Ninas,Otros
+  };
 
   return (
     <div>
@@ -114,36 +117,7 @@ render(){
           </Toolbar>
         </AppBar>
         
-        <List>
-        
-          <ListItem >
-          <strong>Nombre:</strong>
-          <Input autoFocus style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Nombre} onChange={(e)=>this.handleChange(e,'Nombre')}/>
-          </ListItem>
-          
-          <Divider />
-          <ListItem>
-          <strong>Edad:</strong>
-          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Edad} onChange={(e)=>this.handleChange(e,'Edad')} />
-          </ListItem>
-          <Divider />
-          <ListItem >
-          <strong>Oficio:</strong>
-          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Oficio} onChange={(e)=>this.handleChange(e,'Oficio')} />
-          </ListItem>
-          <Divider />
-          <ListItem >
-          <strong>Genero:</strong>
-          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Genero} onChange={(e)=>this.handleChange(e,'Genero')} />
-          </ListItem>
-          <Divider />
-          <ListItem >
-          <strong>Estado:</strong>
-          <Input style={{marginLeft:'0.5%'}} fullWidth defaultValue={this.state.Estado} onChange={(e)=>this.handleChange(e,'Estado')} />
-          </ListItem>
-          <Divider />
-        </List>
-
+       <Form vals={formval} handleChange={this.handleChange}/>
         <Fab color="primary" aria-label="Add" style={{margin:'1em',position: 'absolute',
           bottom:0,
           left:"90%"}} onClick={this.UpdateFunc}>
