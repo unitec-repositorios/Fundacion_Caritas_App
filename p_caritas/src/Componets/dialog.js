@@ -34,6 +34,7 @@ class FullScreenDialog extends Component   {
       extraData: []
     }
   }
+  
     UpdateFunc=()=>{
     console.log(this.props);
     this.setState(prevState=> ({Update:{...prevState.Update,Nombre:this.state.Nombre}}));
