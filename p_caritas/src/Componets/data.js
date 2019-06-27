@@ -74,14 +74,15 @@ class data extends Component {
   };
   handleClose = () => {
       this.setState({ open: false });
+      window.location.reload();
     };
   
    datas=(selectedRow)=>{  
           this.setState({selectedRow:[selectedRow]});
           this.handleClickOpen();
    }
- 
-   info=()=>{
+
+  info=()=>{
       console.log(this.state.selectedRow[0].tableData.id);
       pos=this.state.selectedRow[0].tableData.id;
       console.log(this.state.list[pos].Nombre);

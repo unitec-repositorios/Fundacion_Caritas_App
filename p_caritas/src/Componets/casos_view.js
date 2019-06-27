@@ -73,7 +73,7 @@ class casos_view extends Component{
     constructor(props){
         super(props);
         this.state = {
-            list: [],
+            list: []
             // selectedRow: null,
             // open: false
         }
