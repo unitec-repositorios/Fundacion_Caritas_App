@@ -10,8 +10,6 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
-// import Dialog from './dialog';
-import Button from '@material-ui/core/Button';
 
 const tableIcons = {
     DetailPanel: ChevronRight,
@@ -26,8 +24,7 @@ const tableIcons = {
     ViewColumn: ViewColumn
   };
 
-let pos=0;
-// let Nombres='';
+
 const columns=[
   {
     title: 'Id Caso',
@@ -67,7 +64,7 @@ const columns=[
   }
 ]
 
-const port = 'http://localhost:3000';
+const port = 'http://localhost:8000';
 
 class casos_view extends Component{
     constructor(props){
@@ -80,9 +77,12 @@ class casos_view extends Component{
     }
 
     componentDidMount (){
-        fetch('https://apicaritas.herokuapp.com/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
+        fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
     }
 
+    /*componentDidUpdate(){
+      fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
+    }*/
     // handleClickOpen = () => {
     //     this.setState({ open: true });
     //     console.log(this.state.open);
