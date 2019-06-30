@@ -20,7 +20,7 @@ let causaInfiel = '';
 let victima= '';
 let agresor = '';
 
-const port = 'https://apicaritas.herokuapp.com';
+const port = 'http://localhost:8000';
 
 function createCase(params) {
     var case_number = params.NumeroEx;
@@ -85,6 +85,8 @@ export class Form3 extends Component {
     }
 
     generarPdf = () =>{
+        createCase(this.props.vals);
+        
         const input  = document.getElementById("imprimir");
         html2canvas(input).then((canvas) => {
             const imgData = canvas.toDataURL('img/png');
@@ -92,7 +94,6 @@ export class Form3 extends Component {
             pdf.addImage(imgData, 'PNG', 0, 0);
             pdf.save('Ficha_Paciente.pdf'); 
         });
-        createCase(this.props.vals);
     }
     componentWillMount=()=>{
         if(this.props.vals.VPsicologica){

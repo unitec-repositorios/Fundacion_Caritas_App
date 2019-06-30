@@ -158,11 +158,7 @@ class Form extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm={6}>
-                                    <Paper>
-                                        <Input disableUnderline={true} placeholder=" Colonia" fullWidth defaultValue={vals.Colonia} onChange={(e)=>handleChange(e,'Colonia')} />
-                                    </Paper>
-                                </Grid>
+                                
                             </Grid>
                         </CardContent>
                         <CardContent>

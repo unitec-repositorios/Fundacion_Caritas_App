@@ -16,8 +16,8 @@ import Delete from '@material-ui/icons/Delete';
 import axios from 'axios';
 
 
-// const url = 'http://localhost:3000/api/paciente/';
-const url = 'https://apicaritas.herokuapp.com/api/paciente/';
+const url = 'http://localhost:8000/api/paciente/';
+//const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -49,15 +49,17 @@ class FullScreenDialog extends Component   {
               +'/' + this.state.extraData.IdTera + '/' + this.state.extraData.IdEO,{}
       ).then(res => console.log(res.data));
     this.CloseDialog();
+  
   }
 
   deleteFunc=()=>{
-    axios.delete(`https://apicaritas.herokuapp.com/api/paciente/${this.state.Id}`)
+    axios.delete(`http://localhost:8000/api/paciente/${this.state.Id}`)
     .then(res => console.log(res.data));
 
     if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){
       this.CloseDialog();
     }
+
     
   }
 
@@ -88,7 +90,7 @@ componentDidMount=(e)=>{
   this.setState({Estado:this.props.vals.selectedRow[0].Estado});
   console.log("el id seleccionado es: "+this.props.vals.selectedRow[0].Id);
 
-  fetch('https://apicaritas.herokuapp.com/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
+  fetch('http://localhost:8000/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
     .then(res => res.json()).then(data =>
        this.setState({extraData: data}))
     .catch(function (error) {
