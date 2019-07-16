@@ -25,7 +25,7 @@ const tableIcons = {
   ViewColumn: ViewColumn
 };
 let pos=0;
-let Nombres='';
+
 const columns=[
   {
     title: 'Identidad',
@@ -53,7 +53,7 @@ const columns=[
   }
 ]
 
-const port = 'https://apicaritas.herokuapp.com/';
+const port = 'http://localhost:8000/';
 
 class data extends Component {
     constructor(props){
@@ -65,8 +65,17 @@ class data extends Component {
       }
     }
     componentDidMount(){
-      fetch('https://apicaritas.herokuapp.com/api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+      fetch(port+'api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
     }
+
+    /*componentDidUpdate(){
+      fetch(port+'api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+    }*/
+
+    componentDidUpdate(){
+      fetch(port+'api/paciente').then(res => res.json()).then(data => this.setState({list: data}))
+    }
+
   handleClickOpen = () => {
       this.setState({ open: true });
       console.log(this.state.open);
@@ -74,14 +83,15 @@ class data extends Component {
   };
   handleClose = () => {
       this.setState({ open: false });
+  
     };
   
    datas=(selectedRow)=>{  
           this.setState({selectedRow:[selectedRow]});
           this.handleClickOpen();
    }
- 
-   info=()=>{
+
+  info=()=>{
       console.log(this.state.selectedRow[0].tableData.id);
       pos=this.state.selectedRow[0].tableData.id;
       console.log(this.state.list[pos].Nombre);
@@ -94,6 +104,7 @@ class data extends Component {
         <div style={{maxWidth:'100%'}}>
           <Bar/>
           <MaterialTable
+          
           icons={tableIcons}
          
           title = "Pacientes"

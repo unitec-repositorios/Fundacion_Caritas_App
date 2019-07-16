@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { Redirect } from 'react-router-dom';
 import logo from './Recursos/caritas_logo.png';
 
+const pagina = <Redirect to='./Formulario' />;
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
@@ -18,14 +19,16 @@ class FormDialog extends React.Component {
         redirect:false
       };
   }
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
+
   renderRedirect = () => {
-    if (this.state.redirect && this.evaluate()) {
-      return <Redirect to='./Formulario' />
+    if(this.evaluate()){
+      this.setState({
+        redirect: true
+      });
+    }else{
+      this.setState({
+        redirect: false
+      });
     }
   }
 
@@ -58,7 +61,6 @@ class FormDialog extends React.Component {
   render() {
     return (
       <div >
-          {this.renderRedirect()}
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Login
         </Button>
@@ -84,7 +86,7 @@ class FormDialog extends React.Component {
               name="email"
               onChange={this.handleChange}
               type="email"
-              
+              value={this.state.email}
               fullWidth
             />
              <TextField
@@ -93,6 +95,7 @@ class FormDialog extends React.Component {
               id="pass"
               label="Contraseña"
               name="pass"
+              value={this.state.pass}
               onChange={this.handleChange}
               type="Password"
               fullWidth
@@ -102,11 +105,15 @@ class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.setRedirect} color="primary">
+            <Button onClick={this.renderRedirect} color="primary">
               Login
             </Button>
           </DialogActions>
         </Dialog>
+        {
+          this.state.redirect ?
+          pagina : <p></p> 
+        }
       </div>
     );
   }

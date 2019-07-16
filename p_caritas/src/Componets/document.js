@@ -5,12 +5,77 @@ import './ficha_usuarios.css';
 import Button from '@material-ui/core/Button';
 import * as jsPDF from 'jspdf';
 import { number } from 'prop-types';
+import axios from 'axios';
 
 let cant=0;
 let vpsicologica='';
 let vfisica='';
 let veconomica='';
 let vsexual='';
+let vurbana = '';
+let vrural = '';
+let causaEconomica = '';
+let causaAlcohol = '';
+let causaInfiel = '';
+let victima= '';
+let agresor = '';
+
+const port = 'http://localhost:8000';
+
+function createCase(params) {
+    var case_number = params.NumeroEx;
+    var patient_id = params.NumeroIdent;
+    var remission_id = params.Remision;
+    
+    let violence_type_id = 0;
+    if (params.VPsicologica)
+        violence_type_id = 1;
+    else if (params.VFisica)
+        violence_type_id = 2;
+    else if (params.VEconomica)
+        violence_type_id = 3;
+    else if (params.VSexual)
+        violence_type_id = 4;
+    
+    var condition_id = params.Victima ? 1 : 2;
+
+    let cause_id = 0;
+    if (params.CEconomica)
+        cause_id = 1;
+    else if(params.CInfidelidad)
+        cause_id = 2;
+    else if (params.CAlcoholismo)
+        cause_id = 3;
+    
+    var location_violence_id = params.VUrbana ? 1 : 2;   
+
+    var mun = params.Parroquia;
+    let city_id = 0;
+    switch (mun) {
+        case 'sps':
+            city_id = 1;
+            break;
+        case 'lima':
+            city_id = 2;
+            break;
+        default:
+            city_id = 4;
+    }
+
+    var state_id = params.EstadoAtencion;
+    var benefitted_amount = Number(params.Ninos) + Number(params.Ninas) + Number(params.Otros);
+
+    try {
+        var response = axios.post(port+'/api/casos/'+case_number+'/'+patient_id+'/'+remission_id+'/'+violence_type_id+'/'+condition_id+'/'+cause_id+'/'+location_violence_id+'/'+city_id+'/'+state_id+'/'+benefitted_amount)
+        .then(res => {
+            console.log(res);
+        })
+        console.log(response);
+    } catch(e) {
+        console.log(e);
+    }
+    
+}
 
 export class Form3 extends Component {
  
@@ -20,6 +85,8 @@ export class Form3 extends Component {
     }
 
     generarPdf = () =>{
+        createCase(this.props.vals);
+        
         const input  = document.getElementById("imprimir");
         html2canvas(input).then((canvas) => {
             const imgData = canvas.toDataURL('img/png');
@@ -29,35 +96,49 @@ export class Form3 extends Component {
         });
     }
     componentWillMount=()=>{
-if(this.props.vals.VPsicologica){
-    vpsicologica=" Psicologica ";
-}
-if(this.props.vals.VEconomica){
-    veconomica=" Economica ";
-}        
-if(this.props.vals.VFisica){
-    vfisica="Fisica";
-}
-if(this.props.vals.VSexual){
-    vsexual="Sexual";
-}
-if(this.props.vals.Ninos==='')
-    {var ninos = 0;}
-else    
-    {var ninos = parseInt(this.props.vals.Ninos);}
-if(this.props.vals.Ninas==='')
-   { var ninas =0;}
-else 
-    {var ninas = parseInt(this.props.vals.Ninas);}
-if(this.props.vals.Otros==='')
-    {var otros = 0;}    
-else
-    {var otros = parseInt(this.props.vals.Otros);}
- 
- cant = ninos + ninas + otros;
+        if(this.props.vals.VPsicologica){
+            vpsicologica=" Psicologica ";
+        }
+        if(this.props.vals.VEconomica){
+            veconomica=" Economica ";
+        }        
+        if(this.props.vals.VFisica){
+            vfisica="Fisica";
+        }
+        if(this.props.vals.VSexual){
+            vsexual="Sexual";
+        }
+        if(this.props.vals.Ninos==='')
+            {var ninos = 0;}
+        else    
+            {var ninos = parseInt(this.props.vals.Ninos);}
+        if(this.props.vals.Ninas==='')
+        { var ninas =0;}
+        else 
+            {var ninas = parseInt(this.props.vals.Ninas);}
+        if(this.props.vals.Otros==='')
+            {var otros = 0;}    
+        else
+            {var otros = parseInt(this.props.vals.Otros);}
+        if(this.props.vals.VUrbana){
+            vurbana = "Urbana";
+        }
+        if(this.props.vals.VRural)
+            vrural = "Rural";
+        if (this.props.vals.CEconomica)
+            causaEconomica = "Economica";
+        if(this.props.vals.CAlcoholismo)
+            causaAlcohol = 'Alcholimos';
+        if(this.props.vals.CInfidelidad)
+            causaInfiel = 'Infidelidad';
+        if(this.props.vals.Victima)
+            victima = 'Victima';
+        if(this.props.vals.Agresor)
+            agresor = 'Agresor';
+        cant = ninos + ninas + otros;
 
-console.log("cantidad es: " + cant + 'Ninos '+otros);
-}
+        console.log("cantidad es: " + cant + 'Ninos '+otros);
+    }
     
     render() {
         const {vals}=this.props;
@@ -150,11 +231,11 @@ console.log("cantidad es: " + cant + 'Ninos '+otros);
                                 </td>
                                 <td class="c6" colspan="2" rowspan="1">
                                     <p class="c2"><span class="c8">CAUSA DE VIOLENCIA</span></p>
-                                    <p class="c0"><span class="c8"></span></p>
-                                    <p class="c0"><span class="c8"></span></p>
+                                    <p class="c13"><span class="c7">{causaAlcohol} {causaEconomica} {causaInfiel}</span></p>
                                 </td>
                                 <td class="c6" colspan="2" rowspan="1">
                                     <p class="c2"><span class="c15">UBICACI&Oacute;N DE LA VIOLENCIA</span></p>
+                                    <p class="c13"><span class="c7">{vurbana} {vrural}</span></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -259,7 +340,7 @@ console.log("cantidad es: " + cant + 'Ninos '+otros);
                                     <p class="c2"><span class="c14">DESCRIPCI&Oacute;N DE ATENCI&Oacute;N PSICOL&Oacute;GICA</span></p>
                                     <p class="c13"><span class="c7">Remitido de: {vals.Remision}</span></p>
                                     <p class="c13"><span class="c7">Tipo de Violencia: {vpsicologica} {vfisica} {veconomica} {vsexual} </span></p>
-                                    <p class="c13"><span class="c7">Condici&oacute;n de la persona: {vals.Victima} {vals.Agresor} </span></p>
+                                    <p class="c13"><span class="c7">Condici&oacute;n de la persona: {victima} {agresor} </span></p>
                                 </td>
                             </tr>
                             <tr class="c20">

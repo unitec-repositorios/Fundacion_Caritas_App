@@ -91,7 +91,7 @@ class Form extends Component {
                         </CardContent>
                         <CardContent>
                             <Grid container alignContent="stretch" spacing={24} >
-                                <Grid item sm={6}>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivilD')} value={vals.EstadoCivilD}>
                                             <option value=""> Estado Civil </option>
@@ -100,7 +100,21 @@ class Form extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                           <Grid item sm={6}>
+                                <Grid item sm={4}>
+                                    <Paper>
+                                        <NativeSelect disableUnderline={true} id="educacion" fullWidth onChange={(e)=>handleChange(e,'EducacionD')} value={vals.EducacionD} >
+                                            <option value=""> Educacion </option>
+                                            <option value="analfabeto"> Analfabeto </option>
+                                            <option value="pb-incompleta"> Pre-Basica - Incompleta </option>
+                                            <option value="pb-completa"> Pre-Basica - Completa </option>
+                                            <option value="b-incompleta"> Basica - Incompleta </option>
+                                            <option value="b-completa"> Basica - Completa </option>
+                                            <option value="s-incompleta"> Superior - Incompleta </option>
+                                            <option value="s-completa"> Superior - Completa </option>
+                                        </NativeSelect>
+                                    </Paper>
+                                </Grid>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.OficioD} onChange={(e)=>handleChange(e,'OficioD')} />
                                     </Paper>
