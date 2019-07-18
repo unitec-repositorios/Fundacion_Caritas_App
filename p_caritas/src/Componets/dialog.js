@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import Form from './Form';
+import Form from './Forms/Form';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -76,8 +76,6 @@ class FullScreenDialog extends Component   {
         this.props.handleClose();
       };  
 componentDidMount=(e)=>{
-  // console.log( "Propiedades: " + this.props);
-  
   this.setState({Id: this.props.vals.selectedRow[0].Id});
   this.setState({Nombre:this.props.vals.selectedRow[0].Nombre});
   this.setState({id:this.props.vals.selectedRow[0].Id});
@@ -87,7 +85,7 @@ componentDidMount=(e)=>{
   this.setState({Estado:this.props.vals.selectedRow[0].Estado});
   console.log("el id seleccionado es: "+this.props.vals.selectedRow[0].Id);
 
-  fetch('http://localhost:8000/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
+  fetch('https://apicaritas.herokuapp.com/api/paciente/personal/'+this.props.vals.selectedRow[0].Id)
     .then(res => res.json()).then(data =>
        this.setState({extraData: data}))
     .catch(function (error) {

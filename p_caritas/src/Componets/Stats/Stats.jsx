@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import { Line, Pie, Bar as BarChart } from 'react-chartjs-2';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -90,7 +89,6 @@ class Stats extends Component {
 
     return (
       <div>  
-        <Bar/>
         <Card>
           <CardContent>
             <Grid container>

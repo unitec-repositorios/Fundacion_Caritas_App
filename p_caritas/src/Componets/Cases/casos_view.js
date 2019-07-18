@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import FilterList from '@material-ui/icons/FilterList';
@@ -64,20 +63,23 @@ const columns=[
   }
 ]
 
-const port = 'http://localhost:8000';
+const port = 'https://apicaritas.herokuapp.com/';
 
 class casos_view extends Component{
     constructor(props){
         super(props);
         this.state = {
-            list: []
-            // selectedRow: null,
-            // open: false
+            list: [],
+            isLoading:false
         }
     }
 
     componentDidMount (){
-        fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
+        this.setState({isLoading:true});
+        fetch(port+'/api/casos').then(res => res.json()).then(data => {
+          this.setState({list: data})
+          this.setState({isLoading:false});
+        })
     }
 
     /*componentDidUpdate(){
@@ -109,14 +111,14 @@ class casos_view extends Component{
         // if(!open){
           return (
           <div style={{maxWidth:'100%'}}>
-            <Bar/>
+       
             <MaterialTable
             icons={tableIcons}
            
             title = "Casos"
             columns = {columns}
             data={this.state.list}
-            isLoading = {this.state.list.length === 0}
+            isLoading = {this.state.isLoading}
             // onRowClick={((evt, selectedRow) => this.datas(selectedRow))}
             localization = {{
               pagination: {

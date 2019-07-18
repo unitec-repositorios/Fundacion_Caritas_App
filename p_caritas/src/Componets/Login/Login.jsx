@@ -5,10 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { Redirect } from 'react-router-dom';
-import logo from './Recursos/caritas_logo.png';
-
-const pagina = <Redirect to='./Formulario' />;
+import logo from '../Recursos/caritas_logo.png';
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
@@ -16,32 +13,25 @@ class FormDialog extends React.Component {
         open: true,
         email:'',
         pass:'',
-        redirect:false
+      
       };
   }
 
-  renderRedirect = () => {
+  login = () => {
     if(this.evaluate()){
-      this.setState({
-        redirect: true
-      });
+      this.props.handelLogin(true)
     }else{
-      this.setState({
-        redirect: false
-      });
+      this.props.handelLogin(false);
     }
   }
 
   evaluate=()=>{
       if((this.state.email==='Caritas'|| this.state.email==='caritas@honduras.com')&& this.state.pass==='caritas'){
-        console.log('TODO BIEN');
         return true;
       }
       if((this.state.email==='Honduras'|| this.state.email==='honduras@caritas.com,')&& this.state.pass==='caritas'){
-        console.log('TODO BIEN');
         return true;
       }
-      console.log('Email '+this.state.email+' Pass '+this.state.pass);
       return false;
          
   }
@@ -50,31 +40,14 @@ class FormDialog extends React.Component {
       [event.target.name]: event.target.value
     });
   };
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+ 
   //"#ff8a80"
   render() {
+    
     return (
       <div >
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Login
-        </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-          PaperProps={{
-            style: {backgroundColor: '#e63946', boxShadow: "none",
-            overflow: "hidden"}
-          }}
-        >
-          {/*<DialogTitle id="form-dialog-title" style={{ textAlign: 'center'}}>LOGIN</DialogTitle>*/}
-          <DialogContent>
+      <Dialog open={true} style={{background:"Red"}}>    
+          <DialogContent style={{background:"Red"}}>
             <DialogContentText>
             <img src={logo} width="100%" alt="logo" />
             </DialogContentText>
@@ -87,6 +60,7 @@ class FormDialog extends React.Component {
               onChange={this.handleChange}
               type="email"
               value={this.state.email}
+              
               fullWidth
             />
              <TextField
@@ -101,19 +75,13 @@ class FormDialog extends React.Component {
               fullWidth
             />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.renderRedirect} color="primary">
+          <DialogActions style={{background:"Red"}}>
+            <Button onClick={this.login} color="primary">
               Login
             </Button>
           </DialogActions>
         </Dialog>
-        {
-          this.state.redirect ?
-          pagina : <p></p> 
-        }
+        
       </div>
     );
   }
