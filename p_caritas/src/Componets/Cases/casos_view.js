@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bar from './appBar';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import FilterList from '@material-ui/icons/FilterList';
@@ -10,8 +9,6 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
-// import Dialog from './dialog';
-import Button from '@material-ui/core/Button';
 
 const tableIcons = {
     DetailPanel: ChevronRight,
@@ -26,8 +23,7 @@ const tableIcons = {
     ViewColumn: ViewColumn
   };
 
-let pos=0;
-// let Nombres='';
+
 const columns=[
   {
     title: 'Id Caso',
@@ -67,22 +63,28 @@ const columns=[
   }
 ]
 
-const port = 'http://localhost:3000';
+const port = 'https://apicaritas.herokuapp.com/';
 
 class casos_view extends Component{
     constructor(props){
         super(props);
         this.state = {
             list: [],
-            // selectedRow: null,
-            // open: false
+            isLoading:false
         }
     }
 
     componentDidMount (){
-        fetch('https://apicaritas.herokuapp.com/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
+        this.setState({isLoading:true});
+        fetch(port+'/api/casos').then(res => res.json()).then(data => {
+          this.setState({list: data})
+          this.setState({isLoading:false});
+        })
     }
 
+    /*componentDidUpdate(){
+      fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
+    }*/
     // handleClickOpen = () => {
     //     this.setState({ open: true });
     //     console.log(this.state.open);
@@ -109,14 +111,14 @@ class casos_view extends Component{
         // if(!open){
           return (
           <div style={{maxWidth:'100%'}}>
-            <Bar/>
+       
             <MaterialTable
             icons={tableIcons}
            
             title = "Casos"
             columns = {columns}
             data={this.state.list}
-            isLoading = {this.state.list.length === 0}
+            isLoading = {this.state.isLoading}
             // onRowClick={((evt, selectedRow) => this.datas(selectedRow))}
             localization = {{
               pagination: {

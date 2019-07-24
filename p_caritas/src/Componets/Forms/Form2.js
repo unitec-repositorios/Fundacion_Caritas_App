@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
 
-const url = 'http://localhost:8000/api/paciente/';
+const url = 'https://apicaritas.herokuapp.com/';
 class Form2 extends Component {
     
     continue = e => {
@@ -49,7 +49,7 @@ class Form2 extends Component {
                             <h3 style={{ textAlign: 'center' }}> &nbsp; Caso </h3>
                         </div>
                         <CardContent>
-                            <Grid container alignContent="space-between" spacing={16}>
+                            <Grid container  spacing={1}>
                                 <Grid item sm={4}>
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Tipo de caso" fullWidth defaultValue={vals.TipoCaso} onChange={(e)=>handleChange(e,'TipoCaso')}/>
@@ -68,7 +68,7 @@ class Form2 extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignContent="space-between" spacing={16}>
+                            <Grid container  spacing={1}>
                                 <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-atencion" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
@@ -173,7 +173,7 @@ class Form2 extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent> 
-                        <Grid container alignContent="space-between" spacing={16}>
+                        <Grid container  spacing={1}>
                                 <Grid item sm={6} >
                                     <Paper>
                                     <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>

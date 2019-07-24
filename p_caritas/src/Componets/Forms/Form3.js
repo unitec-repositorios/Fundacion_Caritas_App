@@ -32,7 +32,7 @@ class Form extends Component {
                             <h3> &nbsp; Informacion del denunciado </h3>
                         </div>
                         <CardContent>
-                            <Grid container alignContent="space-around" spacing={16} >
+                            <Grid container  spacing={1} >
                                 <Grid item sm={3} >
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Nombre" fullWidth defaultValue={vals.NombreD} onChange={(e)=>handleChange(e,'NombreD')} />
@@ -56,7 +56,7 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignContent="space-around" spacing={16}>
+                            <Grid container  spacing={1}>
                                 <Grid item sm={8} >
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Direccion" fullWidth defaultValue={vals.DireccionD} onChange={(e)=>handleChange(e,'DireccionD')}/>
@@ -70,7 +70,7 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignContent="space-between" spacing={20} >
+                            <Grid container spacing={1} >
                                 <Grid item sm={6} >
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Departamento" fullWidth  defaultValue={vals.DepartamentoD} onChange={(e)=>handleChange(e,'DepartamentoD')}/>
@@ -90,8 +90,8 @@ class Form extends Component {
                             </Grid>
                         </CardContent>
                         <CardContent>
-                            <Grid container alignContent="stretch" spacing={24} >
-                                <Grid item sm={6}>
+                            <Grid container  spacing={1} >
+                                <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivilD')} value={vals.EstadoCivilD}>
                                             <option value=""> Estado Civil </option>
@@ -100,7 +100,21 @@ class Form extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                           <Grid item sm={6}>
+                                <Grid item sm={4}>
+                                    <Paper>
+                                        <NativeSelect disableUnderline={true} id="educacion" fullWidth onChange={(e)=>handleChange(e,'EducacionD')} value={vals.EducacionD} >
+                                            <option value=""> Educacion </option>
+                                            <option value="analfabeto"> Analfabeto </option>
+                                            <option value="pb-incompleta"> Pre-Basica - Incompleta </option>
+                                            <option value="pb-completa"> Pre-Basica - Completa </option>
+                                            <option value="b-incompleta"> Basica - Incompleta </option>
+                                            <option value="b-completa"> Basica - Completa </option>
+                                            <option value="s-incompleta"> Superior - Incompleta </option>
+                                            <option value="s-completa"> Superior - Completa </option>
+                                        </NativeSelect>
+                                    </Paper>
+                                </Grid>
+                                <Grid item sm={4}>
                                     <Paper>
                                         <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.OficioD} onChange={(e)=>handleChange(e,'OficioD')} />
                                     </Paper>
@@ -110,13 +124,13 @@ class Form extends Component {
                        
                         <CardContent>
                       
-                        <Grid container alignItems="space-between" spacing="16" sm="12">
-                                <Grid item sm="6" alignContent="space-around">
+                        <Grid container spacing={1} >
+                                <Grid item sm={6} >
                                     <Paper>
                                     <Button fullWidth color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm="6" alignContent="space-around">
+                                <Grid item sm={6}>
                                     <Paper>
                                     <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
