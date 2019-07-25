@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'antd/dist/antd.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Route, BrowserRouter as Router} from 'react-router-dom';
-
 const routing =(
     <Router>
-        <div>
+        <div >
                 <Route exact path='/' component={App}/>            
         </div>
         

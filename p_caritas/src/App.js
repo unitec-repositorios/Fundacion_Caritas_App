@@ -37,7 +37,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="App">
         <Mayre
           of={<Appbar handleChangeValue={this.handleChangeValue} values={this.state.value} logout={this.logout} login={this.state.login} />}
           when={() => this.logins()}

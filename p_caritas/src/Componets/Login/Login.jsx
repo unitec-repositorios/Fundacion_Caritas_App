@@ -4,7 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { FormControl } from '@material-ui/core';
-import Logo from '../Recursos/logo_login.jpeg';
+import Logo from '../Recursos/logo_login.png';
+import {message} from 'antd';
 
 const styles = theme => ({
   root: {
@@ -19,6 +20,7 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    marginTop: '10vh',
     backgroundColor: '#ff8585'
   },
   textField: {
@@ -44,8 +46,6 @@ const styles = theme => ({
   },
 });
 
-const msj = <h5>Usuario o Contraseña Incorrecta</h5>;
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -58,9 +58,11 @@ class Login extends Component {
   handelLogin = () => {
     if (this.evaluate()) {
       this.props.handelLogin(true)
+      message.success('Acceso Correcto! Bienvenido');
       localStorage.setItem('token', 'vadsasf');
     } else {
       this.props.handelLogin(false);
+      message.error('Accesso denegado, Verifique su usario o contraseña');
     }
   }
 
@@ -118,9 +120,6 @@ class Login extends Component {
 
         </Paper>
         <br />
-        <div className={classes.container}>
-          {!this.state.check && msj}
-        </div>
       </div>
     );
   }

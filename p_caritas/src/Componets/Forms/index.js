@@ -66,11 +66,11 @@ class Index extends Component {
         switch (this.state.steps) {
             case 1:
                 return (
-                    <div>
+                    <div style={{alignContent:'center'}}>
                         <h2 style={{ textAlign: 'center' }}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
                         <div style={{ textAlign: 'center' }}>
                             <img src={logoi} width="30%" alt="logo inicio" />
-                        </div>
+                    </div>
 
                         <Fab color="primary" aria-label="Add" style={{
                             margin: '1em', position: 'absolute',
@@ -83,7 +83,7 @@ class Index extends Component {
                 );
             case 2:
                 return (
-                    <div>
+                    <div style={{alignContent:'center'}}>
 
                         <Form newStep={this.newStep} handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} />
                     </div>
