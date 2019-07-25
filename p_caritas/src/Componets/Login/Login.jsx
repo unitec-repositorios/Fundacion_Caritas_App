@@ -1,91 +1,129 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import logo from '../Recursos/caritas_logo.png';
-class FormDialog extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        open: true,
-        email:'',
-        pass:'',
-      
-      };
-  }
+import Button from '@material-ui/core/Button';
+import { FormControl } from '@material-ui/core';
+import Logo from '../Recursos/logo_login.jpeg';
 
-  login = () => {
-    if(this.evaluate()){
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    marginLeft:'30%',
+    marginTop:'10vh',
+    paddingBottom: theme.spacing(1),
+    height: 'auto',
+    width: 'auto',
+    backgroundColor: '#ff8585'
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    backgroundColor: '#ff8585'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 400,
+  },
+  button: {
+    margin: theme.spacing(1),
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#007bff',
+    borderColor: '#007bff',
+    color: 'white',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+});
+
+const msj = <h5>Usuario o Contraseña Incorrecta</h5>;
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      pass: '',
+      check: true
+    }
+  }
+  handelLogin = () => {
+    if (this.evaluate()) {
       this.props.handelLogin(true)
-    }else{
+      localStorage.setItem('token', 'vadsasf');
+    } else {
       this.props.handelLogin(false);
     }
   }
 
-  evaluate=()=>{
-      if((this.state.email==='Caritas'|| this.state.email==='caritas@honduras.com')&& this.state.pass==='caritas'){
-        return true;
-      }
-      if((this.state.email==='Honduras'|| this.state.email==='honduras@caritas.com,')&& this.state.pass==='caritas'){
-        return true;
-      }
-      return false;
-         
+  evaluate = () => {
+    if ((this.state.email === 'Caritas' || this.state.email === 'caritas@honduras.com') && this.state.pass === 'caritas') {
+      return true;
+    }
+    if ((this.state.email === 'Honduras' || this.state.email === 'honduras@caritas.com,') && this.state.pass === 'caritas') {
+      return true;
+    }
+    this.setState({check:false});
+    return false;
+
   }
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
- 
-  //"#ff8a80"
+  handleChange = (event,input) => {
+    this.setState({ [input]: event.target.value });
+  }
+
   render() {
-    
+    const { classes } = this.props;
     return (
-      <div >
-      <Dialog open={true} style={{background:"Red"}}>    
-          <DialogContent style={{background:"Red"}}>
-            <DialogContentText>
-            <img src={logo} width="100%" alt="logo" />
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Usuario"
-              name="email"
-              onChange={this.handleChange}
-              type="email"
-              value={this.state.email}
-              
-              fullWidth
-            />
-             <TextField
-              autoFocus
-              margin="dense"
-              id="pass"
-              label="Contraseña"
-              name="pass"
-              value={this.state.pass}
-              onChange={this.handleChange}
-              type="Password"
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions style={{background:"Red"}}>
-            <Button onClick={this.login} color="primary">
-              Login
-            </Button>
-          </DialogActions>
-        </Dialog>
-        
+      <div className={classes.container}>
+
+        <Paper className={classes.root}>
+          <header>
+            <img src={Logo} alt="Logo" />
+          </header>
+          <TextField
+            id="Username"
+            label="Usuario"
+            className={classes.textField}
+            onChange={(e) => this.handleChange(e,'email')}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="Password"
+            label="Contraseña"
+            className={classes.textField}
+            onChange={(e) => this.handleChange(e,'pass')}
+            margin="normal"
+            type='password'
+          />
+          <br />
+          <FormControl>
+            <Button
+              className={classes.button}
+              color="primary"
+              variant="contained"
+              onClick={this.handelLogin}
+            >
+              Entrar
+                    </Button>
+          </FormControl>
+
+        </Paper>
+        <br />
+        <div className={classes.container}>
+          {!this.state.check && msj}
+        </div>
       </div>
     );
   }
 }
 
-
-export default (FormDialog);
+export default withStyles(styles)(Login);

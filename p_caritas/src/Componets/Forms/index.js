@@ -8,7 +8,7 @@ import Document from '../document';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
-import logoi from '../Recursos/caritasInicio.jpg';
+import logoi from '../Recursos/logo_lp.jpeg';
 
 const port = 'https://apicaritas.herokuapp.com/';
 

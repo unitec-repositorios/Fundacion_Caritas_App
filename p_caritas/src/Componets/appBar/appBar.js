@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import logo from '../Recursos/Caritas.jpg';
+import logo from '../Recursos/logo_nav_bar.jpeg';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button';
 
-export default class appBar extends Component {
+class appBar extends Component {
   
   render() {
     const {values} =this.props;
@@ -17,9 +18,10 @@ export default class appBar extends Component {
           <Tabs value={values} onChange={this.props.handleChangeValue}>
           <Tab label='Formulario' />
           <Tab label='Estadisticas'  />
-          <Tab label='Pacientes'  />
-          <Tab label='Casos'  />
+          <Tab label='Pacientes'/>
+          <Tab label='Casos'/>
         </Tabs>
+        {this.props.login?<Button color='inherit' onClick={this.props.logout}>Log Out</Button>:''}
         </Toolbar>
       </AppBar>
 
@@ -28,14 +30,4 @@ export default class appBar extends Component {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
+export default appBar;

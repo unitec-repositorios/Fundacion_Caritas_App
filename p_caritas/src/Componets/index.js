@@ -7,7 +7,6 @@ export default class index extends Component {
 
     render() {
         const {values}=this.props;
-        console.log(values);
         switch (values){
             case 0: return(<Forms/>)
             case 1: return(<Stats/>)

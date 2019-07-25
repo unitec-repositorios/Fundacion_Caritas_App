@@ -5,32 +5,48 @@ import Index from './Componets/index';
 import './App.css';
 import Mayre from 'mayre';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       login:false,
-       value:0
+      login: false,
+      value: 0,
+      token: ''
     }
   }
-  
-  handleChangeValue=(event,newValue)=>{
-  this.setState({value:newValue})
+
+  handleChangeValue = (event, newValue) => {
+    this.setState({ value: newValue })
   }
-  handelLogin=(login)=>{
-    this.setState({login})
+  handelLogin = (login) => {
+    this.setState({ login })
+  }
+  logins() {
+    if (this.state.token && !this.state.login)
+      this.handelLogin(true);
+    return this.state.login || this.state.token;
+  }
+  logout = () => {
+    this.handelLogin(false);
+    this.setState({ token: '' });
+    localStorage.clear();
+  }
+  componentWillMount() {
+    this.setState({ token: localStorage.getItem('token') });
   }
   render() {
-   
     return (
-      <div className="App">
-         <Appbar handleChangeValue={this.handleChangeValue} values={this.state.value}/>
-          <Mayre
-            of={<Index values={this.state.value}/>}
-            or={<Login handelLogin={this.handelLogin} login={this.state.login}/>}
-            when={this.state.login}
-          />
+      <div>
+        <Mayre
+          of={<Appbar handleChangeValue={this.handleChangeValue} values={this.state.value} logout={this.logout} login={this.state.login} />}
+          when={() => this.logins()}
+        />
+        <Mayre
+          of={<Index values={this.state.value} />}
+          or={<Login handelLogin={this.handelLogin} login={this.state.login} />}
+          when={() => this.logins()}
+        />
 
       </div>
 
@@ -38,3 +54,4 @@ export default class App extends Component {
   }
 }
 
+export default (App);
