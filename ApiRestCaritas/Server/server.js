@@ -8,10 +8,18 @@ const router = express.Router();
 
 app.set('port',process.env.PORT || 8000);
 
+app.listen(app.get('port'), () =>{
+    console.log('Servidor corriendo en %PORT%'.replace('%PORT%',app.get('port')))
+});
+
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    /*res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');*/
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     
     if ('OPTIONS' === req.method) {
@@ -31,9 +39,6 @@ app.options("/*", function(req, res, next){
   res.send(200);
 });
 
-app.listen(app.get('port'), () =>{
-    console.log('Servidor corriendo en %PORT%'.replace('%PORT%',app.get('port')))
-});
 
 app.get('/',(req,res,next)=>{
 	res.json({
@@ -844,6 +849,6 @@ app.delete('/api/ubicacionvio/:id',(req, res , next)=>{
     });
 });
 
-app.use(function(req,res){
+app.use( (req,res) => {
     res.sendStatus(404);
 });
