@@ -6,13 +6,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 
+
 class appBar extends Component {
-  
   render() {
     const {values} =this.props;
     return (
       <div>
-      <AppBar position="static" color="secondary">
+      "
+      <AppBar position="static" color="secondary" style={{  position: "fixed", top: 0,  width: "100%"}}>
         <Toolbar variant="dense">
         <img src={logo} width="10%" alt='logo'/>
           <Tabs value={values} onChange={this.props.handleChangeValue}>
@@ -30,4 +31,10 @@ class appBar extends Component {
   }
 }
 
+
 export default appBar;
+
+
+
+
+

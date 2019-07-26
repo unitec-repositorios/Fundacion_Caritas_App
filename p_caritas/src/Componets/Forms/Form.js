@@ -23,7 +23,7 @@ class Form extends Component {
     const {vals,handleChange}=this.props;
     const card_background = grey[200];
     return (
-      <div style={{alignContent:"center"}}>
+      <div>
         <Grid container justify='flex-end' style={{width: '70%', alignSelf: 'center', margin:'2%'}}>
             <Card style={{backgroundColor: card_background}}>
 

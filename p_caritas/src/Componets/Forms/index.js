@@ -66,7 +66,7 @@ class Index extends Component {
         switch (this.state.steps) {
             case 1:
                 return (
-                    <div style={{alignContent:'center'}}>
+                    <div>
                         <h2 style={{ textAlign: 'center' }}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
                         <div style={{ textAlign: 'center' }}>
                             <img src={logoi} width="30%" alt="logo inicio" />
