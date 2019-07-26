@@ -43,7 +43,7 @@ class App extends Component {
         />
         
           <Mayre
-            of={<div style={{padding:"20px",marginTop:"30px",height:"1500px"}}><Index values={this.state.value} /></div>}
+            of={<div style={{padding:"20px",marginTop:"30px"}}><Index values={this.state.value} /></div>}
             or={<Login handelLogin={this.handelLogin} login={this.state.login} />}
             when={() => this.logins()}
           />

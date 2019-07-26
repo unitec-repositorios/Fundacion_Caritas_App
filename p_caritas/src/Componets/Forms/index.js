@@ -7,10 +7,9 @@ import Form from './Form';
 import Document from '../document';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import axios from 'axios';
 import logoi from '../Recursos/logo_lp.jpeg';
 
-const port = 'https://apicaritas.herokuapp.com/';
+
 
 class Index extends Component {
 
@@ -40,12 +39,10 @@ class Index extends Component {
         }
     };
     newStep = () => {
-        console.log(this.state.Direccion);
         this.setState({ steps: this.state.steps + 1 });
     }
     prevStep = () => {
         this.setState({ steps: this.state.steps - 1 });
-        console.log(this.state.VPsicologica);
     }
 
     render() {
@@ -70,7 +67,7 @@ class Index extends Component {
                         <h2 style={{ textAlign: 'center' }}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
                         <div style={{ textAlign: 'center' }}>
                             <img src={logoi} width="30%" alt="logo inicio" />
-                    </div>
+                        </div>
 
                         <Fab color="primary" aria-label="Add" style={{
                             margin: '1em', position: 'absolute',
@@ -83,7 +80,7 @@ class Index extends Component {
                 );
             case 2:
                 return (
-                    <div style={{alignContent:'center'}}>
+                    <div style={{ alignContent: 'center' }}>
 
                         <Form newStep={this.newStep} handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} />
                     </div>
@@ -105,12 +102,9 @@ class Index extends Component {
                     </div>
                 );
             case 5:
-                savePatients(vals);
-                return (
-                    <div>
-
-                        <Document prevStep={this.prevStep} handleChange={this.handleChange} vals={vals} />
-                    </div>
+                return (<div>
+                    <Document prevStep={this.prevStep} handleChange={this.handleChange} vals={vals} />
+                </div>
                 );
             default:
                 return (<div>
@@ -126,114 +120,4 @@ class Index extends Component {
     }
 }
 
-function savePatients(params) {
-    var id = Number(params.NumeroIdent);
-    var name = params.Nombre;
-    var current_year = new Date();
-    var birth_year = new Date(params.Date);
-    var age = current_year.getFullYear() - birth_year.getFullYear();
-    var gender = params.Genero;
-    var state = params.EstadoCivil;
-    var profession = params.Oficio;
-
-    let education_id = 0;
-    switch (params.Educacion) {
-        case 's-completa':
-            education_id = 7;
-            break;
-        case 's-incompleta':
-            education_id = 6;
-            break;
-        case 'b-completa':
-            education_id = 5;
-            break;
-        case 'b-incompleta':
-            education_id = 4;
-            break;
-        case 'pb-completa':
-            education_id = 3;
-            break;
-        case 'pb-incompleta':
-            education_id = 2;
-            break;
-        default:
-            education_id = 1;
-    }
-
-    var mun = params.Parroquia;
-    let city_id = 0;
-    switch (mun) {
-        case 'sps':
-            city_id = 1;
-            break;
-        case 'lima':
-            city_id = 2;
-            break;
-        default:
-            city_id = 4;
-    }
-
-    var id_therapist = params.Terapeuta === 1 ? params.Terapeuta : (params.Terapeuta === 2 ? 2 : 3);
-    var occupancy_state = params.EstadoOcupacion === 'remunerado' ? 1 : 2;
-
-    try {
-        var response = axios.post(port + '/api/paciente/' + id + '/' + name + '/' + age + '/' + gender + '/' + state + '/' + profession + '/' + education_id + '/' + city_id + '/' + id_therapist + '/' + occupancy_state)
-            .then(res => {
-                console.log(res);
-            });
-        console.log(response);
-    } catch (e) {
-        console.log(e);
-    }
-
-}
-
-/*function createCase(params) {
-    var case_number = params.NumeroEx;
-    var patient_id = params.NumeroIdent;
-    var remission_id = params.Remision;  
-    let violence_type_id = 0;
-    if (params.VPsicologica)
-        violence_type_id = 1;
-    else if (params.VFisica)
-        violence_type_id = 2;
-    else if (params.VEconomica)
-        violence_type_id = 3;
-    else if (params.VSexual)
-        violence_type_id = 4;  
-    var condition_id = params.Victima ? 1 : 2
-    let cause_id = 0;
-    if (params.CEconomica)
-        cause_id = 1;
-    else if(params.CInfidelidad)
-        cause_id = 2;
-    else if (params.CAlcoholismo)
-        cause_id = 3;  
-    var location_violence_id = params.VUrbana ? 1 : 2;  
-    var mun = params.Parroquia;
-    let city_id = 0;
-    switch (mun) {
-        case 'sps':
-            city_id = 1;
-            break;
-        case 'lima':
-            city_id = 2;
-            break;
-        default:
-            city_id = 4;
-    
-    var state_id = params.EstadoAtencion;
-    var benefitted_amount = Number(params.Ninos) + Number(params.Ninas) + Number(params.Otros)
-    try {
-        var response = axios.post(port+'/api/casos/'+case_number+'/'+patient_id+'/'+remission_id+'/'+violence_type_id+'/'+condition_id+'/'+cause_id+'/'+location_violence_id+'/'+city_id+'/'+state_id+'/'+benefitted_amount)
-        .then(res => {
-            console.log(res);
-        })
-        console.log(response);
-    } catch(e) {
-        console.log(e);
-    }  
-}
-}
-*/
 export default Index;

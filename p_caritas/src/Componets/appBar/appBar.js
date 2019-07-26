@@ -12,7 +12,6 @@ class appBar extends Component {
     const {values} =this.props;
     return (
       <div>
-      "
       <AppBar position="static" color="secondary" style={{  position: "fixed", top: 0,  width: "100%"}}>
         <Toolbar variant="dense">
         <img src={logo} width="10%" alt='logo'/>
@@ -22,7 +21,7 @@ class appBar extends Component {
           <Tab label='Pacientes'/>
           <Tab label='Casos'/>
         </Tabs>
-        {this.props.login?<Button color='inherit' onClick={this.props.logout}>Log Out</Button>:''}
+        <Button color='inherit' onClick={this.props.logout}>Log Out</Button>
         </Toolbar>
       </AppBar>
 
