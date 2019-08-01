@@ -80,11 +80,10 @@ export class Form3 extends Component {
                 </div>
                 <div id="imprimir" className="c26">
                     <p className="c10"><span className="c3">CARITAS DE SAN PEDRO SULA</span></p>
-                    <p className="c10 c19"><span className="c11"></span></p>
+                    {/* <p className="c10 c19"><span className="c11"></span></p> */}
                     <p className="c24"><span className="c14">SOLICITUD DE ASISTENCIA PSICOL&Oacute;GICA GRATUITA EN CASOS DE VIOLENCIA DOM&Eacute;STICA</span></p>
-                    <p className="c18"><span className="c14"></span></p>
+                    {/* <p className="c18"><span className="c14"></span></p> */}
                     <p className="c24"><span className="c17">Con la finalidad de acreditar la concurrencia de los requisitos legales exigidos por Caritas de San Pedro Sula para el goce de apoyo psicol&oacute;gico gratuito, declaro que los datos que relaciono a continuaci&oacute;n son ciertos, completos y sin omisi&oacute;n alguna.</span></p>
-                    <p className="c5 c19"><span className="c17"></span></p>
                     <p className="c5"><span className="c11">1. Datos Personales&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de recepci&oacute;n: {fechaActual}</span></p>
                     <p className="c5"><span className="c11">A) Beneficiario (a)</span></p>
                     <table className="c16">
@@ -155,8 +154,14 @@ export class Form3 extends Component {
                                     <p className="c13"><span className="c7">{causaAlcohol} {causaEconomica} {causaInfiel}</span></p>
                                 </td>
                                 <td className="c6" colSpan="2" rowSpan="1">
-                                    <p className="c2"><span className="c15">UBICACI&Oacute;N DE LA VIOLENCIA</span></p>
+                                    <p className="c2"><span className="c15">UBICACI&Oacute;N DE VIOLENCIA</span></p>
                                     <p className="c13"><span className="c7">{vurbana} {vrural}</span></p>
+                                </td>
+                            </tr>
+                            <tr className="c9">
+                                <td className="c6" colSpan="6" rowS pan="1">
+                                    <p className="c2"><span className="c8">ACCESO A LA JUSTICIA</span></p>
+                                    <p className="c13"><span className="c7"></span></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -224,10 +229,8 @@ export class Form3 extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <p className="c5 c19"><span className="c3"></span></p>
                     <p className="c5"><span className="c11">2. Datos Econ&oacute;micos </span></p>
                     <p className="c5"><span className="c11">A) Ingresos Mensuales por unidad familiar</span></p>
-                    <p className="c5 c19"><span className="c3"></span></p>
                     <table className="c16">
                         <tbody>
                             <tr className="c22">
@@ -273,8 +276,6 @@ export class Form3 extends Component {
                         <li className="c5 c27"><span className="c17">Mis datos de car&aacute;cter personal ser&aacute;n incluidos en un fichero manejado por la Instituci&oacute;n para efectos de registro e investigaci&oacute;n.</span></li>
                         <li className="c5 c27"><span className="c17">Que la instituci&oacute;n no es responsable de contactarme para el cumplimiento del proceso, esa responsabilidad recae en m&iacute;, para hacer las gestiones necesarias para iniciar dicho tr&aacute;mite.</span></li>
                     </ol>
-                    <p className="c5 c19"><span className="c17"></span></p>
-                    <p className="c5 c19"><span className="c17"></span></p>
                     <p className="c5 c19"><span className="c17"></span></p>
                     <p className="c10"><span className="c17">____________________________________________________</span></p>
                     <p className="c10"><span className="c17">(Firma)</span></p>
