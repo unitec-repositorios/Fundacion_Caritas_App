@@ -100,7 +100,7 @@ class Form2 extends Component {
                                 </Grid>
                                 <Grid item sm={3}>
                                     <Paper>
-                                        <NativeSelect disableUnderline={true} id="acceso-justicia" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
+                                        <NativeSelect disableUnderline={true} id="acceso-justicia" fullWidth value={vals.AccesoJusticia} onChange={(e)=>handleChange(e,'AccesoJusticia')}>
                                             <option value=""> Acceso a la justicia </option>
                                             <option value="1"> UMEP </option>
                                             <option value="2"> OMM </option>
