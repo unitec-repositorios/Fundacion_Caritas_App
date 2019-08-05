@@ -17,7 +17,7 @@ class Index extends Component {
             steps: 1, Nombre: '', PrimerA: '', SegundoA: '', NumeroIdent: '', Direccion: '',
             Localidad: '', Departamento: '', Telefono: '', Date: '', EstadoCivil: '', Genero: '',
             Edad: '', Oficio: '', Educacion: '', EstadoOcupacion: '', Remision: '', Parroquia: '',
-            Colonia: '', TipoCaso: '', Tratamiento: '', NumeroEx: '', EstadoAtencion: '', Terapeuta: '',
+            Colonia: '', TipoCaso: '', Tratamiento: '', NumeroEx: '', EstadoAtencion: '', Terapeuta: '', AccesoJusticia: '',
             VPsicologica: false, VFisica: false, VEconomica: false, VSexual: false, Victima: false, Agresor: false, RPT: false,
             Ninos: '', Ninas: '', Otros: '', CEconomica: false, CInfidelidad: false, CAlcoholismo: false,
             VUrbana: false, VRural: false
@@ -46,14 +46,14 @@ class Index extends Component {
     render() {
         const { NombreD, PrimerAD, SegundoAD, NumeroIdentD, DireccionD, LocalidadD, DepartamentoD, EstadoCivilD, OficioD, EducacionD, TelefonoD, DateD,
             Nombre, PrimerA, SegundoA, NumeroIdent, Direccion, Localidad, Departamento, Telefono, Date, EstadoCivil,
-            Genero, Oficio, Educacion, EstadoOcupacion, Remision, Parroquia, Colonia, TipoCaso, Tratamiento, NumeroEx,
+            Genero, Oficio, Educacion, EstadoOcupacion, Remision, AccesoJusticia, Parroquia, Colonia, TipoCaso, Tratamiento, NumeroEx,
             EstadoAtencion, Terapeuta, VPsicologica, VFisica, VEconomica, VSexual, Victima, Agresor, CInfidelidad, CEconomica, CAlcoholismo,
             VUrbana, VRural, Ninos, Ninas, Otros
         } = this.state;
         const vals = {
             NombreD, PrimerAD, SegundoAD, NumeroIdentD, DireccionD, LocalidadD, DepartamentoD, EstadoCivilD, OficioD, EducacionD, TelefonoD, DateD,
             Nombre, PrimerA, SegundoA, NumeroIdent, Direccion, Localidad, Departamento, Telefono, Date, EstadoCivil,
-            Genero, Oficio, Educacion, EstadoOcupacion, Remision, Parroquia, Colonia, TipoCaso, Tratamiento, NumeroEx,
+            Genero, Oficio, Educacion, EstadoOcupacion, Remision, AccesoJusticia, Parroquia, Colonia, TipoCaso, Tratamiento, NumeroEx,
             EstadoAtencion, Terapeuta, VPsicologica, VFisica, VEconomica, VSexual, Victima, Agresor, CInfidelidad, CEconomica, CAlcoholismo,
             VUrbana, VRural, Ninos, Ninas, Otros
         };
