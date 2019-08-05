@@ -13,8 +13,8 @@ import Delete from '@material-ui/icons/Delete';
 import axios from 'axios';
 
 
-const url = 'http://localhost:8000/api/paciente/';
-//const url = 'https://apicaritas.herokuapp.com/api/paciente/';
+// const url = 'http://apicaritas.herokuapp.com/api/paciente/';
+const url = 'https://apicaritas.herokuapp.com/api/paciente/';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -50,7 +50,7 @@ class FullScreenDialog extends Component   {
   }
 
   deleteFunc=()=>{
-    axios.delete(`http://localhost:8000/api/paciente/${this.state.Id}`)
+    axios.delete(`http://apicaritas.herokuapp.com/api/paciente/${this.state.Id}`)
     .then(res => console.log(res.data));
 
     if (window.confirm("¿Está seguro que desea eliminar a " + this.state.Nombre + "?")){

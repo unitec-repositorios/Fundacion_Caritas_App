@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import logo from '../Recursos/caritas_logo.png';
+// import logo from '../Recursos/caritas_logo.png';
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
@@ -49,7 +49,7 @@ class FormDialog extends React.Component {
       <Dialog open={true} style={{background:"Red"}}>    
           <DialogContent style={{background:"Red"}}>
             <DialogContentText>
-            <img src={logo} width="100%" alt="logo" />
+            {/* <img src={logo} width="100%" alt="logo" /> */}
             </DialogContentText>
             <TextField
               autoFocus
