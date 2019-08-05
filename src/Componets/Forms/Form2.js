@@ -69,7 +69,7 @@ class Form2 extends Component {
                         </CardContent>
                         <CardContent>
                             <Grid container  spacing={1}>
-                                <Grid item sm={4}>
+                                <Grid item sm={3}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-atencion" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
                                             <option value=""> Estado de Atencion </option>
@@ -78,23 +78,35 @@ class Form2 extends Component {
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm={4}>
+                                <Grid item sm={3}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="terapeuta" fullWidth value={vals.Terapeuta} onChange={(e)=>handleChange(e,'Terapeuta')}>
                                             <option value=""> Terapeuta </option>
                                             <option value="1">Miriam Fonseca</option>
                                             <option value="2">Otros</option>
-                                            <option value="ninguno"> Ninguno </option>
+                                            <option value="ninguno"> Ninguno </option> 
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                <Grid item sm={4}>
+                                <Grid item sm={3}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} placeholder=" Remision" fullWidth defaultValue={vals.Remision} onChange={(e)=>handleChange(e,'Remision')}>
                                             <option value="">Remision</option>
                                             <option value="JEVD">JEVD</option>
                                             <option value="JP">JP</option>
                                             <option value="JEVS">JEVS</option>
+                                        </NativeSelect>
+                                    </Paper>
+                                </Grid>
+                                <Grid item sm={3}>
+                                    <Paper>
+                                        <NativeSelect disableUnderline={true} id="acceso-justicia" fullWidth value={vals.EstadoAtencion} onChange={(e)=>handleChange(e,'EstadoAtencion')}>
+                                            <option value=""> Acceso a la justicia </option>
+                                            <option value="1"> UMEP </option>
+                                            <option value="2"> OMM </option>
+                                            <option value="3"> ONG </option>
+                                            <option value="4"> Juzgado </option>
+                                            <option value="5"> Fiscal&iacute;a </option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>

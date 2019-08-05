@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import logo from '../Recursos/caritas_logo.png';
+import logo from '../Recursos/logo_login.png';
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
