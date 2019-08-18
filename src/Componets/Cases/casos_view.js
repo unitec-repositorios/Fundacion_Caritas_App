@@ -9,7 +9,7 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
-
+const port= 'https://apicaritas.herokuapp.com/';
 const tableIcons = {
     DetailPanel: ChevronRight,
     Filter: FilterList,
@@ -63,7 +63,6 @@ const columns=[
   }
 ]
 
-const port = 'https://apicaritas.herokuapp.com/';
 
 class casos_view extends Component{
     constructor(props){
@@ -80,6 +79,7 @@ class casos_view extends Component{
           this.setState({list: data})
           this.setState({isLoading:false});
         })
+        
     }
 
     /*componentDidUpdate(){
