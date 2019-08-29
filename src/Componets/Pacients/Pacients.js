@@ -11,7 +11,9 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
 import Dialog from '../dialog';
 import Mayre from 'mayre';
-const port = 'https://apicaritas.herokuapp.com/';
+
+const port = 'https://caritas-ui.firebaseapp.com';
+
 const tableIcons = {
   DetailPanel: ChevronRight,
   Filter: FilterList,
@@ -63,11 +65,10 @@ class Pacients extends Component {
   }
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch(port+'api/paciente').then(res => res.json()).then(data => {
+    fetch(port + '/api/paciente').then(res => res.json()).then(data => {
       this.setState({ list: data })
     })
     this.setState({ isLoading: false });
-
   }
 
   handleClickOpen = () => {

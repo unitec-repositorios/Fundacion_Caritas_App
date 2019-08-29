@@ -60,7 +60,6 @@ export class Form3 extends Component {
             agresor = 'Agresor';
         cant = ninos + ninas + otros;
 
-
     }
 
     render() {
@@ -159,9 +158,9 @@ export class Form3 extends Component {
                                 </td>
                             </tr>
                             <tr className="c9">
-                                <td className="c6" colSpan="6" rowS pan="1">
+                                <td className="c6" colSpan="6" rowSpan="1">
                                     <p className="c2"><span className="c8">ACCESO A LA JUSTICIA</span></p>
-                                    <p className="c13"><span className="c7"></span></p>
+                                    <p className="c13"><span className="c7"> {vals.AccesoJusticia}</span></p>
                                 </td>
                             </tr>
                         </tbody>
