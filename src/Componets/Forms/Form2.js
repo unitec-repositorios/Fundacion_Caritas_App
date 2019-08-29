@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
 
-const url = 'https://apicaritas.herokuapp.com/';
+const url = 'https://caritas-ui.firebaseapp.com/';
 class Form2 extends Component {
     
     continue = e => {
@@ -102,11 +102,11 @@ class Form2 extends Component {
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="acceso-justicia" fullWidth value={vals.AccesoJusticia} onChange={(e)=>handleChange(e,'AccesoJusticia')}>
                                             <option value=""> Acceso a la justicia </option>
-                                            <option value="1"> UMEP </option>
-                                            <option value="2"> OMM </option>
-                                            <option value="3"> ONG </option>
-                                            <option value="4"> Juzgado </option>
-                                            <option value="5"> Fiscal&iacute;a </option>
+                                            <option value="UMEP"> UMEP </option>
+                                            <option value="OMM"> OMM </option>
+                                            <option value="ONG"> ONG </option>
+                                            <option value="Juzgado"> Juzgado </option>
+                                            <option value="Fiscalía"> Fiscal&iacute;a </option>
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
