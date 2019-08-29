@@ -4,19 +4,17 @@ import AddBox from '@material-ui/icons/AddBox';
 import Edit from '@material-ui/icons/Edit';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import DoneIcon from '@material-ui/icons/Done';
-import CancelIcon from '@material-ui/icons/Cancel';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 import { forwardRef } from 'react';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    Save: forwardRef((props, ref) => <DoneIcon {...props} ref={ref} />),
-    Cancel: forwardRef((props, ref) => <CancelIcon {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
   };
 
   
