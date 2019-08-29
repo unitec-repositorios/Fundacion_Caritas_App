@@ -65,8 +65,8 @@ class Pacients extends Component {
     this.setState({ isLoading: true });
     fetch(port+'api/paciente').then(res => res.json()).then(data => {
       this.setState({ list: data })
+      this.setState({ isLoading: false });
     })
-    this.setState({ isLoading: false });
 
   }
 
