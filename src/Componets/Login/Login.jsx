@@ -6,14 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import logo from '../Recursos/logo_login.png';
+
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
       this.state = {
         open: true,
         email:'',
-        pass:'',
-      
+        pass:''
       };
   }
 
@@ -46,8 +46,8 @@ class FormDialog extends React.Component {
     
     return (
       <div >
-      <Dialog open={true} style={{background:"Red"}}>    
-          <DialogContent style={{background:"Red"}}>
+      <Dialog open={true} style={{background:"#F5F5F5"}}>    
+          <DialogContent style={{background:"#e57373"}}>
             <DialogContentText>
             <img src={logo} width="100%" alt="logo" />
             </DialogContentText>
@@ -55,27 +55,26 @@ class FormDialog extends React.Component {
               autoFocus
               margin="dense"
               id="name"
-              label="Usuario"
               name="email"
               onChange={this.handleChange}
               type="email"
+              placeholder="Usuario"
               value={this.state.email}
-              
               fullWidth
             />
              <TextField
               autoFocus
               margin="dense"
               id="pass"
-              label="Contraseña"
               name="pass"
               value={this.state.pass}
               onChange={this.handleChange}
               type="Password"
+              placeholder="Contraseña"
               fullWidth
             />
           </DialogContent>
-          <DialogActions style={{background:"Red"}}>
+          <DialogActions style={{background:"White", justifyContent:"Center"}}>
             <Button onClick={this.login} color="primary">
               Login
             </Button>

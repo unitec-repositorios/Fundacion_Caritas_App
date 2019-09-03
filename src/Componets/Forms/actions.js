@@ -1,19 +1,20 @@
 import axios from 'axios';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-const port = 'https://apicaritas.herokuapp.com/';
+const port = 'https://caritas-ui.firebaseapp.com/';
 export const savePatients =(params)=> {
-    var id = Number(params.NumeroIdent);
-    var name = params.Nombre;
+
+    var id = params.vals.NumeroIdent
+    var name = params.vals.Nombre;
     var current_year = new Date();
-    var birth_year = new Date(params.Date);
+    var birth_year = new Date(params.vals.Date);
     var age = current_year.getFullYear() - birth_year.getFullYear();
-    var gender = params.Genero;
-    var state = params.EstadoCivil;
-    var profession = params.Oficio;
+    var gender = params.vals.Genero;
+    var state = params.vals.EstadoCivil;
+    var profession = params.vals.Oficio;
 
     let education_id = 0;
-    switch (params.Educacion) {
+    switch (params.vals.Educacion) {
         case 's-completa':
             education_id = 7;
             break;
@@ -53,7 +54,7 @@ export const savePatients =(params)=> {
     var occupancy_state = params.EstadoOcupacion === 'remunerado' ? 1 : 2;
 
     try {
-        var response = axios.post(port + '/api/paciente/' + id + '/' + name + '/' + age + '/' + gender + '/' + state + '/' + profession + '/' + education_id + '/' + city_id + '/' + id_therapist + '/' + occupancy_state)
+        var response = axios.post(port + 'api/paciente/' + id + '/' + name + '/' + age + '/' + gender + '/' + state + '/' + profession + '/' + education_id + '/' + city_id + '/' + id_therapist + '/' + occupancy_state)
             .then(res => {
                 console.log(res);
             });
@@ -76,9 +77,9 @@ export const generarPdf = (props) =>{
     savePatients(props)
 }
 function createCase(params) {
-    var case_number = params.NumeroEx;
-    var patient_id = params.NumeroIdent;
-    var remission_id = params.Remision;
+    var case_number = params.vals.NumeroEx;
+    var patient_id = params.vals.NumeroIdent;
+    var remission_id = params.vals.Remision;
     
     let violence_type_id = 0;
     if (params.VPsicologica)
@@ -115,9 +116,9 @@ function createCase(params) {
             city_id = 4;
     }
 
-    var state_id = params.EstadoAtencion;
-    var benefitted_amount = Number(params.Ninos) + Number(params.Ninas) + Number(params.Otros);
-        axios.post(port+'/api/casos/'+case_number+'/'+patient_id+'/'+
+    var state_id = params.vals.EstadoAtencion;
+    var benefitted_amount = Number(params.vals.Ninos) + Number(params.vals.Ninas) + Number(params.vals.Otros);
+        axios.post(port+'api/casos/'+case_number+'/'+patient_id+'/'+
         remission_id+'/'+violence_type_id+'/'+condition_id+'/'+cause_id+'/'+location_violence_id+
         '/'+city_id+'/'+state_id+'/'+benefitted_amount).catch(e=>{console.log(e)}) 
     

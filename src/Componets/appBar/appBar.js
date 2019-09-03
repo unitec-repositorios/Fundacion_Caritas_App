@@ -20,6 +20,7 @@ class appBar extends Component {
           <Tab label='Estadisticas'  />
           <Tab label='Pacientes'/>
           <Tab label='Casos'/>
+          <Tab label = 'Configuracion'/>
         </Tabs>
         <Button color='inherit' onClick={this.props.logout}>Log Out</Button>
         </Toolbar>
