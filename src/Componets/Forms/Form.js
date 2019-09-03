@@ -9,16 +9,92 @@ import Button from '@material-ui/core/Button';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import grey from '@material-ui/core/colors/grey';
+const port = 'http://localhost:3001/api';
 
 class Form extends Component {
-  continue = e => {
-    e.preventDefault();
-   this.props.newStep();
-  };
-  back=e=>{
-    e.preventDefault();
-    this.props.prevStep();
-}
+    constructor(){
+        super();
+        this.state = {
+            estadosCiviles: [],
+            educacion:[],
+            estadoOcupacion:[],
+            parroquia:[],
+            departamentos:[]
+        }
+    }
+
+    continue = e => {
+        e.preventDefault();
+        this.props.newStep();
+    };
+    back = e => {
+        e.preventDefault();
+        this.props.prevStep();
+    };
+
+    componentDidMount() {
+        fetch(port+'/estadocivil')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ estadosCiviles: data }, () => {
+            });
+        });
+        fetch(port+'/educacion')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ educacion: data }, () => {
+            });
+        });
+        fetch(port+'/estadoocupacion')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ estadoOcupacion: data }, () => {
+            });
+        });
+        fetch(port+'/municipio')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ parroquia: data }, () => {
+            });
+        });
+        fetch(port+'/departamento')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ departamentos: data }, () => {
+            });
+        });
+    }
+
+    generateCivilState = () => {
+        return this.state.estadosCiviles.map((item)=>{
+            return <option value={item.id_estadoc}>{item.estado}</option>
+        })
+    }
+
+    generateEducationLevel = () => {
+        return this.state.educacion.map((item)=>{
+            return <option value={item.id_educacion}>{item.tipo}</option>
+        })
+    }
+
+    generateOcupationType = () => {
+        return this.state.estadoOcupacion.map((item)=>{
+            return <option value={item.id_educacion}>{item.tipo}</option>
+        })
+    }
+
+    generateParroquiaType = () => {
+        return this.state.parroquia.map((item)=>{
+            return <option value={item.id_municipio}>{item.nombre}</option>
+        })
+    }
+
+    generateDepartamentos = () => {
+        return this.state.departamentos.map((item)=>{
+            return <option value={item.id_departamento}>{item.nombre}</option>
+        })
+    }
+
   render() {
     const {vals,handleChange}=this.props;
     const card_background = grey[200];
@@ -73,7 +149,13 @@ class Form extends Component {
                             <Grid container alignContent="space-between" spacing={1} >
                                 <Grid item sm={6} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Departamento" fullWidth  defaultValue={vals.Departamento} onChange={(e)=>handleChange(e,'Departamento')}/>
+                                        <NativeSelect disableUnderline={true} id="departamento" fullWidth onChange={(e)=>handleChange(e,'Departamento')} value={vals.Departamento}>
+                                            <option value="" disabled>
+                                                Departamento
+                                            </option>
+                                            {this.generateDepartamentos()}
+                                        </NativeSelect>
+                                        {/*<Input disableUnderline={true} placeholder=" Departamento" fullWidth  defaultValue={vals.Departamento} onChange={(e)=>handleChange(e,'Departamento')}/>*/}
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
@@ -93,10 +175,10 @@ class Form extends Component {
                                 <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivil')} value={vals.EstadoCivil}>
-                                            <option value=""> Estado Civil </option>
-                                            <option value="soltero"> Soltero </option>
-                                            <option value="casada"> Casado </option>
-                                            <option value="union_libre"> Union libre </option>
+                                            <option value="" disabled>
+                                                Estado civil
+                                            </option>
+                                            {this.generateCivilState()}
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
@@ -104,7 +186,7 @@ class Form extends Component {
                                 <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="genero" fullWidth onChange={(e)=>handleChange(e,'Genero')} value={vals.Genero}>
-                                            <option value=""> Genero </option>
+                                            <option value="" disabled> Genero </option>
                                             <option value="m"> Masculino </option>
                                             <option value="f"> Femenino </option>
                                         </NativeSelect>
@@ -122,24 +204,21 @@ class Form extends Component {
                             <Grid container alignContent="space-between" spacing={1}>
                                 <Grid item sm={5}>
                                     <Paper>
-                                        <NativeSelect disableUnderline={true} id="educacion" fullWidth onChange={(e)=>handleChange(e,'Educacion')} value={vals.Educacion} >
-                                            <option value=""> Educacion </option>
-                                            <option value="analfabeto"> Analfabeto </option>
-                                            <option value="pb-incompleta"> Pre-Basica - Incompleta </option>
-                                            <option value="pb-completa"> Pre-Basica - Completa </option>
-                                            <option value="b-incompleta"> Basica - Incompleta </option>
-                                            <option value="b-completa"> Basica - Completa </option>
-                                            <option value="s-incompleta"> Superior - Incompleta </option>
-                                            <option value="s-completa"> Superior - Completa </option>
+                                        <NativeSelect  disableUnderline={true} id="educacion" fullWidth onChange={(e)=>handleChange(e,'Educacion')} value={vals.Educacion} >
+                                            <option value="" disabled>
+                                                    Nivel de educacion
+                                            </option>    
+                                            {this.generateEducationLevel()}
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={7}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="ocupacion" fullWidth onChange={(e)=>handleChange(e,'EstadoOcupacion')} value={vals.EstadoOcupacion}>
-                                            <option value="">Ocupacion</option>
-                                            <option value="remunerado"> Trabajo remunerado </option>
-                                            <option value="no-remunerado"> Trabajo no remunerado </option>
+                                            <option value="" disabled>
+                                                Ocupacion
+                                            </option>
+                                            {this.generateOcupationType()}
                                         </NativeSelect> 
                                     </Paper>
                                 </Grid>
@@ -150,15 +229,13 @@ class Form extends Component {
                                 <Grid item sm={6}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="beneficiario-parroquia" fullWidth onChange={(e)=>handleChange(e,'Parroquia')} value={vals.Parroquia}>
-                                            <option>Beneficiario por parroquia</option>
-                                            <option value="sps"> San Pedro Sula </option>
-                                            <option value="lima"> La Lima </option>
-                                            <option value="villanueva"> Villanueva </option>
-                                            <option value="otro">Otros</option>
+                                            <option value="" disabled>
+                                                Beneficiario por parroquia
+                                            </option>
+                                            {this.generateParroquiaType()}
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
-                                
                             </Grid>
                         </CardContent>
                         <CardContent>
