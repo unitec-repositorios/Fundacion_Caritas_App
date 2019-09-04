@@ -9,7 +9,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      login: false,
+      login: true,
       value: 0,
       token: ''
     }

@@ -1,46 +1,55 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import EditTable from "./EditTable";
+import {handleMunicipiosChange} from "./ConfigPacients_Actions";
+import {handleChangeOcupacion} from './ConfigPacients_Actions';
+import {handleChangeEducacion} from './ConfigPacients_Actions';
 
+const port = 'http://localhost:3001'
+const flagMuni = 'Municipios';
+const flagOcupacion = 'Ocupacion';
+const flagEducacion = 'Educacion';
+const municipiosTitle= "Municipios";
+const municipiosColumns= [ { title: 'Nombre', field: 'nombre' } ];
+const ocupacionTitle = "Ocupacion";
+const ocupacionColumns = [ { title: 'Tipo', field: 'tipo' } ];
+const educacionTitle = "Educacion";
+const educacionColumns = [ { title: 'Tipo', field: 'tipo' } ];
+                      
+    
 class ConfigPacients extends Component{
     constructor (props){
         super(props);
         this.state = {
-            title1: "Beneficiario por Parroquia",
-            columns: [ { title: 'Campo', field: 'campo' } ],
-            data1: [ { campo: 'San Pedro Sula'},{ campo: 'La Lima'}, {campo: 'Villanueva'}, {campo: 'otros'} ],
-
-            title2: "Ocupacion",
-            data2: [ {campo: "Trabajo Remunerado" }, {campo: "Trabajo no remunerado"} ],
-
-            title3: "Educacion",
-            data3: [{campo: "Analfabeto"}, {campo: "Pre-Basica - Incompleta"}, {campo: "Pre-Basica - Completa"},
-                    {campo: "Basica - Incompleta"}, {campo: "Basica - Completa"}, {campo: "Pre-Basica - Incompleta"},
-                    {campo: "Superior - Incompleta"}, {campo: "Superior - Completa"}
-            ]
+            municipiosData: [],
+            ocupacionData: [],
+            educacionData: []
         }
     }
 
-    handleChange1 = (newData) => {
-        this.setState({
-            data1: newData
-        });
-    };
+    componentDidMount() {
+        this.handleDataUpdate();
+    }
+    // componentDidMount(){
+    //     this.handleDataUpdate();
+    // }
+    
+    handleDataUpdate = () =>{
+        fetch(port + '/api/municipio').then(res => res.json()).then(data => {
+            this.setState({ municipiosData: data })
+        })
 
-    handleChange2 = (newData) => {
-        this.setState({
-            data2: newData
-        });
-    };
+        fetch(port + '/api/estadoocupacion').then(res => res.json()).then(data => {
+            this.setState({ ocupacionData: data })  
+        })
 
-    handleChange3 = (newData) => {
-        this.setState({
-            data3: newData
-        });
-    };
+        fetch(port + '/api/educacion').then(res => res.json()).then(data => {
+            this.setState({ educacionData: data })
+        })
+    }
 
     render (){
-        const {title1, title2, title3, columns, data1, data2, data3} = this.state;
+        const {municipiosData, ocupacionData, educacionData} = this.state;
         
         return(
             <div>
@@ -48,13 +57,16 @@ class ConfigPacients extends Component{
                 <Grid container  justify='flex-end' style={{width: '80%', alignSelf: 'center', marginLeft:'10%', marginTop:'2%' }}>
                     <Grid container spacing = {2}>
                         <Grid item sm = {6}>
-                            <EditTable title = {title1} columns = {columns} data = {data1} handleChange = {this.handleChange1}/>
+                            <EditTable title = {municipiosTitle} columns = {municipiosColumns} data = {municipiosData}
+                                handleChange = {handleMunicipiosChange} flag = {flagMuni} handleDataUpdate = {this.handleDataUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {title2} columns = {columns} data = {data2} handleChange = {this.handleChange2}/>
+                            <EditTable title = {ocupacionTitle} columns = {ocupacionColumns} data = {ocupacionData} 
+                                handleChange = {handleChangeOcupacion} flag = {flagOcupacion} handleDataUpdate = {this.handleDataUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {title3} columns = {columns} data = {data3} handleChange = {this.handleChange3}/>
+                            <EditTable title = {educacionTitle} columns = {educacionColumns} data = {educacionData} 
+                                handleChange = {handleChangeEducacion} flag = {flagEducacion} handleDataUpdate = {this.handleDataUpdate}/>
                         </Grid>
                     </Grid>
                 </Grid>

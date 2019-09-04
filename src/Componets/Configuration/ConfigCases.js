@@ -1,69 +1,81 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import EditTable from "./EditTable";
+import {handleChangeRecMuni} from './ConfigCases_Actions';
+import {handleChangeTerapeuta} from './ConfigCases_Actions';
+import {handleChangeRemision} from './ConfigCases_Actions';
+import {handleChangeEstadoAtencion} from './ConfigCases_Actions';
+
+const port = 'http://localhost:3001'
+const flagRecMuni = 'RecMuni';
+const flagTerapeuta = 'Terapeuta';
+const flagRemision = 'Remision';
+const flagEstadoAtencion = 'eAtencion'
 
 class ConfigCases extends Component{
     constructor (props){
         super(props);
         this.state = {
-            columns: [ { title: 'Campo', field: 'campo' } ],
+            recMuniTitle: 'Recursos Municipales',
+            recMuniColumns: [ { title: 'Tipo', field: 'tipo' } ],
+            recMuniData: [],
             
-            title1: 'Acceso a la justicia',
-            data1: [ { campo:'UMEP'}, {campo:'OMM'}, {campo:'ONG'}, {campo:'Juzgado'}, {campo:'Fiscalía'} ],
-        
-            title2: "Terapeuta",
-            data2: [ { campo: 'Miriam Fonseca'}, { campo: 'Otro'}, { campo: 'Ninguno'}  ],
+            terapeutaTitle: 'Terapeuta',
+            terapeutaColumns: [ { title: 'Nombre', field: 'nombre' } ],
+            terapeutaData: [],
 
-            title3: "Remisión",
-            data3: [ {campo: 'JEVD'}, { campo: 'JP'}, { campo: 'JEVS'} ],
-
-            title4: "Estado de Atencion",
-            data4: [ { campo: 'Activo'},{ campo: 'Abandono'} ],
+            remisionTitle: 'Remisión',
+            remisionColumns: [ { title: 'Juez', field: 'juez' } ],
+            remisionData: [],
+            
+            eAtencionTitle: 'Estado de atención',
+            eAtencionColumns: [ { title: 'Estado', field: 'estado' } ],
+            eAtencionData: [],
         }
     }
 
-    handleChange1 = (newData) => {
-        this.setState({
-            data1: newData
-        });
-    };
+    componentDidMount() {
+        fetch(port + '/api/recursosmunicipales').then(res => res.json()).then(data => {
+            this.setState({ recMuniData: data })
+          })
+        
+        fetch(port + '/api/terapeuta').then(res => res.json()).then(data => {
+            this.setState({ terapeutaData: data })  
+          })
 
-    handleChange2 = (newData) => {
-        this.setState({
-            data2: newData
-        });
-    };
+        fetch(port + '/api/remision').then(res => res.json()).then(data => {
+          this.setState({ remisionData: data })
+        })
 
-    handleChange3 = (newData) => {
-        this.setState({
-            data3: newData
-        });
-    };
-
-    handleChange4 = (newData) => {
-        this.setState({
-            data4: newData
-        });
-    };
+        fetch(port + '/api/estadoatencion').then(res => res.json()).then(data => {
+            this.setState({ eAtencionData: data })
+        })
+    }
 
     render (){
-        const {title1, title2, title3, title4, columns, data1, data2, data3, data4} = this.state;
+        var {recMuniTitle, terapeutaTitle, remisionTitle, eAtencionTitle,
+            recMuniColumns, terapeutaColumns, remisionColumns, eAtencionColumns,
+            recMuniData, terapeutaData, remisionData, eAtencionData} = this.state;
         return(
             <div>
                 <h1 style={{alignSelf: 'center', marginLeft: '30%'}}>Mantenimiento de los campos de Casos</h1>
                 <Grid container  justify='flex-end' style={{width: '80%', alignSelf: 'center', marginLeft:'10%', marginTop:'2%' }}>
                     <Grid container spacing = {2}>
                         <Grid item sm = {6}>
-                            <EditTable title = {title1} columns = {columns} data = {data1} handleChange = {this.handleChange1}/>
+                            <EditTable title = {recMuniTitle} columns = {recMuniColumns} data = {recMuniData} 
+                                handleChange = {handleChangeRecMuni} flag = {flagRecMuni}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {title2} columns = {columns} data = {data2} handleChange = {this.handleChange2}/>
+                            <EditTable title = {terapeutaTitle} columns = {terapeutaColumns} data = {terapeutaData} 
+                                handleChange = {handleChangeTerapeuta} flag = {flagTerapeuta}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {title3} columns = {columns} data = {data3} handleChange = {this.handleChange3}/>
+                            <EditTable title = {remisionTitle} columns = {remisionColumns} data = {remisionData} 
+                                handleChange = {handleChangeRemision} flag = {flagRemision}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {title4} columns = {columns} data = {data4} handleChange = {this.handleChange4}/>
+                            <EditTable title = {eAtencionTitle} columns = {eAtencionColumns} data = {eAtencionData} 
+                                handleChange = {handleChangeEstadoAtencion} flag = {flagEstadoAtencion}/>
                         </Grid>
                     </Grid>
                 </Grid>
