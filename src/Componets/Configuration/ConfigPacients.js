@@ -31,19 +31,28 @@ class ConfigPacients extends Component{
     }
 
     componentDidMount() {
-        fetch(port + '/api/municipio').then(res => res.json()).then(data => {
-            this.setState({ municipiosData: data })
-        })
-        
-        fetch(port + '/api/estadoocupacion').then(res => res.json()).then(data => {
-            this.setState({ ocupacionData: data })  
-        })
-
-        fetch(port + '/api/educacion').then(res => res.json()).then(data => {
-          this.setState({ educacionData: data })
-        })
+        this.fetchData();
     }
     
+    fetchData (){
+        Axios.get(port + '/api/municipio').then(res => {
+            this.setState({ municipiosData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
+        
+        Axios.get(port + '/api/estadoocupacion').then(res => {
+            this.setState({ ocupacionData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
+
+        Axios.get(port + '/api/educacion').then(res => {
+            this.setState({ educacionData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
+    }
 
     handleTableUpdate = async (flag) =>{
         let response  = '';

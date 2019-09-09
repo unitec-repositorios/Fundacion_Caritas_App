@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import logo from '../Recursos/logo_login.png';
+import Axios from 'axios';
 
 const port = 'http://localhost:3001';
 
@@ -21,9 +22,15 @@ class FormDialog extends React.Component {
   }
 
   componentDidMount = async () => {
-    await fetch(port + '/api/usuarios').then(res => res.json()).then(data => {
-      this.setState({ userData: data })
-    })
+    await this.fetchData();
+  }
+
+  fetchData = async ()  =>{
+    await Axios.get(port + '/api/usuarios').then(res => {
+      this.setState({ userData: res.data })
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   login = () => {

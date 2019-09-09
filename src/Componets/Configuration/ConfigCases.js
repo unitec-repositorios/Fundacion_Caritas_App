@@ -36,21 +36,33 @@ class ConfigCases extends Component{
     }
 
     componentDidMount() {
-        fetch(port + '/api/recursosmunicipales').then(res => res.json()).then(data => {
-            this.setState({ recMuniData: data })
-          })
+        this.fetchData();
+    }
+
+    fetchData (){
+        Axios.get(port + '/api/recursosmunicipales').then(res => {
+            this.setState({ recMuniData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
         
-        fetch(port + '/api/terapeuta').then(res => res.json()).then(data => {
-            this.setState({ terapeutaData: data })  
-          })
+        Axios.get(port + '/api/terapeuta').then(res => {
+            this.setState({ terapeutaData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
 
-        fetch(port + '/api/remision').then(res => res.json()).then(data => {
-          this.setState({ remisionData: data })
-        })
+        Axios.get(port + '/api/remision').then(res => {
+            this.setState({ remisionData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
 
-        fetch(port + '/api/estadoatencion').then(res => res.json()).then(data => {
-            this.setState({ eAtencionData: data })
-        })
+        Axios.get(port + '/api/estadoatencion').then(res => {
+            this.setState({ eAtencionData: res.data })
+        }).catch(error =>{
+            console.log(error);
+        });
     }
 
     handleTableUpdate = async (flag) =>{
