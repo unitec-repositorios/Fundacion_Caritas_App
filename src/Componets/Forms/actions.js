@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-const port = 'https://caritas-ui.firebaseapp.com/';
+const format = require('../../JSON_Formats');
+const port = 'http://localhost:3001/api';
 export const savePatients =(params)=> {
 
     var id = params.vals.NumeroIdent
@@ -54,10 +55,26 @@ export const savePatients =(params)=> {
     var occupancy_state = params.EstadoOcupacion === 'remunerado' ? 1 : 2;
 
     try {
-        var response = axios.post(port + 'api/paciente/' + id + '/' + name + '/' + age + '/' + gender + '/' + state + '/' + profession + '/' + education_id + '/' + city_id + '/' + id_therapist + '/' + occupancy_state)
-            .then(res => {
-                console.log(res);
-            });
+        var body = format.PACIENTES_POST_Y_PUT(
+            id,
+            name,
+            "apellido",
+            age,
+            gender,
+            profession,
+            parseInt(state),
+            occupancy_state,
+            education_id,
+            city_id);
+
+        var response = axios.post(port+'/paciente/',body,{
+            headers:{
+                'content-type':'application/json',
+            }
+        })
+        .then(res => {
+            console.log(res);
+        });
         console.log(response);
     } catch (e) {
         console.log(e);
@@ -81,29 +98,30 @@ function createCase(params) {
     var patient_id = params.vals.NumeroIdent;
     var remission_id = params.vals.Remision;
     
+    
     let violence_type_id = 0;
-    if (params.VPsicologica)
+    if (params.vals.VPsicologica)
         violence_type_id = 1;
-    else if (params.VFisica)
+    else if (params.vals.VFisica)
         violence_type_id = 2;
-    else if (params.VEconomica)
+    else if (params.vals.VEconomica)
         violence_type_id = 3;
-    else if (params.VSexual)
+    else if (params.vals.VSexual)
         violence_type_id = 4;
     
-    var condition_id = params.Victima ? 1 : 2;
+    var condition_id = params.vals.Victima ? 1 : 2;
 
     let cause_id = 0;
-    if (params.CEconomica)
+    if (params.vals.CEconomica)
         cause_id = 1;
-    else if(params.CInfidelidad)
+    else if(params.vals.CInfidelidad)
         cause_id = 2;
-    else if (params.CAlcoholismo)
+    else if (params.vals.CAlcoholismo)
         cause_id = 3;
     
-    var location_violence_id = params.VUrbana ? 1 : 2;   
+    var location_violence_id = params.vals.VUrbana ? 1 : 2;   
 
-    var mun = params.Parroquia;
+    var mun = params.vals.Parroquia;
     let city_id = 0;
     switch (mun) {
         case 'sps':
@@ -118,8 +136,29 @@ function createCase(params) {
 
     var state_id = params.vals.EstadoAtencion;
     var benefitted_amount = Number(params.vals.Ninos) + Number(params.vals.Ninas) + Number(params.vals.Otros);
-        axios.post(port+'api/casos/'+case_number+'/'+patient_id+'/'+
-        remission_id+'/'+violence_type_id+'/'+condition_id+'/'+cause_id+'/'+location_violence_id+
-        '/'+city_id+'/'+state_id+'/'+benefitted_amount).catch(e=>{console.log(e)}) 
+    var id_terapeuta = params.vals.Terapeuta;
+
+    const body = format.CASOS_POST_Y_PUT(
+        case_number,
+        benefitted_amount,
+        location_violence_id,
+        parseInt(state_id),
+        parseInt(mun),
+        parseInt(remission_id),
+        city_id,
+        cause_id,
+        parseInt(id_terapeuta),
+        0,
+        condition_id,
+        parseInt(params.vals.Tratamiento)
+        );
+
+        var response = axios.post(port+'/caso',body,{
+            headers:{
+                'content-type':'application/json',
+            }
+        });
+
+        
     
 }

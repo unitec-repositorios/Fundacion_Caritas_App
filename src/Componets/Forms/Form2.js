@@ -76,7 +76,7 @@ class Form2 extends Component {
     continue = e => {
         e.preventDefault();
         this.props.newStep();
-        fetch(url, {
+        fetch(port, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
