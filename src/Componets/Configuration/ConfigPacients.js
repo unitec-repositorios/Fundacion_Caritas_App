@@ -4,22 +4,25 @@ import EditTable from "./EditTable";
 import {handleMunicipiosChange} from "./ConfigPacients_Actions";
 import {handleChangeOcupacion} from './ConfigPacients_Actions';
 import {handleChangeEducacion} from './ConfigPacients_Actions';
+import Axios from 'axios';
 
 const port = 'http://localhost:3001'
-const flagMuni = 'Municipios';
-const flagOcupacion = 'Ocupacion';
-const flagEducacion = 'Educacion';
+
+const flagMuni = 'municipio';
+const flagOcupacion = 'estadoocupacion';
+const flagEducacion = 'educacion';
+
 const municipiosTitle= "Municipios";
 const municipiosColumns= [ { title: 'Nombre', field: 'nombre' } ];
 const ocupacionTitle = "Ocupacion";
 const ocupacionColumns = [ { title: 'Tipo', field: 'tipo' } ];
 const educacionTitle = "Educacion";
 const educacionColumns = [ { title: 'Tipo', field: 'tipo' } ];
-                      
     
 class ConfigPacients extends Component{
     constructor (props){
         super(props);
+        this.handleTableUpdate = this.handleTableUpdate.bind(this);
         this.state = {
             municipiosData: [],
             ocupacionData: [],
@@ -28,29 +31,44 @@ class ConfigPacients extends Component{
     }
 
     componentDidMount() {
-        this.handleDataUpdate();
-    }
-    // componentDidMount(){
-    //     this.handleDataUpdate();
-    // }
-    
-    handleDataUpdate = () =>{
         fetch(port + '/api/municipio').then(res => res.json()).then(data => {
             this.setState({ municipiosData: data })
-        })
-
+          })
+        
         fetch(port + '/api/estadoocupacion').then(res => res.json()).then(data => {
             this.setState({ ocupacionData: data })  
-        })
+          })
 
         fetch(port + '/api/educacion').then(res => res.json()).then(data => {
-            this.setState({ educacionData: data })
+          this.setState({ educacionData: data })
         })
+    }
+    
+
+    handleTableUpdate = async (flag) =>{
+        let response  = '';
+        let data = '';
+        if(flag === 'municipio'){
+            response = await Axios.get(port + '/api/municipio');
+            data = await response.data;
+            this.setState({municipiosData: data});
+        }
+        
+        if(flag === 'estadoocupacion'){
+            response = await Axios.get(port + '/api/estadoocupacion');
+            data = await response.data;
+            this.setState({ocupacionData: data});
+        }
+        if(flag === 'educacion'){
+            response = await Axios.get(port + '/api/educacion');
+            data = await response.data;
+            this.setState({educacionData: data});
+        }
+
     }
 
     render (){
         const {municipiosData, ocupacionData, educacionData} = this.state;
-        
         return(
             <div>
                 <h1 style={{alignSelf: 'center', marginLeft: '30%'}}>Mantenimiento de los campos de Paciente</h1>
@@ -58,15 +76,15 @@ class ConfigPacients extends Component{
                     <Grid container spacing = {2}>
                         <Grid item sm = {6}>
                             <EditTable title = {municipiosTitle} columns = {municipiosColumns} data = {municipiosData}
-                                handleChange = {handleMunicipiosChange} flag = {flagMuni} handleDataUpdate = {this.handleDataUpdate}/>
+                                handleChange = {handleMunicipiosChange} flag = {flagMuni} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
                             <EditTable title = {ocupacionTitle} columns = {ocupacionColumns} data = {ocupacionData} 
-                                handleChange = {handleChangeOcupacion} flag = {flagOcupacion} handleDataUpdate = {this.handleDataUpdate}/>
+                                handleChange = {handleChangeOcupacion} flag = {flagOcupacion} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
                             <EditTable title = {educacionTitle} columns = {educacionColumns} data = {educacionData} 
-                                handleChange = {handleChangeEducacion} flag = {flagEducacion} handleDataUpdate = {this.handleDataUpdate}/>
+                                handleChange = {handleChangeEducacion} flag = {flagEducacion} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                     </Grid>
                 </Grid>

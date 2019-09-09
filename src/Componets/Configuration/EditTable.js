@@ -20,55 +20,56 @@ const tableIcons = {
 class EditTable extends Component{
     constructor (props){
         super(props);
-        this.state = { };
+        this.state = {};
     }
 
-    // componentWillMount(){
-    //     this.props.handleDataUpdate();
-    // }
+    handleDataChange = async (id, newData, flagOperation, flag) =>{
+       await this.props.handleChange(id, newData, flagOperation);
+       this.props.handleTableUpdate(flag);
+    }
+
     render(){
-        var {title, columns, data, handleChange, flag, handleDataUpdate} = this.props;
+        var {title, columns, data, flag} = this.props;
         var flagOperation = '';
         return (
             <MaterialTable
                 title= {title}
                 icons = {tableIcons}
                 columns={columns}
-                data={data}
-                // onChangePage = {handleDataUpdate}
+                data = {data}
                 options = {{
                     paging: false,
                     search: false,
                     pageSize: 1
                 }}
+                
                 editable={{
 
                     onRowAdd: newData =>
-                    new Promise(resolve => {
+                    new Promise (resolve =>  {
                         setTimeout(() => {
                         resolve();
-                        flagOperation = 'add'
+                        flagOperation = 'add';
                         const id = 0; // no se va a usar, solo es para rellenar parametros
-                        // const datos = [...data];
-                        handleChange(id, newData, flagOperation); //Actualiza los datos en la base de datos
-                        // datos.push(newData); //pushea a datos el nuevo valor
+                        this.handleDataChange(id, newData, flagOperation, flag); //Actualiza los datos en la base de datos
                         }, 600);
                     }),
-
+                    
                     onRowUpdate: (newData, oldData) =>
                     new Promise(resolve => {
                         setTimeout(() => {
                         resolve();
                         const datos = [...data];
-                        var id = '';
+                        var id = 0;
+                        console.log('flag: ', flag);
                         switch (flag) {
-                            case 'Municipios':
+                            case 'municipio':
                                 id = datos[datos.indexOf(oldData)].id_municipio;
                                 break;
-                            case 'Ocupacion':
+                            case 'estadoocupacion':
                                 id = datos[datos.indexOf(oldData)].id_estado;
                                 break;
-                            case 'Educacion':
+                            case 'educacion':
                                 id = datos[datos.indexOf(oldData)].id_educacion;
                                 break;
                             case 'RecMuni':
@@ -84,12 +85,10 @@ class EditTable extends Component{
                                 id = datos[datos.indexOf(oldData)].id_estadoa;
                                 break;
                             default:
-                                id = 0;
+                                id = 'falla';
                         }
                         flagOperation = 'update';
-                        handleChange(id, newData, flagOperation);   //Actualiza los datos en la base de datos
-                        // datos[datos.indexOf(oldData)] = newData; //actualiza datos segun el index dado
-                        // handleDataUpdate();                 //Actualiza los datos del objeto localmente
+                        this.handleDataChange(id, newData, flagOperation, flag);
                         }, 600);
                     }),
 
@@ -98,15 +97,15 @@ class EditTable extends Component{
                         setTimeout(() => {
                         resolve();
                         const datos = [...data];
-                        var id = '';
+                        var id = 0;
                         switch (flag) {
-                            case 'Municipios':
+                            case 'municipio':
                                 id = datos[datos.indexOf(oldData)].id_municipio;
                                 break;
-                            case 'Ocupacion':
+                            case 'estadoocupacion':
                                 id = datos[datos.indexOf(oldData)].id_estado;
                                 break;
-                            case 'Educacion':
+                            case 'educacion':
                                 id = datos[datos.indexOf(oldData)].id_educacion;
                                 break;
                             case 'RecMuni':
@@ -126,9 +125,7 @@ class EditTable extends Component{
                         }
                         flagOperation = 'delete';
                         const newData = 'Lima'; //no se va a usar, solo es para rellenar parametros
-                        handleChange(id , newData, flagOperation);  //elimina el valor en la base de datos
-                        // datos.splice(datos[datos.indexOf(oldData)], 1); //elimina el valor en datos segun el index dado
-                        // handleDataUpdate(); //actualiza localmente los datos del objeto
+                        this.handleDataChange(id, newData, flagOperation, flag);
                         }, 600);
                     }),
                 }}
