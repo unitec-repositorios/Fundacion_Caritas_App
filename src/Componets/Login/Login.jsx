@@ -6,6 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import logo from '../Recursos/logo_login.png';
+
+const port = 'http://localhost:3001';
+
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
@@ -13,28 +16,37 @@ class FormDialog extends React.Component {
         open: true,
         email:'',
         pass:'',
-      
+        userData: ' '
       };
+  }
+
+  componentDidMount = async () => {
+    await fetch(port + '/api/usuarios').then(res => res.json()).then(data => {
+      this.setState({ userData: data })
+    })
   }
 
   login = () => {
     if(this.evaluate()){
       this.props.handelLogin(true)
+      this.props.handleUser(this.state.email, this.state.pass);
     }else{
       this.props.handelLogin(false);
     }
   }
 
   evaluate=()=>{
-      if((this.state.email==='Caritas'|| this.state.email==='caritas@honduras.com')&& this.state.pass==='caritas'){
-        return true;
-      }
-      if((this.state.email==='Honduras'|| this.state.email==='honduras@caritas.com,')&& this.state.pass==='caritas'){
-        return true;
-      }
-      return false;
-         
+    var found = this.state.userData.map((item) => {
+        if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) )
+          return true;
+        return false;
+      })
+     
+      found = found[0] || found[1]; //found recibe un arreglo de 2 posiciones del map, si ambos son false no encontro nada, con uno de los dos que sea verdadero significa que encontro match 
+      console.log("valor de evaluate: ", found);
+      return found;
   }
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value

@@ -33,11 +33,11 @@ class ConfigPacients extends Component{
     componentDidMount() {
         fetch(port + '/api/municipio').then(res => res.json()).then(data => {
             this.setState({ municipiosData: data })
-          })
+        })
         
         fetch(port + '/api/estadoocupacion').then(res => res.json()).then(data => {
             this.setState({ ocupacionData: data })  
-          })
+        })
 
         fetch(port + '/api/educacion').then(res => res.json()).then(data => {
           this.setState({ educacionData: data })
