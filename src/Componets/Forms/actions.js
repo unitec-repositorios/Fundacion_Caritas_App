@@ -138,6 +138,13 @@ function createCase(params) {
     var benefitted_amount = Number(params.vals.Ninos) + Number(params.vals.Ninas) + Number(params.vals.Otros);
     var id_terapeuta = params.vals.Terapeuta;
 
+    var patients;
+    axios.get(port+'/paciente').then(response=>{
+        patients=response.data;
+    }).catch(error =>{
+        console.log(error);
+    });
+
     const body = format.CASOS_POST_Y_PUT(
         case_number,
         benefitted_amount,
