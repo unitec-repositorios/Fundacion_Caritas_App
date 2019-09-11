@@ -3,6 +3,8 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Dialog from './dialog';
+import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
+const { Meta } = Card;
 export class main extends Component {
     constructor(props) {
         super(props)
@@ -42,7 +44,8 @@ export class main extends Component {
                }
              ],
              open:false,
-             Nombre:"Jose"
+             Nombre:"Jose",
+             loading: false,
         }
     }
 
@@ -63,7 +66,7 @@ export class main extends Component {
     render() {
       const {open,Nombre}=this.state;
       const vals={open,Nombre};
-      
+      const { loading } = this.state;
         return (
             <div>
               <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
@@ -73,12 +76,30 @@ export class main extends Component {
               // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
               transform: 'translateZ(0)'}} cols={4.01}  onClick={this.handleClickOpen}>
               {this.state.tileData.map(tile => (
-                <GridListTile key={tile.img}>
-                  <img src={tile.img} alt={tile.title} />
-                <GridListTileBar
-                    title={tile.title}
-                   
-                />
+           <GridListTile key={tile.img}>   
+        <Card
+        style={{ width: "100%"}}
+        actions={[
+          <Icon type="setting" key="setting" />,
+          <Icon type="edit" key="edit" />,
+          <Icon type="ellipsis" key="ellipsis" />,
+        ]}
+      >
+        <Skeleton loading={loading} avatar active >
+          <Meta
+            avatar={
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            }
+            title="Card title"
+            description="This is the description"
+          />
+        </Skeleton>
+      </Card>
+
+
+
+                
+              
                 </GridListTile>
         ))}
         </GridList>
@@ -110,4 +131,57 @@ export default main
  *   },
  * ];
  */
+/*import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
 
+const { Meta } = Card;
+
+class App extends React.Component {
+  state = {
+    loading: true,
+  };
+
+  onChange = checked => {
+    this.setState({ loading: !checked });
+  };
+
+  render() {
+    const { loading } = this.state;
+
+    return (
+      <div>
+        <Switch checked={!loading} onChange={this.onChange} />
+
+        <Card style={{ width: 300, marginTop: 16 }} loading={loading}>
+          <Meta
+            avatar={
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            }
+            title="Card title"
+            description="This is the description"
+          />
+        </Card>
+
+        <Card
+          style={{ width: 300, marginTop: 16 }}
+          actions={[
+            <Icon type="setting" key="setting" />,
+            <Icon type="edit" key="edit" />,
+            <Icon type="ellipsis" key="ellipsis" />,
+          ]}
+        >
+          <Skeleton loading={loading} avatar active>
+            <Meta
+              avatar={
+                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              }
+              title="Card title"
+              description="This is the description"
+            />
+          </Skeleton>
+        </Card>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, mountNode);*/

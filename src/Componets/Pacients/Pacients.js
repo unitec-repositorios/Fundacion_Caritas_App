@@ -12,7 +12,6 @@ import MaterialTable from 'material-table';
 import Dialog from '../dialog';
 import Mayre from 'mayre';
 
-const port = 'https://caritas-ui.firebaseapp.com';
 
 const tableIcons = {
   DetailPanel: ChevronRight,
@@ -63,13 +62,14 @@ class Pacients extends Component {
       isLoading: false
     }
   }
+
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch(port + '/api/paciente').then(res => res.json()).then(data => {
-      this.setState({ list: data })
-      this.setState({ isLoading: false });
-    })
-
+    // fetch(port + '/api/paciente').then(res => res.json()).then(data => {
+    //   this.setState({ list: data })
+    //   this.setState({ isLoading: false });
+    // })
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -81,8 +81,7 @@ class Pacients extends Component {
     this.setState({ selectedRow: [selectedRow] });
     this.handleClickOpen();
   }
-
-  render() {
+  render(){
     const { open, selectedRow } = this.state;
     const vals = { open, selectedRow };
     const pagination = {
@@ -108,7 +107,6 @@ class Pacients extends Component {
         searchPlaceholder: "Buscar"
       }
     }
-
     return (
       <Mayre
         of={
@@ -129,10 +127,14 @@ class Pacients extends Component {
       />
 
     );
-
-
-  }
 }
+ 
+  
+
+
+  
+  }
+
 
 export default Pacients;
 
