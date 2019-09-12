@@ -9,6 +9,7 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
+
 const tableIcons = {
     DetailPanel: ChevronRight,
     Filter: FilterList,
@@ -77,10 +78,9 @@ class casos_view extends Component{
         this.setState({isLoading:true});
         fetch(port+'/api/casos').then(res => res.json()).then(data => {
           this.setState({list: data})
-          this.setState({isLoading:false});
         })
-        
-    }
+        this.setState({isLoading:false});
+    } 
 
     /*componentDidUpdate(){
       fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))

@@ -23,7 +23,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      <Box p={3}>{children}</Box>
+    <Box p={3}>{children}</Box>
     </Typography>
   );
 }
@@ -44,6 +44,7 @@ function a11yProps(index) {
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    marginTop: '5%'
   },
 }); 
 

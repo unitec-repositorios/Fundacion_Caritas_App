@@ -69,7 +69,7 @@ class Index extends Component {
                             margin: '1em', position: 'absolute',
                             bottom: 0,
                             left: "90%"
-                        }} onClick={this.newStep}>
+                        }} onClick={this.newStep} disabled = {this.props.disabled}>
                             <AddIcon />
                         </Fab>
                     </div>

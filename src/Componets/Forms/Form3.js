@@ -9,8 +9,53 @@ import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import grey from '@material-ui/core/colors/grey';
-
+const port = 'http://localhost:3001/api';
 class Form extends Component {
+    constructor(){
+        super()
+        this.state={
+            departamentos:[],
+            estadosCiviles:[],
+            educacion:[]
+        }
+    }
+
+    componentDidMount() {
+        fetch(port+'/estadocivil')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ estadosCiviles: data });
+        });
+        fetch(port+'/educacion')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ educacion: data });
+        });
+        fetch(port+'/departamento')
+        .then(result => result.json())
+        .then(data => {
+            this.setState({ departamentos: data });
+        });
+    }
+
+    generateCivilState = () => {
+        return this.state.estadosCiviles.map((item)=>{
+            return <option value={item.id_estadoc}>{item.estado}</option>
+        })
+    }
+
+    generateEducationLevel = () => {
+        return this.state.educacion.map((item)=>{
+            return <option value={item.id_educacion}>{item.tipo}</option>
+        })
+    }
+
+    generateDepartamentos = () => {
+        return this.state.departamentos.map((item)=>{
+            return <option value={item.id_departamento}>{item.nombre}</option>
+        })
+    }
+
   continue = e => {
     e.preventDefault();
     this.props.newStep();
@@ -73,7 +118,12 @@ class Form extends Component {
                             <Grid container spacing={1} >
                                 <Grid item sm={6} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Departamento" fullWidth  defaultValue={vals.DepartamentoD} onChange={(e)=>handleChange(e,'DepartamentoD')}/>
+                                        <NativeSelect disableUnderline={true} id="departamento" fullWidth onChange={(e)=>handleChange(e,'DepartamentoD')} value={vals.DepartamentoD}>
+                                            <option value="" disabled>
+                                                Departamento
+                                            </option>
+                                            {this.generateDepartamentos()}
+                                        </NativeSelect>
                                     </Paper>
                                 </Grid>
                                 
@@ -94,23 +144,20 @@ class Form extends Component {
                                 <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="estado-civil" fullWidth onChange={(e)=>handleChange(e,'EstadoCivilD')} value={vals.EstadoCivilD}>
-                                            <option value=""> Estado Civil </option>
-                                            <option value="soltero"> Soltero </option>
-                                            <option value="casada"> Casado </option>
+                                            <option value="" disabled>
+                                                Estado civil
+                                            </option>
+                                            {this.generateCivilState()}
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4}>
                                     <Paper>
                                         <NativeSelect disableUnderline={true} id="educacion" fullWidth onChange={(e)=>handleChange(e,'EducacionD')} value={vals.EducacionD} >
-                                            <option value=""> Educacion </option>
-                                            <option value="analfabeto"> Analfabeto </option>
-                                            <option value="pb-incompleta"> Pre-Basica - Incompleta </option>
-                                            <option value="pb-completa"> Pre-Basica - Completa </option>
-                                            <option value="b-incompleta"> Basica - Incompleta </option>
-                                            <option value="b-completa"> Basica - Completa </option>
-                                            <option value="s-incompleta"> Superior - Incompleta </option>
-                                            <option value="s-completa"> Superior - Completa </option>
+                                            <option value="" disabled>
+                                                    Nivel de educacion
+                                            </option>    
+                                            {this.generateEducationLevel()}
                                         </NativeSelect>
                                     </Paper>
                                 </Grid>
