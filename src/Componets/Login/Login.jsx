@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import logo from '../Recursos/logo_login.png';
+import { message } from 'antd';
 class FormDialog extends React.Component {
   constructor(props){
       super(props);
@@ -15,14 +16,6 @@ class FormDialog extends React.Component {
         pass:'',
       
       };
-  }
-
-  login = () => {
-    if(this.evaluate()){
-      this.props.handelLogin(true)
-    }else{
-      this.props.handelLogin(false);
-    }
   }
 
   evaluate=()=>{
@@ -40,7 +33,16 @@ class FormDialog extends React.Component {
       [event.target.name]: event.target.value
     });
   };
- 
+  handelLogin = () => {
+    if (this.evaluate()) {
+      this.props.handelLogin(true)
+      message.success('Acceso Correcto! Bienvenido');
+      localStorage.setItem('token', 'vadsasf');
+    } else {
+      this.props.handelLogin(false);
+      message.error('Accesso denegado, Verifique su usario o contraseña');
+    }
+  }
   //"#ff8a80"
   render() {
     
@@ -76,7 +78,7 @@ class FormDialog extends React.Component {
             />
           </DialogContent>
           <DialogActions style={{background:"Red"}}>
-            <Button onClick={this.login} color="primary">
+            <Button onClick={this.handelLogin} color="primary">
               Login
             </Button>
           </DialogActions>

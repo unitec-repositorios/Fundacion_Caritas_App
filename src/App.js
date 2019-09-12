@@ -21,6 +21,7 @@ class App extends Component {
   handelLogin = (login) => {
     this.setState({ login })
   }
+ 
   logins() {
     if (this.state.token && !this.state.login)
       this.handelLogin(true);
@@ -44,7 +45,7 @@ class App extends Component {
         
           <Mayre
             of={<div style={{padding:"20px",marginTop:"30px"}}><Index values={this.state.value} /></div>}
-            or={<Login handelLogin={this.handelLogin} login={this.state.login} />}
+            or={<Login handelLogin={this.handelLogin} />}
             when={() => this.logins()}
           />
         
