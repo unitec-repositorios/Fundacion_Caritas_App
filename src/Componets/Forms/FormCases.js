@@ -14,7 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
 const port = 'http://localhost:3001/api';
 const url = 'https://caritas-ui.firebaseapp.com/';
-class Form2 extends Component {
+class FormCases extends Component {
     constructor(){
         super();
         this.state = {
@@ -253,4 +253,4 @@ class Form2 extends Component {
     }
 }
 
-export default Form2
+export default FormCases

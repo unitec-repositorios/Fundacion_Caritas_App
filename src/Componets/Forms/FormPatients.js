@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import grey from '@material-ui/core/colors/grey';
 const port = 'http://localhost:3001/api';
 
-class Form extends Component {
+class FormPatients extends Component {
     constructor(){
         super();
         this.state = {
@@ -284,4 +284,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default FormPatients;
