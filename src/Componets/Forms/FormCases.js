@@ -22,7 +22,8 @@ class FormCases extends Component {
             estadosAtencion:[],
             terapeutas:[],
             remisiones:[],
-            accesosJusticia:[]
+            accesosJusticia:[],
+            tratamientos:[]
         }
     }
 
@@ -47,6 +48,11 @@ class FormCases extends Component {
         .then(data => {
             this.setState({ terapeutas: data });
         });
+        fetch(port+'/tratamiento')
+        .then(result=>result.json())
+        .then(data => {
+            this.setState({tratamientos:data})
+        })
     }
 
     generateEstadosAtencion = () => {
@@ -70,6 +76,12 @@ class FormCases extends Component {
     generateAccesosJusticia = () => {
         return this.state.accesosJusticia.map((item)=>{
             return <option value={item.id_recursos}>{item.tipo}</option>
+        })
+    }
+
+    generateTratamientos = () => {
+        return this.state.tratamientos.map((item)=>{
+            return <option value={item.id_tratamiento}>{item.tratamiento}</option>
         })
     }
 
@@ -102,7 +114,10 @@ class FormCases extends Component {
                                 </Grid>
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Tratamiento que recibe" fullWidth defaultValue={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')} />
+                                        <NativeSelect disableUnderline={true} id="tratamiento" fullWidth value={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')}>
+                                            <option value="" disabled> Tratamiento que recibe </option>
+                                            {this.generateTratamientos()}
+                                        </NativeSelect>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4}>
