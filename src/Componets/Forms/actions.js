@@ -145,7 +145,6 @@ const createCase = (params, patient_id) => {
         condition_id,
         parseInt(params.vals.Tratamiento)
     );
-    console.log(body);
 
     var response = axios.post(port+'/caso/', body, {
         headers:{
