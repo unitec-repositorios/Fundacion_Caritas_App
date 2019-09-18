@@ -100,8 +100,12 @@ export const generarPdf = (props) =>{
 }
 
 const createCase = (params, patient_id) => {
-    var case_number = params.vals.NumeroEx;
-    var remission_id = params.vals.Remision;
+    const case_number = params.vals.NumeroEx;
+    const remission_id = params.vals.Remision;
+    const municipal_resource_id = params.vals.AccesoJusticia;
+    const mun = params.vals.Parroquia;
+    const state_id = params.vals.EstadoAtencion;
+    const id_terapeuta = params.vals.Terapeuta;
     
     let violence_type_id = 0;
     if (params.vals.VPsicologica)
@@ -124,23 +128,8 @@ const createCase = (params, patient_id) => {
         cause_id = 3;
     
     var location_violence_id = params.vals.VUrbana ? 1 : 2;   
-
-    var mun = params.vals.Parroquia;
-    let city_id = 0;
-    switch (mun) {
-        case 'sps':
-            city_id = 1;
-            break;
-        case 'lima':
-            city_id = 2;
-            break;
-        default:
-            city_id = 4;
-    }
-
-    var state_id = params.vals.EstadoAtencion;
+    
     var benefitted_amount = Number(params.vals.Ninos) + Number(params.vals.Ninas) + Number(params.vals.Otros);
-    var id_terapeuta = params.vals.Terapeuta;
 
     const body = format.CASOS_POST_Y_PUT(
         case_number,
@@ -149,15 +138,15 @@ const createCase = (params, patient_id) => {
         parseInt(state_id),
         parseInt(mun),
         parseInt(remission_id),
-        city_id,
+        parseInt(municipal_resource_id),
         cause_id,
         parseInt(id_terapeuta),
         patient_id,
         condition_id,
         parseInt(params.vals.Tratamiento)
     );
+    console.log(body);
 
-    let status = 0;
     var response = axios.post(port+'/caso/', body, {
         headers:{
             'content-type':'application/json',
@@ -168,5 +157,4 @@ const createCase = (params, patient_id) => {
         console.log(error);
     });
 
-    return status;
 }
