@@ -12,8 +12,9 @@ import ListItem from '@material-ui/core/ListItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
+const actions = require('../Forms/actions');
 const port = 'http://localhost:3001/api';
-const url = 'https://caritas-ui.firebaseapp.com/';
+
 class FormCases extends Component {
     constructor(){
         super();
@@ -76,20 +77,7 @@ class FormCases extends Component {
     continue = e => {
         e.preventDefault();
         this.props.newStep();
-        fetch(port, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            // body: JSON.stringify({
-            //     id: vals.numeroIdent,
-            //     nombre: vals.nombre, 
-            //     apellido: vals.primerA,
-            //     genero: vals.genero,
-            //     estado: vals.genero//req.params.oficio,req.params.ocupacion,req.params.edu,req.params.edi,req.params.tera];
-            // })
-        })
+        actions.savePatients(this.props);
       };
     back=e=>{
         e.preventDefault();

@@ -3,16 +3,18 @@ import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 const format = require('../../JSON_Formats');
 const port = 'http://localhost:3001/api';
-export const savePatients =(params)=> {
 
-    var id = params.vals.NumeroIdent
-    var name = params.vals.Nombre;
-    var current_year = new Date();
-    var birth_year = new Date(params.vals.Date);
-    var age = current_year.getFullYear() - birth_year.getFullYear();
-    var gender = params.vals.Genero;
-    var state = params.vals.EstadoCivil;
-    var profession = params.vals.Oficio;
+export const savePatients = (params) => {
+
+    const id = params.vals.NumeroIdent;
+    const name = params.vals.Nombre;
+    const last_name = params.vals.PrimerA + ' ' + params.vals.SegundoA;
+    const current_year = new Date();
+    const birth_year = new Date(params.vals.Date);
+    const age = current_year.getFullYear() - birth_year.getFullYear();
+    const gender = params.vals.Genero;
+    const state = params.vals.EstadoCivil;
+    const profession = params.vals.Oficio;
 
     let education_id = 0;
     switch (params.vals.Educacion) {
@@ -38,7 +40,7 @@ export const savePatients =(params)=> {
             education_id = 1;
     }
 
-    var mun = params.Parroquia;
+    const mun = params.Parroquia;
     let city_id = 0;
     switch (mun) {
         case 'sps':
@@ -51,36 +53,39 @@ export const savePatients =(params)=> {
             city_id = 4;
     }
 
-    var id_therapist = params.Terapeuta === 1 ? params.Terapeuta : (params.Terapeuta === 2 ? 2 : 3);
-    var occupancy_state = params.EstadoOcupacion === 'remunerado' ? 1 : 2;
+    const occupancy_state = params.EstadoOcupacion === 'remunerado' ? 1 : 2;
 
     try {
         var body = format.PACIENTES_POST_Y_PUT(
             id,
             name,
-            "apellido",
+            last_name,
             age,
             gender,
             profession,
             parseInt(state),
             occupancy_state,
             education_id,
-            city_id);
-
+            city_id
+        );
+       
         var response = axios.post(port+'/paciente/',body,{
             headers:{
                 'content-type':'application/json',
             }
         })
         .then(res => {
-            console.log(res);
+            const id_paciente = res.data[0].IDPACIENTE; 
+            createCase(params, id_paciente);
+        }).catch(error => {
+            console.log(error);
         });
-        console.log(response);
+
     } catch (e) {
         console.log(e);
     }
-
 }
+
 export const generarPdf = (props) =>{
     createCase(props);
     
@@ -93,11 +98,10 @@ export const generarPdf = (props) =>{
     });
     savePatients(props)
 }
-function createCase(params) {
+
+const createCase = (params, patient_id) => {
     var case_number = params.vals.NumeroEx;
-    var patient_id = params.vals.NumeroIdent;
     var remission_id = params.vals.Remision;
-    
     
     let violence_type_id = 0;
     if (params.vals.VPsicologica)
@@ -138,13 +142,6 @@ function createCase(params) {
     var benefitted_amount = Number(params.vals.Ninos) + Number(params.vals.Ninas) + Number(params.vals.Otros);
     var id_terapeuta = params.vals.Terapeuta;
 
-    var patients;
-    axios.get(port+'/paciente').then(response=>{
-        patients=response.data;
-    }).catch(error =>{
-        console.log(error);
-    });
-
     const body = format.CASOS_POST_Y_PUT(
         case_number,
         benefitted_amount,
@@ -155,17 +152,21 @@ function createCase(params) {
         city_id,
         cause_id,
         parseInt(id_terapeuta),
-        0,
+        patient_id,
         condition_id,
         parseInt(params.vals.Tratamiento)
-        );
+    );
 
-        var response = axios.post(port+'/caso',body,{
-            headers:{
-                'content-type':'application/json',
-            }
-        });
+    let status = 0;
+    var response = axios.post(port+'/caso/', body, {
+        headers:{
+            'content-type':'application/json',
+        }
+    }).then(res => {
+        console.log(res);
+    }).catch(error => {
+        console.log(error);
+    });
 
-        
-    
+    return status;
 }

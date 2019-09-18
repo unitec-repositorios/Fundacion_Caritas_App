@@ -12,7 +12,7 @@ import MaterialTable from 'material-table';
 import Dialog from '../dialog';
 import Mayre from 'mayre';
 
-const port = 'https://caritas-ui.firebaseapp.com';
+const port = 'http://localhost:3001';
 
 const tableIcons = {
   DetailPanel: ChevronRight,
