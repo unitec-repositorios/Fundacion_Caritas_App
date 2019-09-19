@@ -60,7 +60,7 @@ class EditTable extends Component{
                         setTimeout(() => {
                         resolve();
                         const datos = [...data];
-                        var id = 0;
+                        var id;
                         console.log('flag: ', flag);
                         switch (flag) {
                             case 'municipio':
@@ -83,6 +83,9 @@ class EditTable extends Component{
                                 break;
                             case 'eAtencion':
                                 id = datos[datos.indexOf(oldData)].id_estadoa;
+                                break;
+                            case 'usuarios':
+                                id = datos[datos.indexOf(oldData)].usuario;
                                 break;
                             default:
                                 id = 'falla';
@@ -119,6 +122,9 @@ class EditTable extends Component{
                                 break;
                             case 'eAtencion':
                                 id = datos[datos.indexOf(oldData)].id_estadoa;
+                                break;
+                            case 'usuarios':
+                                id = datos[datos.indexOf(oldData)].usuario;
                                 break;
                             default:
                                 id = 'falla';
