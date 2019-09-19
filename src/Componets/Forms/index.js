@@ -83,14 +83,12 @@ class Index extends Component {
                     </div>
                 );
             case 3:
-
                 return (
                     <div>
                         <FormCases newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals} />
                     </div>
                 );
             case 4:
-
                 return (
                     <div>
                         <FormDenounced prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals} />
