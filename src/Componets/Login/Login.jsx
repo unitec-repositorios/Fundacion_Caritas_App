@@ -22,16 +22,42 @@ class FormDialog extends React.Component {
     };
   }
 
+  componentDidMount = async () => {
+    await this.fetchData();
+  }
 
-  evaluate = () => {
-    if ((this.state.email === 'admin' || this.state.email === 'caritas@honduras.com') && this.state.pass === 'caritas') {
-      return true;
-    }
-    if ((this.state.email === 'caritas' || this.state.email === 'honduras@caritas.com,') && this.state.pass === 'caritas') {
-      return true;
-    }
-    return false;
+  fetchData = async ()  =>{
+    await Axios.get(port + '/api/usuarios').then(res => {
+      this.setState({ userData: res.data })
+    }).catch(error =>{
+      console.log(error);
+    });
+  }
 
+  login = () => {
+    if(this.evaluate()){
+      this.props.handelLogin(true)
+      this.props.handleUser(this.state.email, this.state.pass);
+      message.success('Acceso Correcto! Bienvenido');
+      localStorage.setItem('token', 'vadsasf');
+      this.setState({ isLoading: false });
+    }else{
+      message.error('Accesso denegado, Verifique su usario o contraseña');
+      this.setState({ isLoading: false });
+      this.props.handelLogin(false);
+    }
+  }
+
+  evaluate=()=>{
+    var found = this.state.userData.map((item) => {
+        if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) )
+          return true;
+        return false;
+      })
+     
+      found = found[0] || found[1]; //found recibe un arreglo de 2 posiciones del map, si ambos son false no encontro nada, con uno de los dos que sea verdadero significa que encontro match 
+      console.log("valor de evaluate: ", found);
+      return found;
   }
 
   handleChange = event => {
@@ -39,20 +65,7 @@ class FormDialog extends React.Component {
       [event.target.name]: event.target.value
     });
   };
-  handelLogin = () => {
-    this.setState({ isLoading: true });
-    if (this.evaluate()) {
-      this.props.handelLogin(true)
-      this.props.handleUser(this.state.email, this.state.pass);
-      message.success('Acceso Correcto! Bienvenido');
-      localStorage.setItem('token', 'vadsasf');
-      this.setState({ isLoading: false });
-    } else {
-      message.error('Accesso denegado, Verifique su usario o contraseña');
-      this.setState({ isLoading: false });
-      this.props.handelLogin(false);
-    }
-  }
+
   //"#ff8a80"
   render() {
 
@@ -88,7 +101,7 @@ class FormDialog extends React.Component {
           </DialogContent>
 
 
-            <Button onClick={this.handelLogin} loading={this.state.isLoading} type="default">
+            <Button onClick={this.login} loading={this.state.isLoading} type="default">
               Login
               </Button>
 
