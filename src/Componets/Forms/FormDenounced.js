@@ -80,22 +80,22 @@ class FormDenounced extends Component {
                             <Grid container  spacing={1} >
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Nombre" fullWidth defaultValue={vals.NombreD} onChange={(e)=>handleChange(e,'NombreD')} />
+                                        <Input disableUnderline={true} id="nombre_d" placeholder=" Nombre" fullWidth defaultValue={vals.NombreD} onChange={(e)=>handleChange(e,'NombreD')} />
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Primer apellido" fullWidth defaultValue={vals.PrimerAD} onChange={(e)=>handleChange(e,'PrimerAD')}/>
+                                        <Input disableUnderline={true} id="p_apellido_d" placeholder=" Primer apellido" fullWidth defaultValue={vals.PrimerAD} onChange={(e)=>handleChange(e,'PrimerAD')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Segundo apellido" fullWidth defaultValue={vals.SegundoAD} onChange={(e)=>handleChange(e,'SegundoAD')}/>
+                                        <Input disableUnderline={true} id="s_apellido_d" placeholder=" Segundo apellido" fullWidth defaultValue={vals.SegundoAD} onChange={(e)=>handleChange(e,'SegundoAD')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Numero de identidad" fullWidth defaultValue={vals.NumeroIdentD} onChange={(e)=>handleChange(e,'NumeroIdentD')}/>
+                                        <Input disableUnderline={true} id="num_identidad_d" placeholder=" Numero de identidad" fullWidth defaultValue={vals.NumeroIdentD} onChange={(e)=>handleChange(e,'NumeroIdentD')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -104,12 +104,12 @@ class FormDenounced extends Component {
                             <Grid container  spacing={1}>
                                 <Grid item sm={8} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Direccion" fullWidth defaultValue={vals.DireccionD} onChange={(e)=>handleChange(e,'DireccionD')}/>
+                                        <Input disableUnderline={true} id="direccion_d" placeholder=" Direccion" fullWidth defaultValue={vals.DireccionD} onChange={(e)=>handleChange(e,'DireccionD')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Localidad" fullWidth defaultValue={vals.LocalidadD} onChange={(e)=>handleChange(e,'LocalidadD')}/>
+                                        <Input disableUnderline={true} id="localidad_d" placeholder=" Localidad" fullWidth defaultValue={vals.LocalidadD} onChange={(e)=>handleChange(e,'LocalidadD')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -129,12 +129,12 @@ class FormDenounced extends Component {
                                 
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Telefono" fullWidth defaultValue={vals.TelefonoD} onChange={(e)=>handleChange(e,'TelefonoD')}/>
+                                        <Input disableUnderline={true} id="telefono_d" placeholder=" Telefono" fullWidth defaultValue={vals.TelefonoD} onChange={(e)=>handleChange(e,'TelefonoD')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <TextField type="date" fullWidth onChange={(e)=>handleChange(e,'DateD')} value={vals.DateD}/>
+                                        <TextField type="date" id="fecha_nacimiento_d" fullWidth onChange={(e)=>handleChange(e,'DateD')} value={vals.DateD}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -163,7 +163,7 @@ class FormDenounced extends Component {
                                 </Grid>
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.OficioD} onChange={(e)=>handleChange(e,'OficioD')} />
+                                        <Input disableUnderline={true} id="oficio_d" placeholder=" Oficio" fullWidth defaultValue={vals.OficioD} onChange={(e)=>handleChange(e,'OficioD')} />
                                     </Paper>
                                 </Grid>
                             </Grid>

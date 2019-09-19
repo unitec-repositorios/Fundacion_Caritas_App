@@ -109,7 +109,7 @@ class FormCases extends Component {
                             <Grid container  spacing={1}>
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Tipo de caso" fullWidth defaultValue={vals.TipoCaso} onChange={(e)=>handleChange(e,'TipoCaso')}/>
+                                        <Input disableUnderline={true} id="tipo_caso" placeholder=" Tipo de caso" fullWidth defaultValue={vals.TipoCaso} onChange={(e)=>handleChange(e,'TipoCaso')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4}>
@@ -122,7 +122,7 @@ class FormCases extends Component {
                                 </Grid>
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" No. Expediente" fullWidth defaultValue={vals.NumeroEx} onChange={(e)=>handleChange(e,'NumeroEx')}/>
+                                        <Input disableUnderline={true} id="no_expediente" placeholder=" No. Expediente" fullWidth defaultValue={vals.NumeroEx} onChange={(e)=>handleChange(e,'NumeroEx')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -147,7 +147,7 @@ class FormCases extends Component {
                                 </Grid>
                                 <Grid item sm={3}>
                                     <Paper>
-                                        <NativeSelect disableUnderline={true} placeholder=" Remision" fullWidth defaultValue={vals.Remision} onChange={(e)=>handleChange(e,'Remision')}>
+                                        <NativeSelect disableUnderline={true} id="remision" placeholder=" Remision" fullWidth defaultValue={vals.Remision} onChange={(e)=>handleChange(e,'Remision')}>
                                             <option value="" disabled>Remision</option>
                                             {this.generateRemisiones()}
                                         </NativeSelect>
