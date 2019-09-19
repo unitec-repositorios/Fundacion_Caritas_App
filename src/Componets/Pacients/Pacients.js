@@ -11,7 +11,9 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
 import Dialog from '../dialog';
 import Mayre from 'mayre';
+import Axios from 'axios';
 
+const port = 'http://localhost:3001/';
 
 const tableIcons = {
   DetailPanel: ChevronRight,
@@ -28,27 +30,39 @@ const tableIcons = {
 const columns = [
   {
     title: 'Identidad',
-    field: 'Id'
+    field: 'identidad'
   },
   {
     title: 'Nombre',
-    field: 'Nombre'
+    field: 'nombre'
+  },
+  {
+    title: 'Apellidos',
+    field: 'apellido'
   },
   {
     title: 'Edad',
-    field: 'Edad',
+    field: 'edad',
   },
   {
     title: 'Genero',
-    field: 'Genero'
-  },
-  {
-    title: 'Estado Civil',
-    field: 'Estado'
+    field: 'genero'
   },
   {
     title: 'Oficio',
-    field: 'Oficio'
+    field: 'oficio'
+  },
+  {
+    title: 'Estado Civil',
+    field: 'estado_civil'
+  },
+  {
+    title: 'Trabajo',
+    field: 'trabajo'
+  },
+  {
+    title: 'Educacion',
+    field: 'educacion'
   }
 ]
 
@@ -63,12 +77,19 @@ class Pacients extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    await this.fetchPacientsData();
+  }
+
+  fetchPacientsData = async () => {
     this.setState({ isLoading: true });
-    // fetch(port + '/api/paciente').then(res => res.json()).then(data => {
-    //   this.setState({ list: data })
-    //   this.setState({ isLoading: false });
-    // })
+    await Axios.get(port + 'api/paciente').then(res => {
+      this.setState({ list: res.data })
+    }).catch(error => {
+      console.log(error);
+    });
+    this.setState({ isLoading: false });
+
   }
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -81,7 +102,7 @@ class Pacients extends Component {
     this.setState({ selectedRow: [selectedRow] });
     this.handleClickOpen();
   }
-  render(){
+  render() {
     const { open, selectedRow } = this.state;
     const vals = { open, selectedRow };
     const pagination = {
@@ -127,13 +148,12 @@ class Pacients extends Component {
       />
 
     );
-}
- 
-  
-
-
-  
   }
+
+
+
+
+}
 
 
 export default Pacients;

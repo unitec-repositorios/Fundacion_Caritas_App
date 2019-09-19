@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Pacient from '../PacientList';
 import Main from '../main';
-import Form3 from './Form3';
-import Form2 from './Form2';
-import Form from './Form';
+import FormDenounced from './FormDenounced';
+import FormCases from './FormCases';
+import FormPatients from './FormPatients';
 import Document from '../document';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -77,24 +77,19 @@ class Index extends Component {
             case 2:
                 return (
                     <div style={{ alignContent: 'center' }}>
-
-                        <Form newStep={this.newStep} handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} />
+                        <FormPatients newStep={this.newStep} handleChange={this.handleChange} vals={vals} prevStep={this.prevStep} />
                     </div>
                 );
             case 3:
-
                 return (
                     <div>
-
-                        <Form2 newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals} />
+                        <FormCases newStep={this.newStep} handleChange={this.handleChange} handleCheckBox={this.handleCheckBox} prevStep={this.prevStep} vals={vals} />
                     </div>
                 );
             case 4:
-
                 return (
                     <div>
-
-                        <Form3 prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals} />
+                        <FormDenounced prevStep={this.prevStep} newStep={this.newStep} handleChange={this.handleChange} vals={vals} />
                     </div>
                 );
             case 5:
@@ -104,7 +99,6 @@ class Index extends Component {
                 );
             default:
                 return (<div>
-
                     <Main newStep={this.newStep} handleChange={this.handleChange} vals={vals} />
                     <Pacient />
                     <Fab color="primary" aria-label="Add" style={{ margin: '1em' }}>

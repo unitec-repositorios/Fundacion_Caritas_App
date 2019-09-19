@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import grey from '@material-ui/core/colors/grey';
 const port = 'http://localhost:3001/api';
 
-class Form extends Component {
+class FormPatients extends Component {
     constructor(){
         super();
         this.state = {
@@ -111,22 +111,22 @@ class Form extends Component {
                             <Grid container  spacing={1} >
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Nombre" fullWidth defaultValue={vals.Nombre} onChange={(e)=>handleChange(e,'Nombre')} />
+                                        <Input disableUnderline={true} id="nom_paciente" placeholder=" Nombre" fullWidth defaultValue={vals.Nombre} onChange={(e)=>handleChange(e,'Nombre')} />
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Primer apellido" fullWidth defaultValue={vals.PrimerA} onChange={(e)=>handleChange(e,'PrimerA')}/>
+                                        <Input disableUnderline={true} id="p_apellido" placeholder=" Primer apellido" fullWidth defaultValue={vals.PrimerA} onChange={(e)=>handleChange(e,'PrimerA')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Segundo apellido" fullWidth defaultValue={vals.SegundoA} onChange={(e)=>handleChange(e,'SegundoA')}/>
+                                        <Input disableUnderline={true} id="s_apellido" placeholder=" Segundo apellido" fullWidth defaultValue={vals.SegundoA} onChange={(e)=>handleChange(e,'SegundoA')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Numero de identidad" fullWidth defaultValue={vals.NumeroIdent} onChange={(e)=>handleChange(e,'NumeroIdent')}/>
+                                        <Input disableUnderline={true} id="num_identidad" placeholder=" Numero de identidad" fullWidth defaultValue={vals.NumeroIdent} onChange={(e)=>handleChange(e,'NumeroIdent')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -135,12 +135,12 @@ class Form extends Component {
                             <Grid container  spacing={1}>
                                 <Grid item sm={8} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Direccion" fullWidth defaultValue={vals.Direccion} onChange={(e)=>handleChange(e,'Direccion')}/>
+                                        <Input disableUnderline={true} id="direccion" placeholder=" Direccion" fullWidth defaultValue={vals.Direccion} onChange={(e)=>handleChange(e,'Direccion')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Localidad" fullWidth defaultValue={vals.Localidad} onChange={(e)=>handleChange(e,'Localidad')}/>
+                                        <Input disableUnderline={true} id="localidad" placeholder=" Localidad" fullWidth defaultValue={vals.Localidad} onChange={(e)=>handleChange(e,'Localidad')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -160,12 +160,12 @@ class Form extends Component {
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Telefono" fullWidth defaultValue={vals.Telefono} onChange={(e)=>handleChange(e,'Telefono')}/>
+                                        <Input disableUnderline={true} id="telefono" placeholder=" Telefono" fullWidth defaultValue={vals.Telefono} onChange={(e)=>handleChange(e,'Telefono')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3} >
                                     <Paper>
-                                        <TextField type="date" fullWidth onChange={(e)=>handleChange(e,'Date')} value={vals.Date}/>
+                                        <TextField type="date" id="fecha_nacimiento" fullWidth onChange={(e)=>handleChange(e,'Date')} value={vals.Date}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -195,7 +195,7 @@ class Form extends Component {
                              
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Oficio" fullWidth defaultValue={vals.Oficio} onChange={(e)=>handleChange(e,'Oficio')} />
+                                        <Input disableUnderline={true} id="oficio" placeholder=" Oficio" fullWidth defaultValue={vals.Oficio} onChange={(e)=>handleChange(e,'Oficio')} />
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -284,4 +284,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default FormPatients;

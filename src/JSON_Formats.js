@@ -35,10 +35,10 @@ module.exports = {
         return ({RECURSO: RECURSOSMUNICIPALES});
     },
 
-    PACIENTES_POST_Y_PUT : function(IDENTIDAD,NOMBRE,APELLIDO,ED,GEN,OFI,ESTADOC,REMUNERACION,EDUCACION,DEPART){
+    PACIENTES_POST_Y_PUT : function(IDENTIDAD,NOMBRE,APELLIDO,ED,GEN,OFI,ESTADOC,REMUNERACION,EDUACION,DEPART){
         return ({IDEN: IDENTIDAD,NOMB: NOMBRE,APELL: APELLIDO,
                                EDAD: ED,GENERO: GEN,OFICIO: OFI,ESTADOCIVIL: ESTADOC,
-                               REMUNERA: REMUNERACION,EDUACION: EDUCACION,DEP: DEPART});
+                               REMUNERA: REMUNERACION,EDUACION: EDUACION,DEP: DEPART});
                             },
                             
     MUNICIPIO_POST_Y_PUT : function(MUNICIPALIDAD){
@@ -77,11 +77,6 @@ module.exports = {
         
     DEPARTAMENTO_POST_Y_PUT : function(DEPAR){
         return ({DEP: DEPAR});
-    },
-
-    PACIENTES_ID_POST_GET : function(response){
-        const id = response.data[response.data.length-1]
-        return id[0].IDPACIENTE;
     }
 };
     
