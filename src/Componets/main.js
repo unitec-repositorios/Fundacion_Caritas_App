@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Dialog from './dialog';
-import { Skeleton, Switch, Card, Icon, Avatar } from 'antd';
+import { Skeleton, Card, Icon, Avatar } from 'antd';
 const { Meta } = Card;
 export class main extends Component {
     constructor(props) {

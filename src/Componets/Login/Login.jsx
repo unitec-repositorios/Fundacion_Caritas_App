@@ -1,49 +1,34 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Button } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import logo from '../Recursos/logo_login.png';
 import { message } from 'antd';
-import Axios from 'axios';
 
-const port = 'http://localhost:3001';
 class FormDialog extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        open: true,
-        email:'',
-        pass:'',
-        userData: ' '
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+      email: '',
+      pass: '',
+      userData: ' ',
+      isLoading: false,
+    };
   }
 
 
-  componentDidMount = async () => {
-    await this.fetchData();
-  }
+  evaluate = () => {
+    if ((this.state.email === 'admin' || this.state.email === 'caritas@honduras.com') && this.state.pass === 'caritas') {
+      return true;
+    }
+    if ((this.state.email === 'caritas' || this.state.email === 'honduras@caritas.com,') && this.state.pass === 'caritas') {
+      return true;
+    }
+    return false;
 
-  fetchData = async ()  =>{
-    await Axios.get(port + '/api/usuarios').then(res => {
-      this.setState({ userData: res.data })
-    }).catch(error =>{
-      console.log(error);
-    });
-  }
-
-  evaluate=()=>{
-    var found = this.state.userData.map((item) => {
-        if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) )
-          return true;
-        return false;
-      })
-     
-      found = found[0] || found[1]; //found recibe un arreglo de 2 posiciones del map, si ambos son false no encontro nada, con uno de los dos que sea verdadero significa que encontro match 
-      console.log("valor de evaluate: ", found);
-      return found;
   }
 
   handleChange = event => {
@@ -52,25 +37,28 @@ class FormDialog extends React.Component {
     });
   };
   handelLogin = () => {
+    this.setState({ isLoading: true });
     if (this.evaluate()) {
       this.props.handelLogin(true)
       this.props.handleUser(this.state.email, this.state.pass);
       message.success('Acceso Correcto! Bienvenido');
       localStorage.setItem('token', 'vadsasf');
+      this.setState({ isLoading: false });
     } else {
-      this.props.handelLogin(false);
       message.error('Accesso denegado, Verifique su usario o contraseña');
+      this.setState({ isLoading: false });
+      this.props.handelLogin(false);
     }
   }
   //"#ff8a80"
   render() {
-    
+
     return (
       <div >
-      <Dialog open={true} style={{background:"#F5F5F5"}}>    
-          <DialogContent style={{background:"#e57373"}}>
+        <Dialog open style={{ background: "#F5F5F5" }}>
+          <DialogContent style={{ background: "#e57373" }}>
             <DialogContentText>
-            <img src={logo} width="100%" alt="logo" />
+              <img src={logo} width="100%" alt="logo" />
             </DialogContentText>
             <TextField
               autoFocus
@@ -83,7 +71,7 @@ class FormDialog extends React.Component {
               value={this.state.email}
               fullWidth
             />
-             <TextField
+            <TextField
               autoFocus
               margin="dense"
               id="pass"
@@ -96,13 +84,13 @@ class FormDialog extends React.Component {
             />
           </DialogContent>
 
-          <DialogActions style={{background:"White", justifyContent:"Center"}}>
-            <Button onClick={this.handelLogin} color="primary">
+
+            <Button onClick={this.handelLogin} loading={this.state.isLoading} type="default">
               Login
-            </Button>
-          </DialogActions>
+              </Button>
+
         </Dialog>
-        
+
       </div>
     );
   }
