@@ -9,6 +9,7 @@ import Clear from '@material-ui/icons/Clear';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
+import Axios from 'axios';
 
 const tableIcons = {
     DetailPanel: ChevronRight,
@@ -26,62 +27,97 @@ const tableIcons = {
 
 const columns=[
   {
-    title: 'Id Caso',
-    field: 'IDCaso'
+    title: 'ID Caso',
+    field: 'id_caso',
+    cellStyle: {
+      width: '100%',
+      maxWidth: '100%',
+      padding: 'none'
+    },
   },
   {
-    title: 'Identidad',
-    field: 'ID'
-  },
-  {
-    title: 'Tipo Violencia',
-    field: 'Violencia'
-  },
-  {
-    title: 'Juez',
-    field: 'Juez',
+    title: 'Paciente',
+    field: 'nombre',
+    cellStyle: {
+      width: '100%',
+      maxWidth: '100%',
+      padding: 'none'
+    }
+    // headerStyle: {
+    // //   width: 700,
+    // //   maxWidth: 700,
+    // //   padding: 'none'
+    // // }
   },
   {
     title: 'Condición',
-    field: 'Condicion'
+    field: 'condicion'
   },
   {
-    title:'Causa',
-    field: 'Causa'
+    title:'Terapeuta',
+    field: 'terapeuta'
   },
   {
-    title: 'Ubicación',
-    field: 'Ubicacion'
+    title: 'Causa',
+    field: 'causa'
   },
   {
-    title: 'Tipo',
-    field: 'Tipo'
+    title: 'Recursos Municipales',
+    field: 'recursos'
   },
   {
-    title: 'Estado Atención',
-    field: 'Estado'
+    title: 'Juez',
+    field: 'juez'
+  },
+  {
+    title: 'Municipio',
+    field: 'municipio'
+  },
+  {
+    title: 'Estado Atencion',
+    field: 'estado_atencion'
+  },
+  {
+    title: 'Ubicacion Violencia',
+    field: 'ubicacion_violencia'
+  },
+  {
+    title: 'Tratamiento',
+    field: 'tratamiento'
+  },
+  {
+    
   }
 ]
 
-const port = 'https://caritas-ui.firebaseapp.com';
+const options = {
+  resizableColumns: 'true'
+}
+
+const port = 'http://localhost:3001/';
 
 class casos_view extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            list: [],
-            isLoading:false
-        }
+  constructor(props){
+    super(props);
+    this.state = {
+      list: [],
+      isLoading:false
     }
+  }
 
-    componentDidMount (){
-        this.setState({isLoading:true});
-        fetch(port+'/api/casos').then(res => res.json()).then(data => {
-          this.setState({list: data})
-        })
-        this.setState({isLoading:false});
-    } 
+  componentDidMount = async () => {
+    await this.fetchCasesData();
+  } 
 
+  fetchCasesData = async () => {
+    this.setState({ isLoading: true });
+    await Axios.get(port + 'api/caso').then(res => {
+      this.setState({ list: res.data })
+    }).catch(error =>{
+      console.log(error);
+    });
+    this.setState({ isLoading: false });
+  }
     /*componentDidUpdate(){
       fetch(port+'/api/casos').then(res => res.json()).then(data => this.setState({list: data}))
     }*/
@@ -106,54 +142,52 @@ class casos_view extends Component{
     // }
 
     render() {
-        // const {open,selectedRow}=this.state;
-        // const vals={open,selectedRow};
-        // if(!open){
-          return (
-          <div style={{maxWidth:'100%'}}>
-       
-            <MaterialTable
-            icons={tableIcons}
-           
-            title = "Casos"
-            columns = {columns}
-            data={this.state.list}
-            isLoading = {this.state.isLoading}
-            // onRowClick={((evt, selectedRow) => this.datas(selectedRow))}
-            localization = {{
-              pagination: {
-                labelDisplayedRows: "{from}-{to} de {count}",
-                labelRowsSelect: "filas",
-                labelRowsPerPage: "Filas por pagina:",
-                firstAriaLabel: "Primera pagina",
-                firstTooltip: "Primera pagina",
-                previousAriaLabel: "Pagina anterior",
-                previousTooltip: "Pagina anterior",
-                nextAriaLabel: "Pagina siguiente",
-                nextTooltip: "Pagina siguiente",
-                lastAriaLabel: "Ultima pagina",
-                lastTooltip: "Ultima pagina"
-              },
-              body: {
-                emptyDataSourceMessage: 'No se encontraron registros',
-                filterTooltip: 'Filtrar'
-              },
-              toolbar: {
-                searchTooltip: "Buscar",
-                searchPlaceholder: "Buscar"
-              }
-            }}
-            />
-              
-          </div>
-        );  
-        // }else{
-        //   return (
-        //     <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
-        //   );  
-        // }
-        
-    }
+      return (
+        <div style={{maxWidth:'100%'}}>
+      
+          <MaterialTable
+          icons={tableIcons}
+          
+          title = "Casos"
+          columns = {columns}
+          data={this.state.list}
+          isLoading = {this.state.isLoading}
+          options = {options}
+          
+          localization = {{
+            pagination: {
+              labelDisplayedRows: "{from}-{to} de {count}",
+              labelRowsSelect: "filas",
+              labelRowsPerPage: "Filas por pagina:",
+              firstAriaLabel: "Primera pagina",
+              firstTooltip: "Primera pagina",
+              previousAriaLabel: "Pagina anterior",
+              previousTooltip: "Pagina anterior",
+              nextAriaLabel: "Pagina siguiente",
+              nextTooltip: "Pagina siguiente",
+              lastAriaLabel: "Ultima pagina",
+              lastTooltip: "Ultima pagina"
+            },
+            body: {
+              emptyDataSourceMessage: 'No se encontraron registros',
+              filterTooltip: 'Filtrar'
+            },
+            toolbar: {
+              searchTooltip: "Buscar",
+              searchPlaceholder: "Buscar"
+            }
+          }}
+          />
+            
+        </div>
+      );  
+      // }else{
+      //   return (
+      //     <Dialog handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} vals={vals}/>
+      //   );  
+      // }
+      
+  }
 }
 
 export default casos_view;
