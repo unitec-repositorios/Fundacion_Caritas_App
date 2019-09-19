@@ -12,8 +12,9 @@ import ListItem from '@material-ui/core/ListItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import grey from '@material-ui/core/colors/grey';
+const actions = require('../Forms/actions');
 const port = 'http://localhost:3001/api';
-const url = 'https://caritas-ui.firebaseapp.com/';
+
 class FormCases extends Component {
     constructor(){
         super();
@@ -21,7 +22,8 @@ class FormCases extends Component {
             estadosAtencion:[],
             terapeutas:[],
             remisiones:[],
-            accesosJusticia:[]
+            accesosJusticia:[],
+            tratamientos:[]
         }
     }
 
@@ -46,6 +48,11 @@ class FormCases extends Component {
         .then(data => {
             this.setState({ terapeutas: data });
         });
+        fetch(port+'/tratamiento')
+        .then(result=>result.json())
+        .then(data => {
+            this.setState({tratamientos:data})
+        })
     }
 
     generateEstadosAtencion = () => {
@@ -72,24 +79,17 @@ class FormCases extends Component {
         })
     }
 
+    generateTratamientos = () => {
+        return this.state.tratamientos.map((item)=>{
+            return <option value={item.id_tratamiento}>{item.tratamiento}</option>
+        })
+    }
+
     
     continue = e => {
         e.preventDefault();
         this.props.newStep();
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            // body: JSON.stringify({
-            //     id: vals.numeroIdent,
-            //     nombre: vals.nombre, 
-            //     apellido: vals.primerA,
-            //     genero: vals.genero,
-            //     estado: vals.genero//req.params.oficio,req.params.ocupacion,req.params.edu,req.params.edi,req.params.tera];
-            // })
-        })
+        actions.savePatients(this.props);
       };
     back=e=>{
         e.preventDefault();
@@ -114,7 +114,10 @@ class FormCases extends Component {
                                 </Grid>
                                 <Grid item sm={4}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Tratamiento que recibe" fullWidth defaultValue={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')} />
+                                        <NativeSelect disableUnderline={true} id="tratamiento" fullWidth value={vals.Tratamiento} onChange={(e)=>handleChange(e,'Tratamiento')}>
+                                            <option value="" disabled> Tratamiento que recibe </option>
+                                            {this.generateTratamientos()}
+                                        </NativeSelect>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={4}>

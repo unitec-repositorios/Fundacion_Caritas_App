@@ -89,7 +89,6 @@ const columns=[
     
   }
 ]
-
 const options = {
   resizableColumns: 'true'
 }
