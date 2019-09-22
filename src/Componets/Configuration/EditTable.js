@@ -24,8 +24,9 @@ class EditTable extends Component{
     }
 
     handleDataChange = async (id, newData, flagOperation, flag) =>{
-       await this.props.handleChange(id, newData, flagOperation);
-       this.props.handleTableUpdate(flag);
+        console.log("Primer paso");
+        await this.props.handleChange(id, newData, flagOperation);
+        this.props.handleTableUpdate(flag);
     }
 
     render(){
@@ -51,6 +52,7 @@ class EditTable extends Component{
                         resolve();
                         flagOperation = 'add';
                         const id = 0; // no se va a usar, solo es para rellenar parametros
+                        console.log("Entro a add: ", newData);
                         this.handleDataChange(id, newData, flagOperation, flag); //Actualiza los datos en la base de datos
                         }, 600);
                     }),
@@ -60,7 +62,7 @@ class EditTable extends Component{
                         setTimeout(() => {
                         resolve();
                         const datos = [...data];
-                        var id = 0;
+                        var id;
                         console.log('flag: ', flag);
                         switch (flag) {
                             case 'municipio':
@@ -83,6 +85,9 @@ class EditTable extends Component{
                                 break;
                             case 'eAtencion':
                                 id = datos[datos.indexOf(oldData)].id_estadoa;
+                                break;
+                            case 'usuarios':
+                                id = datos[datos.indexOf(oldData)].usuario;
                                 break;
                             default:
                                 id = 'falla';
@@ -119,6 +124,9 @@ class EditTable extends Component{
                                 break;
                             case 'eAtencion':
                                 id = datos[datos.indexOf(oldData)].id_estadoa;
+                                break;
+                            case 'usuarios':
+                                id = datos[datos.indexOf(oldData)].usuario;
                                 break;
                             default:
                                 id = 'falla';

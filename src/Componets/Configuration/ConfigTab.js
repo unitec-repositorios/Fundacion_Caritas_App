@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ConfigPacients from './ConfigPacients';
 import ConfigCases from "./ConfigCases";
+import ConfigUsuarios from "./ConfigUsuarios";
 import { createMuiTheme } from '@material-ui/core/styles';
 
 function TabPanel(props) {
@@ -81,6 +82,7 @@ class ConfigTab extends Component{
           >
             <Tab label="Pacientes" {...a11yProps(0)} />
             <Tab label="Casos" {...a11yProps(1)} />
+            <Tab label="Usuarios" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -93,6 +95,9 @@ class ConfigTab extends Component{
           </TabPanel>
           <TabPanel value={this.state.value} index={1} dir={theme.direction}>
             <ConfigCases/>
+          </TabPanel>
+          <TabPanel value={this.state.value} index={2} dir={theme.direction}>
+            <ConfigUsuarios/>
           </TabPanel>
         </SwipeableViews>
       </div>
