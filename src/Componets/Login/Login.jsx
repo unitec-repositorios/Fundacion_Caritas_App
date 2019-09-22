@@ -17,7 +17,7 @@ class FormDialog extends React.Component {
         open: true,
         email:'',
         pass:'',
-        userData: ' '
+        userData: []
       };
   }
 
@@ -43,6 +43,7 @@ class FormDialog extends React.Component {
   }
 
   evaluate=()=>{
+    try {
     var found = this.state.userData.map((item) => {
         if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) )
           return true;
@@ -52,6 +53,9 @@ class FormDialog extends React.Component {
       found = found[0] || found[1]; //found recibe un arreglo de 2 posiciones del map, si ambos son false no encontro nada, con uno de los dos que sea verdadero significa que encontro match 
       console.log("valor de evaluate: ", found);
       return found;
+    } catch (e){
+      console.log("Login Error: ", e);
+    }
   }
 
   handleChange = event => {

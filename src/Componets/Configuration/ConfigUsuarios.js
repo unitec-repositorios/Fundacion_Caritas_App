@@ -38,15 +38,11 @@ class ConfigUsuarios extends Component{
         });
     }
 
-    generateRol = () => {
+    generateRol = (actualRowValue) => {
         return this.state.rolesData.map((item)=>{
-            return <option value={item.id_rol}>{item.rol}</option>
+            if(item.rol != actualRowValue)
+                return <option value={item.rol}>{item.rol}</option>
         })
-    }
-
-    handleValueChange = (e) => {
-        rolValue = e.target.value;
-        console.log("rol Value: ", rolValue);
     }
 
     handleTableUpdate = async (flag) =>{
@@ -74,8 +70,9 @@ class ConfigUsuarios extends Component{
                                         { title: 'Contraseña', field: 'contraseña' }, 
                                         {title: 'Rol', field: 'rol', 
                                         editComponent: props =>
-                                        <NativeSelect disableUnderline={true} id="rol" onChange = {(e) => this.handleValueChange(e)}>
-                                            {this.generateRol()}
+                                        <NativeSelect disableUnderline={true} id="rol" value ={props.value} onChange = {(e) => props.onChange(e.target.value)}>
+                                            <option value = {props.value}>{props.value}</option>
+                                            {this.generateRol(props.value)}
                                         </NativeSelect>
                                         } 
                                     ]
