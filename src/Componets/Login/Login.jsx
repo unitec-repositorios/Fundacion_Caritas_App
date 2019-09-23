@@ -9,6 +9,7 @@ import logo from '../Recursos/logo_login.png';
 import Axios from 'axios';
 
 const port = 'http://localhost:3001';
+var loggedUser;
 
 class FormDialog extends React.Component {
   constructor(props){
@@ -17,7 +18,7 @@ class FormDialog extends React.Component {
         open: true,
         email:'',
         pass:'',
-        userData: []
+        userData: [],
       };
   }
 
@@ -31,12 +32,19 @@ class FormDialog extends React.Component {
     }).catch(error =>{
       console.log(error);
     });
+
+    await Axios.get(port + '/api/roles').then(res => {
+      this.setState({ rolesData: res.data })
+    
+    }).catch(error =>{
+        console.log(error);
+    });
   }
 
   login = () => {
     if(this.evaluate()){
       this.props.handelLogin(true)
-      this.props.handleUser(this.state.email, this.state.pass);
+      this.props.handleUser(loggedUser);
     }else{
       this.props.handelLogin(false);
     }
@@ -45,8 +53,10 @@ class FormDialog extends React.Component {
   evaluate=()=>{
     try {
     var found = this.state.userData.map((item) => {
-        if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) )
+        if ( (this.state.email === item.usuario) && (this.state.pass === item.contraseña) ){
+          loggedUser = item;
           return true;
+        }
         return false;
       })
      

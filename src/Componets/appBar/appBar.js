@@ -9,9 +9,9 @@ import Button from '@material-ui/core/Button';
 
 class appBar extends Component {
   render() {
-    const {values, user} =this.props;
-    console.log("usuario appbar: ", user);
-    if(user === 'admin'){
+    const {values, rol} =this.props;
+    console.log("rol appbar: ", rol);
+    if(rol === 'Administrador'){
       return (
         <div>
         <AppBar position="static" color="secondary" style={{  position: "fixed", top: 0,  width: "100%"}}>
