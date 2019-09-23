@@ -7,9 +7,9 @@ import ConfigTab from './Configuration/ConfigTab'
 export default class index extends Component {
 
     render() {
-        const {values, user}=this.props;
-        console.log("usuario index: ", user);
-        if(user==='admin'){
+        const {values, rol}=this.props;
+        console.log("rol index: ", rol);
+        if(rol === 'Administrador'){
             switch (values){
                 case 0: return(<Forms disabled = {false}/>)
                 case 1: return(<Stats/>)

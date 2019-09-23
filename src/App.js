@@ -15,6 +15,7 @@ class App extends Component {
       token: '',
       user: '',
       password: '',
+      rol: ''
     }
   }
 
@@ -26,10 +27,11 @@ class App extends Component {
     this.setState({ login })
   }
 
-  handleUser = (user, password) => {
+  handleUser = (loggedUser) => {
     this.setState({
-      user: user,
-      password: password
+      user: loggedUser.usuario,
+      password: loggedUser.contraseña,
+      rol: loggedUser.rol
     })
   }
 
@@ -52,12 +54,12 @@ class App extends Component {
       <div>
         <Mayre
           of={<Appbar handleChangeValue={this.handleChangeValue} values={this.state.value} logout={this.logout} 
-            login={this.state.login} user = {this.state.user} handleUser = {this.handleUser} />}
+            login={this.state.login} rol = {this.state.rol} handleUser = {this.handleUser} />}
           when={() => this.logins()}
         />
         
           <Mayre
-            of={<div style={{padding:"20px",marginTop:"30px"}}><Index values={this.state.value} user = {this.state.user} /></div>}
+            of={<div style={{padding:"20px",marginTop:"30px"}}><Index values={this.state.value} rol = {this.state.rol} /></div>}
             or={<Login handelLogin={this.handelLogin} login={this.state.login} handleUser = {this.handleUser} />}
             when={() => this.logins()}
           />
