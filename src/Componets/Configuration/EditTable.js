@@ -24,7 +24,6 @@ class EditTable extends Component{
     }
 
     handleDataChange = async (id, newData, flagOperation, flag) =>{
-        console.log("Primer paso");
         await this.props.handleChange(id, newData, flagOperation);
         this.props.handleTableUpdate(flag);
     }
@@ -52,7 +51,6 @@ class EditTable extends Component{
                         resolve();
                         flagOperation = 'add';
                         const id = 0; // no se va a usar, solo es para rellenar parametros
-                        console.log("Entro a add: ", newData);
                         this.handleDataChange(id, newData, flagOperation, flag); //Actualiza los datos en la base de datos
                         }, 600);
                     }),
@@ -63,7 +61,6 @@ class EditTable extends Component{
                         resolve();
                         const datos = [...data];
                         var id;
-                        console.log('flag: ', flag);
                         switch (flag) {
                             case 'municipio':
                                 id = datos[datos.indexOf(oldData)].id_municipio;

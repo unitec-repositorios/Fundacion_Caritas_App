@@ -48,11 +48,9 @@ class ConfigUsuarios extends Component{
     handleTableUpdate = async (flag) =>{
         let response  = '';
         let data = '';
-        console.log("Tercer paso");
         response = await Axios.get(port + '/api/usuarios');
         data = await response.data;
-        console.log("data: ", data);
-        this.setState({municipiosData: data});
+        this.setState({usersData: data});
     }
 
     render (){
