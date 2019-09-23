@@ -245,17 +245,17 @@ class FormPatients extends Component {
                                 </Grid>
                                 <Grid item sm={3}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Cant. niños" fullWidth defaultValue={vals.Ninos} onChange={(e)=>handleChange(e,'Ninos')}/>
+                                        <Input disableUnderline={true} id="CantNiños" placeholder=" Cant. niños" fullWidth defaultValue={vals.Ninos} onChange={(e)=>handleChange(e,'Ninos')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Cant. niñas" fullWidth defaultValue={vals.Ninas} onChange={(e)=>handleChange(e,'Ninas')}/>
+                                        <Input disableUnderline={true} id="CantNiñas"  placeholder=" Cant. niñas" fullWidth defaultValue={vals.Ninas} onChange={(e)=>handleChange(e,'Ninas')}/>
                                     </Paper>
                                 </Grid>
                                 <Grid item sm={3}>
                                     <Paper>
-                                        <Input disableUnderline={true} placeholder=" Cant. otros" fullWidth defaultValue={vals.Otros} onChange={(e)=>handleChange(e,'Otros')}/>
+                                        <Input disableUnderline={true} id="CantOtros" placeholder=" Cant. otros" fullWidth defaultValue={vals.Otros} onChange={(e)=>handleChange(e,'Otros')}/>
                                     </Paper>
                                 </Grid>
                             </Grid>
@@ -270,7 +270,7 @@ class FormPatients extends Component {
                                 </Grid>
                                 <Grid item sm={6} >
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
+                                    <Button fullWidth id="NextBtn" color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>

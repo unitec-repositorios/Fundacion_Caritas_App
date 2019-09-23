@@ -80,9 +80,9 @@ class ConfigTab extends Component{
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab label="Pacientes" {...a11yProps(0)} />
-            <Tab label="Casos" {...a11yProps(1)} />
-            <Tab label="Usuarios" {...a11yProps(2)} />
+            <Tab id="TabPacientes" label="Pacientes" {...a11yProps(0)} />
+            <Tab id="TabCasos" label="Casos" {...a11yProps(1)} />
+            <Tab id="TabUsuarios" label="Usuarios" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <SwipeableViews

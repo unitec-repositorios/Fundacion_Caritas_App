@@ -169,7 +169,7 @@ class FormCases extends Component {
                                     <InputLabel htmlFor="tipo-violencia"> &nbsp; Tipo de violencia</InputLabel>
                                     <List id="tipo-violencia">
                                         <ListItem key="1">
-                                            <Checkbox  onChange={(e)=>handleCheckBox(e,'VPsicologica')} checked={vals.VPsicologica}/>
+                                            <Checkbox id="VPsicologia"  onChange={(e)=>handleCheckBox(e,'VPsicologica')} checked={vals.VPsicologica}/>
                                             <ListItemText primary="Violencia psicologica" />
                                         </ListItem>
                                         <ListItem key="2">
@@ -190,7 +190,7 @@ class FormCases extends Component {
                                     <InputLabel htmlFor="tipo-condicion"> &nbsp; Tipo de condicion</InputLabel>
                                     <List id="tipo-condicion">
                                         <ListItem key="victima">
-                                        <Checkbox onChange={(e)=>handleCheckBox(e,'Victima')} checked={vals.Victima}/>
+                                        <Checkbox id="Victima" onChange={(e)=>handleCheckBox(e,'Victima')} checked={vals.Victima}/>
                                             <ListItemText primary="Victima" />
                                         </ListItem>
                                         <ListItem key="agresor">
@@ -207,7 +207,7 @@ class FormCases extends Component {
                                     <InputLabel htmlFor="causa-violencia"> &nbsp; Causa de violencia</InputLabel>
                                     <List id="causa-violencia">
                                         <ListItem key="economica">
-                                        <Checkbox onChange={(e)=>handleCheckBox(e,'CEconomica')} checked={vals.CEconomica}/>
+                                        <Checkbox id="Economica" onChange={(e)=>handleCheckBox(e,'CEconomica')} checked={vals.CEconomica}/>
                                             <ListItemText primary="Economica" />
                                         </ListItem>
                                         <ListItem key="infidelidad">
@@ -224,7 +224,7 @@ class FormCases extends Component {
                                     <InputLabel htmlFor="ubicacion-violencia"> &nbsp; Ubicacion caso</InputLabel>
                                     <List id="ubicacion-violencia">
                                         <ListItem key="urbana">
-                                        <Checkbox onChange={(e)=>handleCheckBox(e,'VUrbana')} checked={vals.VUrbana}/>
+                                        <Checkbox id="Urbana" onChange={(e)=>handleCheckBox(e,'VUrbana')} checked={vals.VUrbana}/>
                                             <ListItemText primary="Urbana" />
                                         </ListItem>
                                         <ListItem key="rural">
@@ -244,7 +244,7 @@ class FormCases extends Component {
                                 </Grid>
                                 <Grid item sm={6} >
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
+                                    <Button fullWidth color="primary" variant="outlined" id="ButtonNxt"  onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>

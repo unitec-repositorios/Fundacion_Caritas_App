@@ -62,12 +62,12 @@ class Index extends Component {
             case 1:
                 return (
                     <div>
-                        <h2 style={{ textAlign: 'center' }}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
+                        <h2  id="TituloB" style={{ textAlign: 'center' }}>Bienvenido al Sistema administrativo de Pacientes de Caritas</h2>
                         <div style={{ textAlign: 'center' }}>
                             <img src={logoi} width="30%" alt="logo inicio" />
                         </div>
 
-                        <Fab color="primary" aria-label="Add" style={{
+                        <Fab id="ButtonAdd" color="primary" aria-label="Add" style={{
                             margin: '1em', position: 'absolute',
                             bottom: 0,
                             left: "90%"

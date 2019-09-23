@@ -84,15 +84,15 @@ class ConfigPacients extends Component{
                 <Grid container  justify='flex-end' style={{width: '80%', alignSelf: 'center', marginLeft:'10%', marginTop:'2%' }}>
                     <Grid container spacing = {2}>
                         <Grid item sm = {6}>
-                            <EditTable title = {municipiosTitle} columns = {municipiosColumns} data = {municipiosData}
+                            <EditTable id="Municipios" title = {municipiosTitle} columns = {municipiosColumns} data = {municipiosData}
                                 handleChange = {handleMunicipiosChange} flag = {flagMuni} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {ocupacionTitle} columns = {ocupacionColumns} data = {ocupacionData} 
+                            <EditTable id="Ocupacion" title = {ocupacionTitle} columns = {ocupacionColumns} data = {ocupacionData} 
                                 handleChange = {handleChangeOcupacion} flag = {flagOcupacion} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                         <Grid item sm = {6}>
-                            <EditTable title = {educacionTitle} columns = {educacionColumns} data = {educacionData} 
+                            <EditTable id="Eduacion" title = {educacionTitle} columns = {educacionColumns} data = {educacionData} 
                                 handleChange = {handleChangeEducacion} flag = {flagEducacion} handleTableUpdate = {this.handleTableUpdate}/>
                         </Grid>
                     </Grid>

@@ -179,7 +179,7 @@ class FormDenounced extends Component {
                                 </Grid>
                                 <Grid item sm={6}>
                                     <Paper>
-                                    <Button fullWidth color="primary" variant="outlined"   onClick={this.continue}>Continuar</Button>
+                                    <Button fullWidth color="primary" variant="outlined" id="ButtonNxt"   onClick={this.continue}>Continuar</Button>
                                     </Paper>
                                 </Grid>
                             </Grid>
