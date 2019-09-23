@@ -60,7 +60,6 @@ export class Form3 extends Component {
             agresor = 'Agresor';
         cant = ninos + ninas + otros;
 
-
     }
 
     render() {
@@ -76,7 +75,7 @@ export class Form3 extends Component {
             <div>
                 <div className="right">
                     <Button color="secondary" variant="outlined" onClick={this.back}>Regresar</Button>
-                    <Button color="primary" variant="outlined" onClick={() => generarPdf(this.props)}>Imprimir</Button>
+                    <Button color="primary" id="ButtonNxt" variant="outlined" onClick={() => generarPdf(this.props)}>Imprimir</Button>
                 </div>
                 <div id="imprimir" className="c26">
                     <p className="c10"><span className="c3">CARITAS DE SAN PEDRO SULA</span></p>
@@ -159,9 +158,9 @@ export class Form3 extends Component {
                                 </td>
                             </tr>
                             <tr className="c9">
-                                <td className="c6" colSpan="6" rowS pan="1">
+                                <td className="c6" colSpan="6" rowSpan="1">
                                     <p className="c2"><span className="c8">ACCESO A LA JUSTICIA</span></p>
-                                    <p className="c13"><span className="c7"></span></p>
+                                    <p className="c13"><span className="c7"> {vals.AccesoJusticia}</span></p>
                                 </td>
                             </tr>
                         </tbody>
