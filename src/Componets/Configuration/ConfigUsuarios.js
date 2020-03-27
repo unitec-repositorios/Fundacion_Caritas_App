@@ -40,7 +40,7 @@ class ConfigUsuarios extends Component{
 
     generateRol = (actualRowValue) => {
         return this.state.rolesData.map((item)=>{
-            if(item.rol != actualRowValue)
+            if(item.rol !== actualRowValue)
                 return <option value={item.rol}>{item.rol}</option>
         })
     }
