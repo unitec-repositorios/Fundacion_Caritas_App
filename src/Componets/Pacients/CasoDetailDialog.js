@@ -31,11 +31,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import "../../styles/dialogReport.css";
 
-import ReactExport from "react-export-excel";
+import ReactExport from 'react-data-export';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const url = "https://apicaritas.herokuapp.com/api/paciente/";
 const port = "http://localhost:3001/api/";
@@ -249,25 +248,43 @@ class CasoDetailDialog extends Component {
 			}
 		}
 		recursos_muni = recursos_muni.slice(0,-1);
-		
-		excelData.push({ 
-						"id_caso": dataList[pos].id_caso,
-						"nombre": dataList[pos].nombre, 
-						"condicion": dataList[pos].condicion, 
-						"terapeuta": dataList[pos].terapeuta, 
-						"causa": causas,
-						"recursos_muni": recursos_muni,
-						"tipo_violencia": tipo_violencia,
-						"juez": dataList[pos].juez, 
-						"municipio": dataList[pos].municipio,
-						"estado_atencion" : dataList[pos].estado_atencion,
-						"ubicacion_violencia": dataList[pos].ubicacion_violencia, 
-						"tratamiento": dataList[pos].tratamiento
-		});
+				
+		excelData.push([
+						{value: dataList[pos].id_caso, style: {font: {outline: true}}},
+						{value: dataList[pos].nombre, style: {font: {outline: true}}},
+						{value: dataList[pos].condicion, style: {font: {outline: true}}},
+						{value: dataList[pos].terapeuta, style: {font: {outline: true}}},
+						{value: causas, style: {font: {outline: true}}},
+						{value: recursos_muni, style: {font: {outline: true}}},
+						{value: tipo_violencia, style: {font: {outline: true}}},
+						{value: dataList[pos].juez, style: {font: {outline: true}}},
+						{value: dataList[pos].municipio, style: {font: {outline: true}}},
+						{value: dataList[pos].estado_atencion, style: {font: {outline: true}}},
+						{value: dataList[pos].ubicacion_violencia, style: {font: {outline: true}}},
+						{value: dataList[pos].tratamiento, style: {font: {outline: true}}}
+		]);
 	}
-	return excelData;
+		
+	var multiDataSet = [{
+		columns: [
+            {title: "Id Caso", width: {wpx: 60}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Paciente", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Condicion", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Terapeuta", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Causa", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Recursos Municipalidad", width: {wpx: 140}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Tipo Violencia", width: {wpx: 90}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Juez", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Municipio", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Estado Atencion", width: {wpx: 100}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Ubicacion Violencia", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Tratamiento", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}}
+        ],
+		data: excelData
+	}];
+	return multiDataSet;
   };
-
+  
   render() {
     const { vals } = this.props;
 
@@ -492,21 +509,8 @@ class CasoDetailDialog extends Component {
             />
 			
 			<br/>
-			<ExcelFile filename="Caso" element={<button>Exportar Excel</button>}>
-				<ExcelSheet data={this.getExcelDataCase()} name="Caso">
-					<ExcelColumn label="Id Caso" value="id_caso"/>
-					<ExcelColumn label="Nombre" value="nombre"/>
-					<ExcelColumn label="Condicion" value="condicion"/>
-					<ExcelColumn label="Terapeuta" value="terapeuta"/>
-					<ExcelColumn label="Causa" value="causa"/>
-					<ExcelColumn label="Recursos Municipalidad" value="recursos_muni"/>
-					<ExcelColumn label="Tipo Violencia" value="tipo_violencia"/>
-					<ExcelColumn label="Juez" value="juez"/>
-					<ExcelColumn label="Municipio" value="municipio"/>
-					<ExcelColumn label="Estado Atencion" value="estado_atencion"/>
-					<ExcelColumn label="Ubicacion Violencia" value="ubicacion_violencia"/>
-					<ExcelColumn label="Tratamiento" value="tratamiento"/>
-				</ExcelSheet>				
+			<ExcelFile filename="Casos" element={<button>Exportar Excel</button>}>
+				<ExcelSheet dataSet={this.getExcelDataCase()} name="Casos"/>
 			</ExcelFile>
 					  
           </div>

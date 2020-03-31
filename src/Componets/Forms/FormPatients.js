@@ -339,7 +339,8 @@ class FormPatients extends Component {
                     </InputLabel>
                   </Grid>
                   <Grid item sm={3}>
-                    <Paper>
+					<InputLabel>Niños</InputLabel>
+					<Paper>
                       <Input
                         disableUnderline={true}
                         id="CantNiños"
@@ -352,6 +353,7 @@ class FormPatients extends Component {
                     </Paper>
                   </Grid>
                   <Grid item sm={3}>
+					<InputLabel>Niñas</InputLabel>
                     <Paper>
                       <Input
                         disableUnderline={true}
@@ -365,6 +367,7 @@ class FormPatients extends Component {
                     </Paper>
                   </Grid>
                   <Grid item sm={3}>
+					<InputLabel>Otros</InputLabel>
                     <Paper>
                       <Input
                         disableUnderline={true}

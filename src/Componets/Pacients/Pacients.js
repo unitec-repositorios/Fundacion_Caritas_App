@@ -26,11 +26,10 @@ import MaterialTable from "material-table";
 import Grid from "@material-ui/core/Grid";
 import ReportPantientDialog from "./ReportPantientDialog";
 import CasoDetailDialog from "./CasoDetailDialog";
-import ReactExport from "react-export-excel";
+import ReactExport from 'react-data-export';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const port = "http://localhost:3001/";
 
@@ -229,26 +228,44 @@ class Pacients extends Component {
       newData
     ).then(res => console.log(res));
   };
-  
+    
   getExcelDataPatient() {
 	var excelData = [];
 	var dataList = this.state.list;
 	for(var pos=0; pos<dataList.length; pos++) {
-		excelData.push({ 
-						"correlativo": pos,
-						"identidad": dataList[pos].identidad, 
-						"nombres": dataList[pos].nombres, 
-						"apellidos": dataList[pos].apellidos, 
-						"edad": dataList[pos].edad, 
-						"genero": dataList[pos].genero, 
-						"oficio": dataList[pos].oficio, 
-						"estado_civil": this.state.estadoCivilSelect[dataList[pos].id_estadoc], 
-						"trabajo": this.state.trabajoSelect[dataList[pos].id_estado], 
-						"educacion": this.state.educacionSelect[dataList[pos].id_educacion], 
-						"departamento": this.state.departamentoSelect[dataList[pos].id_departamento]
-		});
+		excelData.push([
+						{value: pos, style: {font: {outline: true}}},
+						{value: dataList[pos].identidad, style: {font: {outline: true}}},
+						{value: dataList[pos].nombres, style: {font: {outline: true}}},
+						{value: dataList[pos].apellidos, style: {font: {outline: true}}},
+						{value: dataList[pos].edad, style: {font: {outline: true}}},
+						{value: dataList[pos].genero, style: {font: {outline: true}}},
+						{value: dataList[pos].oficio, style: {font: {outline: true}}},
+						{value: this.state.estadoCivilSelect[dataList[pos].id_estadoc], style: {font: {outline: true}}},
+						{value: this.state.trabajoSelect[dataList[pos].id_estado], style: {font: {outline: true}}},
+						{value: this.state.educacionSelect[dataList[pos].id_educacion], style: {font: {outline: true}}},
+						{value: this.state.departamentoSelect[dataList[pos].id_departamento], style: {font: {outline: true}}}
+		]);
 	}
-	return excelData;
+	
+	var multiDataSet = [{
+		columns: [
+            {title: "Correlativo", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "No. Identidad", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Nombres", width: {wpx: 140}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Apellidos", width: {wpx: 140}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Edad", width: {wpx: 40}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Genero", width: {wpx: 50}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Oficio", width: {wpx: 140}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Estado Civil", width: {wpx: 80}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Trabajo", width: {wpx: 150}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Educacion", width: {wpx: 140}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}},
+			{title: "Departamento", width: {wpx: 120}, style: {fill: {patternType: "solid", fgColor: {rgb: "FFF50057"}}, font:{color: {rgb: "FFFFFFFF"}}}}
+        ],
+		data: excelData
+	}];
+	return multiDataSet;
+	
   };
 
   postUsuarioModifico = async id => {
@@ -442,19 +459,7 @@ class Pacients extends Component {
 		  
 		  <br/>
 		  <ExcelFile filename="Pacientes" element={<button>Exportar Excel</button>}>
-                <ExcelSheet data={this.getExcelDataPatient()} name="Pacientes">
-                    <ExcelColumn label="Correlativo" value="correlativo"/>
-                    <ExcelColumn label="No. Identidad" value="identidad"/>
-                    <ExcelColumn label="Nombres" value="nombres"/>
-					<ExcelColumn label="Apellidos" value="apellidos"/>
-                    <ExcelColumn label="Edad" value="edad"/>
-                    <ExcelColumn label="Genero" value="genero"/>
-					<ExcelColumn label="Oficio" value="oficio"/>
-                    <ExcelColumn label="Estado Civil" value="estado_civil"/>
-                    <ExcelColumn label="Trabajo" value="trabajo"/>
-					<ExcelColumn label="Educacion" value="educacion"/>
-                    <ExcelColumn label="Departamento" value="departamento"/>
-                </ExcelSheet>				
+			  <ExcelSheet dataSet={this.getExcelDataPatient()} name="Pacientes"/>
 		  </ExcelFile>
 
         </div>

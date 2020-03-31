@@ -28,6 +28,7 @@
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-chartjs-2": "^2.9.0",
+    "react-data-export": "^0.6.0",
     "react-dom": "^16.13.0",
     "react-export-excel": "^0.5.3",
     "react-pure-grid": "^2.1.1",
