@@ -30,14 +30,14 @@ export const handleChangeRecMuni  = async (id, data, flag) =>{
 export const handleChangeTerapeuta = async (id, data, flag) => {
     if (flag === 'add'){
         
-        await Axios.post(port + '/api/terapeuta', format.TERAPEUTAS_POST_Y_PUT(data.nombre))
+        await Axios.post(port + '/api/terapeuta', format.TERAPEUTAS_POST_Y_PUT(data.nombre, data.codigo))
         .then(res => res.json)
         .catch(error => console.error('Error: ', error))
         .then(response => console.log('Succes: ', response))
 
     }else if (flag === 'update'){
 
-        await Axios.put(port + '/api/terapeuta/' +id, format.TERAPEUTAS_POST_Y_PUT(data.nombre))
+        await Axios.put(port + '/api/terapeuta/' +id, format.TERAPEUTAS_POST_Y_PUT(data.nombre, data.codigo))
         .then(res => res.json)
         .catch(error => console.error('Error: ', error))
         .then(response => console.log(': ', response))

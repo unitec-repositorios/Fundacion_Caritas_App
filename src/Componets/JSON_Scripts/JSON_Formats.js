@@ -23,8 +23,8 @@ module.exports = {
         return ({COND: CONDICION});
     },
 
-    TERAPEUTAS_POST_Y_PUT : function(NOMBRE){
-        return ({NOMB: NOMBRE});
+    TERAPEUTAS_POST_Y_PUT : function(NOMBRE, CODIGO){
+        return ({NOMB: NOMBRE, COD: CODIGO});
     },
 
     REMISION_POST_Y_PUT : function(REMISION){
